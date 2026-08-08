@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-dark: #050505;
+    --bg-surface: #0A0A0A;
+    --text-primary: #F1F0EC;
+    --text-muted: #6B6B6B;
+    --border-color: #202020;
+    --accent-blue: #258DFF;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    width: 100vw;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Syne', sans-serif;
+  }
+
+  .font-mono-meta {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Fluid Typography Utilities using CSS clamp() */
+.text-fluid-hero {
+  font-size: clamp(2.75rem, 9.5vw, 13.5rem);
+  line-height: 0.9;
+}
+
+.text-fluid-heading {
+  font-size: clamp(2rem, 6vw, 7.5rem);
+  line-height: 0.95;
+}
+
+.text-fluid-subheading {
+  font-size: clamp(1.25rem, 3.2vw, 3.5rem);
+  line-height: 1.1;
+}
+
+.text-fluid-body {
+  font-size: clamp(0.95rem, 1.2vw, 1.35rem);
+  line-height: 1.6;
+}
+
+/* Hardware Acceleration & Smooth Motion */
+.gpu-accel {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Film Grain Noise Overlay */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* Custom Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #202020;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #258DFF;
+}
+
+/* Image reveal & hover performance */
+.img-reveal-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+.img-reveal-wrapper img {
+  will-change: transform, filter;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+}
+.img-reveal-wrapper:hover img {
+  transform: scale(1.04);
+}
+
+/* Text Stroke Effect */
+.text-stroke {
+  -webkit-text-stroke: 1px rgba(241, 240, 236, 0.2);
+  color: transparent;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Responsive Media Queries for Ultra-Wide / Tablets / Mobile */
+@media (max-width: 640px) {
+  .hero-padding {
+    padding-top: 5rem;
+    padding-bottom: 3rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .max-w-7xl {
+    max-width: 110rem;
+  }
+}
