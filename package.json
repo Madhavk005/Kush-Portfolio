@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "npx vite",
     "build": "npx vite build",
-    "preview": "npx vite preview"
+    "preview": "npx vite preview",
+    "generate": "node generate_data.cjs",
+    "check": "node scripts/check-assets.cjs"
   },
   "dependencies": {
     "react": "^18.3.1",

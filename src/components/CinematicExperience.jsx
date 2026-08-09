@@ -9,11 +9,11 @@ export default function CinematicExperience({ onCursorEnter, onCursorLeave }) {
   const textXRight = useTransform(scrollYProgress, [0.3, 0.7], [-300, 100]);
 
   const images = [
-    { src: "/assets/images/cinematic-amber-fort.jpg", title: "AMER TWILIGHT" },
-    { src: "/assets/images/portrait-shadows.jpg", title: "JAIPUR SHADOWS" },
-    { src: "/assets/images/fashion-heritage-runway.jpg", title: "ROYAL RUNWAY" },
-    { src: "/assets/images/event-sufi-night.jpg", title: "SUFI NOCTURNE" },
-    { src: "/assets/images/product-pendant-gold.jpg", title: "GOLD REFLECTIONS" },
+    { src: "/assets/images/web/cinematic-amber-fort.jpg", title: "AMER TWILIGHT" },
+    { src: "/assets/images/web/d4ec5007-db05-4660-a299-569cebdd3590.jpg", title: "JAIPUR SHADOWS" },
+    { src: "/assets/images/web/fashion-editorial-1.jpg", title: "ROYAL RUNWAY" },
+    { src: "/assets/images/web/DSC04910.jpg", title: "SUFI NOCTURNE" },
+    { src: "/assets/images/web/brand-product-shoot.jpg", title: "GOLD REFLECTIONS" },
   ];
 
   return (

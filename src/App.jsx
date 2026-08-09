@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { MotionConfig } from 'framer-motion';
 import Lenis from 'lenis';
 import LoadingScreen from './components/LoadingScreen';
 import CustomCursor from './components/CustomCursor';
@@ -84,11 +85,24 @@ export default function App() {
     setCursorState({ active: false, text: '' });
   };
 
+  // Hash-based 404: unknown hash (dead link) -> NotFound screen
+  useEffect(() => {
+    const VALID_HASHES = new Set(['', '#hero', '#work', '#about', '#about-intro', '#services', '#contact', '#archive']);
+    const onHashChange = () => {
+      const h = window.location.hash;
+      setIs404(h !== '' && !VALID_HASHES.has(h));
+    };
+    window.addEventListener('hashchange', onHashChange);
+    onHashChange();
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
   if (is404) {
     return <NotFound onReturnHome={() => setIs404(false)} />;
   }
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="bg-[#050505] text-[#F1F0EC] min-h-screen relative font-sans selection:bg-[#258DFF] selection:text-black overflow-x-hidden gpu-accel">
       {/* Cinematic Loading Screen */}
       {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
@@ -180,5 +194,6 @@ export default function App() {
         onCursorLeave={handleCursorLeave}
       />
     </div>
+    </MotionConfig>
   );
 }

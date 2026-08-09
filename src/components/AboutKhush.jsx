@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ProgressiveImage from './ProgressiveImage';
+import { ARCHIVE_IMAGES } from '../data/portfolioData';
 
 export default function AboutKhush({ onCursorEnter, onCursorLeave }) {
   return (
@@ -30,7 +31,7 @@ export default function AboutKhush({ onCursorEnter, onCursorLeave }) {
               onMouseLeave={onCursorLeave}
             >
               <ProgressiveImage
-                src="/assets/images/khush-behind-lens.jpg"
+                src="/assets/images/web/khush-behind-lens.jpg"
                 alt="Khush Kapoor Behind The Lens"
                 className="filter contrast-[1.1] grayscale group-hover:grayscale-0 transition-all duration-700"
                 containerClassName="w-full h-[480px] md:h-[580px]"
@@ -51,7 +52,7 @@ export default function AboutKhush({ onCursorEnter, onCursorLeave }) {
               className="hidden md:block absolute -bottom-8 -right-8 w-60 h-72 border-2 border-[#258DFF] overflow-hidden shadow-2xl z-20"
             >
               <ProgressiveImage
-                src="/assets/images/khush-portrait.jpg"
+                src="/assets/images/web/khush-portrait.jpg"
                 alt="Khush Kapoor Portrait"
                 className="w-full h-full"
                 containerClassName="w-full h-full"
@@ -100,12 +101,12 @@ export default function AboutKhush({ onCursorEnter, onCursorLeave }) {
               className="pt-4 grid grid-cols-3 gap-6 border-t border-white/10 text-xs font-mono"
             >
               <div>
-                <span className="text-[#258DFF] font-bold block text-xl md:text-2xl font-display">8+</span>
-                <span className="text-[#666666]">CATEGORIES</span>
+                <span className="text-[#258DFF] font-bold block text-xl md:text-2xl font-display">{ARCHIVE_IMAGES.length}+</span>
+                <span className="text-[#666666]">FRAMES ARCHIVED</span>
               </div>
               <div>
-                <span className="text-[#258DFF] font-bold block text-xl md:text-2xl font-display">100%</span>
-                <span className="text-[#666666]">INTENTIONAL</span>
+                <span className="text-[#258DFF] font-bold block text-xl md:text-2xl font-display">8</span>
+                <span className="text-[#666666]">SHOOT CATEGORIES</span>
               </div>
               <div>
                 <span className="text-[#258DFF] font-bold block text-xl md:text-2xl font-display">JAIPUR</span>

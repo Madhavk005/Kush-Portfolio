@@ -15,9 +15,9 @@ export default function Introduction({ onCursorEnter, onCursorLeave }) {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex items-center space-x-3 text-xs font-mono tracking-widest text-[#00E5FF] uppercase mb-8"
+          className="flex items-center space-x-3 text-xs font-mono tracking-widest text-[#258DFF] uppercase mb-8"
         >
-          <span className="w-8 h-[1px] bg-[#00E5FF]" />
+          <span className="w-8 h-[1px] bg-[#258DFF]" />
           <span>— 01 / THE PERSON BEHIND THE CAMERA</span>
         </motion.div>
 
@@ -33,7 +33,7 @@ export default function Introduction({ onCursorEnter, onCursorLeave }) {
               className="text-4xl sm:text-6xl md:text-7xl font-extrabold font-display tracking-tight text-[#F1F0EC] uppercase leading-[0.95]"
             >
               I'M NOT HERE <br />
-              <span className="text-[#00E5FF]">TO JUST TAKE</span> PHOTOS.
+              <span className="text-[#258DFF]">TO JUST TAKE</span> PHOTOS.
             </motion.h2>
 
             <motion.p
@@ -41,7 +41,7 @@ export default function Introduction({ onCursorEnter, onCursorLeave }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-lg md:text-2xl text-[#F1F0EC]/90 font-light leading-relaxed border-l-2 border-[#00E5FF] pl-6"
+              className="text-lg md:text-2xl text-[#F1F0EC]/90 font-light leading-relaxed border-l-2 border-[#258DFF] pl-6"
             >
               I'm Khush Kapoor — a photographer and visual storyteller obsessed with creating images that feel like moments, not content.
             </motion.p>
@@ -73,7 +73,7 @@ export default function Introduction({ onCursorEnter, onCursorLeave }) {
                 {categories.map((cat, idx) => (
                   <span
                     key={idx}
-                    className="px-3 py-1.5 border border-white/10 text-xs font-mono text-[#F1F0EC]/80 hover:border-[#00E5FF] hover:text-[#00E5FF] transition-colors"
+                    className="px-3 py-1.5 border border-white/10 text-xs font-mono text-[#F1F0EC]/80 hover:border-[#258DFF] hover:text-[#258DFF] transition-colors"
                   >
                     {cat}
                   </span>
@@ -94,7 +94,7 @@ export default function Introduction({ onCursorEnter, onCursorLeave }) {
           >
             <div className="relative img-reveal-wrapper rounded-none overflow-hidden border border-white/10 shadow-2xl">
               <img
-                src="/assets/images/khush-portrait.jpg"
+                src="/assets/images/web/khush-portrait.jpg"
                 alt="Khush Kapoor Photographer"
                 className="w-full h-[520px] md:h-[620px] object-cover object-center filter grayscale contrast-[1.15] group-hover:grayscale-0 transition-all duration-700"
               />
@@ -107,12 +107,12 @@ export default function Introduction({ onCursorEnter, onCursorLeave }) {
                   <p className="text-[#F1F0EC] font-bold">KHUSH KAPOOR</p>
                   <p className="text-[#666666]">FOUNDER & VISUAL DIRECTOR</p>
                 </div>
-                <span className="text-[#00E5FF]">JAIPUR · 2026</span>
+                <span className="text-[#258DFF]">JAIPUR · 2026</span>
               </div>
             </div>
 
             {/* Subtle background accent box */}
-            <div className="absolute -bottom-4 -right-4 w-full h-full border border-[#00E5FF]/20 pointer-events-none -z-10" />
+            <div className="absolute -bottom-4 -right-4 w-full h-full border border-[#258DFF]/20 pointer-events-none -z-10" />
           </motion.div>
         </div>
       </div>

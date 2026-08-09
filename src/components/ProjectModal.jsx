@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowRight, MapPin, Calendar, User, Tag, Maximize2 } from 'lucide-react';
 import { PORTFOLIO_PROJECTS } from '../data/portfolioData';
 import ImageLightbox from './ImageLightbox';
 import ProgressiveImage from './ProgressiveImage';
+import useFocusTrap from '../hooks/useFocusTrap';
 
 export default function ProjectModal({ project, onClose, onSelectNextProject, onCursorEnter, onCursorLeave }) {
   const [activeLightboxIndex, setActiveLightboxIndex] = useState(null);
+  const modalRef = useRef(null);
+  useFocusTrap(!!project && activeLightboxIndex === null, modalRef);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -29,6 +32,7 @@ export default function ProjectModal({ project, onClose, onSelectNextProject, on
   return (
     <AnimatePresence>
       <motion.div
+        ref={modalRef}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}

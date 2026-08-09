@@ -1,8 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Instagram, ArrowUpRight, Quote } from 'lucide-react';
-import { CLIENT_COLLABORATIONS, TESTIMONIALS, INSTAGRAM_GRID } from '../data/portfolioData';
+import { Instagram, ArrowUpRight } from 'lucide-react';
+import { INSTAGRAM_GRID } from '../data/portfolioData';
 import ProgressiveImage from './ProgressiveImage';
+
+const SHOOT_TYPES = [
+  'PORTRAITS',
+  'FASHION',
+  'BRANDS',
+  'EVENTS',
+  'PRODUCTS',
+  'EDITORIAL',
+  'CINEMATIC',
+  'STREET / LIFESTYLE',
+];
 
 export default function SocialSection({ onCursorEnter, onCursorLeave }) {
   return (
@@ -17,16 +28,16 @@ export default function SocialSection({ onCursorEnter, onCursorLeave }) {
             className="flex items-center space-x-3 text-xs font-mono tracking-widest text-[#258DFF] uppercase"
           >
             <span className="w-8 h-[1px] bg-[#258DFF]" />
-            <span>— TRUSTED / COLLABORATED / CREATED WITH</span>
+            <span>— WHAT I SHOOT</span>
           </motion.div>
 
-          {/* Marquee Brands list */}
-          <div className="border-y border-white/10 py-6 overflow-hidden">
+          {/* Marquee of shoot types */}
+          <div className="border-y border-white/10 py-6 overflow-hidden" aria-hidden="true">
             <div className="flex items-center space-x-12 min-w-max animate-marquee">
-              {[...CLIENT_COLLABORATIONS, ...CLIENT_COLLABORATIONS].map((client, idx) => (
+              {[...SHOOT_TYPES, ...SHOOT_TYPES].map((type, idx) => (
                 <div key={idx} className="flex items-center space-x-12">
-                  <span className="text-xl md:text-3xl font-extrabold font-display uppercase tracking-wider text-[#F1F0EC]/70 hover:text-[#258DFF] transition-colors">
-                    {client}
+                  <span className="text-xl md:text-3xl font-extrabold font-display uppercase tracking-wider text-[#F1F0EC]/70">
+                    {type}
                   </span>
                   <span className="text-[#258DFF] font-mono text-sm">/</span>
                 </div>
@@ -34,28 +45,29 @@ export default function SocialSection({ onCursorEnter, onCursorLeave }) {
             </div>
           </div>
 
-          {/* Testimonials Quotes */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
-            {TESTIMONIALS.map((t, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="p-8 border border-white/10 bg-[#0B0B0B] relative space-y-6"
-              >
-                <Quote className="w-8 h-8 text-[#258DFF]/40" />
-                <p className="text-base md:text-lg text-[#F1F0EC]/90 font-light italic leading-relaxed">
-                  "{t.quote}"
-                </p>
-                <div className="flex justify-between items-center text-xs font-mono border-t border-white/10 pt-4">
-                  <span className="text-[#F1F0EC] font-bold">{t.brand}</span>
-                  <span className="text-[#258DFF]">{t.author}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          {/* Next Collaborator CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="border border-white/10 bg-[#0B0B0B] p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6 pt-6"
+          >
+            <div className="space-y-2">
+              <p className="text-xl md:text-2xl font-display font-extrabold uppercase text-[#F1F0EC]">
+                YOUR BRAND COULD BE <span className="text-[#258DFF]">ON THIS LIST.</span>
+              </p>
+              <p className="text-sm text-[#666666] font-light">
+                Portraits, lookbooks, campaigns, products and live events — booked from Jaipur, shot around the world.
+              </p>
+            </div>
+            <a
+              href="#contact"
+              className="px-6 py-3 border border-[#258DFF] bg-[#258DFF] text-black font-mono font-bold text-xs tracking-widest uppercase hover:bg-white transition-colors flex items-center gap-3 self-start md:self-auto"
+            >
+              START A PROJECT →
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+          </motion.div>
         </div>
 
         {/* Instagram Grid Section */}
@@ -72,7 +84,7 @@ export default function SocialSection({ onCursorEnter, onCursorLeave }) {
             </div>
 
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/keto.k0"
               target="_blank"
               rel="noopener noreferrer"
               onMouseEnter={() => onCursorEnter("OPEN")}
@@ -90,7 +102,7 @@ export default function SocialSection({ onCursorEnter, onCursorLeave }) {
             {INSTAGRAM_GRID.map((item) => (
               <a
                 key={item.id}
-                href="https://instagram.com"
+                href="https://www.instagram.com/keto.k0"
                 target="_blank"
                 rel="noopener noreferrer"
                 onMouseEnter={() => onCursorEnter("INSTA")}

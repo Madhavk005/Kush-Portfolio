@@ -18,7 +18,18 @@ export default function LoadingScreen({ onComplete }) {
       });
     }, 60);
 
-    return () => clearInterval(timer);
+    const skip = (e) => {
+      if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (onComplete) onComplete();
+      }
+    };
+    window.addEventListener('keydown', skip);
+
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('keydown', skip);
+    };
   }, [onComplete]);
 
   return (
@@ -36,7 +47,7 @@ export default function LoadingScreen({ onComplete }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-xs font-mono text-[#00E5FF] tracking-widest uppercase mb-4"
+          className="text-xs font-mono text-[#258DFF] tracking-widest uppercase mb-4"
         >
           PHOTOGRAPHY · VISUAL STORYTELLING
         </motion.div>
@@ -47,7 +58,7 @@ export default function LoadingScreen({ onComplete }) {
 
         <div className="w-full bg-[#1a1a1a] h-[2px] mt-8 overflow-hidden relative">
           <motion.div
-            className="bg-[#00E5FF] h-full"
+            className="bg-[#258DFF] h-full"
             style={{ width: `${Math.min(progress, 100)}%` }}
             transition={{ ease: "easeOut" }}
           />
@@ -60,7 +71,7 @@ export default function LoadingScreen({ onComplete }) {
           <p className="hidden md:block">PORTRAITS · FASHION · BRANDS · EVENTS</p>
         </div>
         <div className="text-3xl md:text-5xl font-mono font-bold text-[#F1F0EC]">
-          {Math.min(progress, 100)}<span className="text-[#00E5FF] text-lg md:text-2xl">%</span>
+          {Math.min(progress, 100)}<span className="text-[#258DFF] text-lg md:text-2xl">%</span>
         </div>
       </div>
     </motion.div>

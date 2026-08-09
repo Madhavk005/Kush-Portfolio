@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, Grid, Layers, Maximize2 } from 'lucide-react';
-import { PORTFOLIO_CATEGORIES, PORTFOLIO_PROJECTS, ALL_192_PHOTOGRAPHS } from '../data/portfolioData';
+import { PORTFOLIO_CATEGORIES, PORTFOLIO_PROJECTS, ARCHIVE_IMAGES } from '../data/portfolioData';
 import ImageLightbox from './ImageLightbox';
 import ProgressiveImage from './ProgressiveImage';
 
@@ -63,12 +63,12 @@ export default function FeaturedWork({ onSelectProject, onCursorEnter, onCursorL
                 }`}
               >
                 <Grid className="w-3.5 h-3.5" />
-                <span>ALL 192 FRAMES WALL</span>
+                <span>ALL {ARCHIVE_IMAGES.length} FRAMES WALL</span>
               </button>
             </div>
 
             <p className="text-xs font-mono text-[#666666] uppercase tracking-widest">
-              {viewMode === "projects" ? `${PORTFOLIO_PROJECTS.length} FEATURED CASE STUDIES` : `192 PHOTOGRAPHS FROM KHUSH'S SHOOT ARCHIVES`}
+              {viewMode === "projects" ? `${PORTFOLIO_PROJECTS.length} FEATURED CASE STUDIES` : `${ARCHIVE_IMAGES.length} PHOTOGRAPHS FROM KHUSH'S SHOOT ARCHIVES`}
             </p>
           </div>
         </div>
@@ -106,6 +106,13 @@ export default function FeaturedWork({ onSelectProject, onCursorEnter, onCursorL
             className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10"
           >
             <AnimatePresence>
+              {filteredProjects.length === 0 && (
+                <div className="md:col-span-12 border border-white/10 bg-[#0B0B0B] p-16 text-center">
+                  <p className="font-mono text-xs text-[#666666] uppercase tracking-widest">
+                    NO CASE STUDIES IN THIS CATEGORY YET — EXPLORE THE FULL FRAMES WALL.
+                  </p>
+                </div>
+              )}
               {filteredProjects.map((project, idx) => {
                 let colSpan = "md:col-span-6";
                 let heightClass = "h-[450px] md:h-[550px]";
@@ -134,7 +141,7 @@ export default function FeaturedWork({ onSelectProject, onCursorEnter, onCursorL
                     onMouseEnter={() => onCursorEnter('VIEW')}
                     onMouseLeave={onCursorLeave}
                   >
-                    <div className={`relative ${heightClass} overflow-hidden border border-white/10 bg-[#0B0B0B]`}>
+                    <div className={`relative ${heightClass} overflow-hidden border border-white/10 bg-[#0B0B0B] content-visibility-auto`}>
                       <ProgressiveImage
                         src={project.heroImage}
                         alt={project.title}
@@ -181,11 +188,11 @@ export default function FeaturedWork({ onSelectProject, onCursorEnter, onCursorL
             animate={{ opacity: 1 }}
             className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
           >
-            {ALL_192_PHOTOGRAPHS.map((imgPath, idx) => (
+            {ARCHIVE_IMAGES.map((imgPath, idx) => (
               <div
                 key={idx}
                 onClick={() => setLightboxIndex(idx)}
-                className="group relative h-48 sm:h-56 md:h-64 overflow-hidden border border-white/10 bg-[#0B0B0B] cursor-pointer"
+                className="group relative h-48 sm:h-56 md:h-64 overflow-hidden border border-white/10 bg-[#0B0B0B] cursor-pointer content-visibility-auto"
                 onMouseEnter={() => onCursorEnter('EXPAND')}
                 onMouseLeave={onCursorLeave}
               >
@@ -211,7 +218,7 @@ export default function FeaturedWork({ onSelectProject, onCursorEnter, onCursorL
       {/* Fullscreen Interactive Lightbox */}
       {lightboxIndex !== null && (
         <ImageLightbox
-          images={ALL_192_PHOTOGRAPHS}
+          images={ARCHIVE_IMAGES}
           currentIndex={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
           onNavigate={(newIdx) => setLightboxIndex(newIdx)}

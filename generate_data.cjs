@@ -1,23 +1,272 @@
+/*
+ * generate_data.cjs — CANONICAL DATA GENERATOR
+ *
+ * Rebuilds src/data/portfolioData.js from the ACTUAL files on disk.
+ *
+ * Steps:
+ *   1. Scans public/assets/images/all for every image file.
+ *   2. Generates web-optimized JPEG copies into public/assets/images/web
+ *      via macOS `sips` (max 2000px, q80) — raw originals stay untouched.
+ *   3. Maps verified project/service/instagram data to existing files only.
+ *   4. Writes src/data/portfolioData.js and src/data/all_images_manifest.json.
+ *
+ * Usage: node generate_data.cjs
+ */
+
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 
-const manifestPath = path.join(process.cwd(), 'src', 'data', 'all_images_manifest.json');
-const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+const ALL_DIR = path.join(__dirname, 'assets-original-images');
+const WEB_DIR = path.join(__dirname, 'public', 'assets', 'images', 'web');
+const MANIFEST_PATH = path.join(__dirname, 'src', 'data', 'all_images_manifest.json');
+const DATA_PATH = path.join(__dirname, 'src', 'data', 'portfolioData.js');
 
-console.log('Manifest loaded:', manifest.length, 'images');
+const MAX_DIM = 2000;
+const QUALITY = 80;
 
-const yuvikaImages = manifest.filter(m => m.originalFolder === 'yuvika').map(m => m.relPath);
-const pendantImages = manifest.filter(m => m.originalFolder === 'pendant').map(m => m.relPath);
-const ringsImages = manifest.filter(m => m.originalFolder === 'rings').map(m => m.relPath);
-const khushImages = manifest.filter(m => m.originalFolder === 'khush').map(m => m.relPath);
-const desktopImages = manifest.filter(m => m.originalFolder === 'desktop').map(m => m.relPath);
+/* ---------------------------------------------------------------- */
+/* 1. Scan disk                                                     */
+/* ---------------------------------------------------------------- */
+const files = fs.readdirSync(ALL_DIR).filter((f) => /\.(jpe?g|png|webp)$/i.test(f));
+files.sort();
 
-const khushPortraits = khushImages.filter((_, i) => i % 4 === 0);
-const khushFashion = khushImages.filter((_, i) => i % 4 === 1);
-const khushCinematic = khushImages.filter((_, i) => i % 4 === 2);
-const khushStreetEvents = khushImages.filter((_, i) => i % 4 === 3);
+/* Non-photograph files (screenshots of apps, UI, etc.) — excluded
+   from the public archive. They stay on disk but are not referenced. */
+const EXCLUDED = files.filter((f) => /^Screenshot_/i.test(f));
 
-const portfolioDataContent = `export const PORTFOLIO_CATEGORIES = [
+const IMAGE_FILES = files.filter((f) => !/^Screenshot_/i.test(f));
+
+function sanitize(name) {
+  return name
+    .replace(/\s+/g, '-')
+    .replace(/[()]/g, '')
+    .replace(/~2/g, '');
+}
+
+/* ---------------------------------------------------------------- */
+/* 2. Web-optimized copies via sips                                  */
+/* ---------------------------------------------------------------- */
+fs.mkdirSync(WEB_DIR, { recursive: true });
+
+const webName = (name) => sanitize(path.parse(name).name) + '.jpg';
+
+for (const file of IMAGE_FILES) {
+  const src = path.join(ALL_DIR, file);
+  const out = path.join(WEB_DIR, webName(file));
+
+  const meta = execFileSync('sips', ['-g', 'pixelWidth', '-g', 'pixelHeight', src], { encoding: 'utf8' });
+  const width = parseInt(/pixelWidth: (\d+)/.exec(meta)[1], 10);
+  const height = parseInt(/pixelHeight: (\d+)/.exec(meta)[1], 10);
+  const longest = Math.max(width, height);
+
+  const args = ['-s', 'format', 'jpeg', '-s', 'formatOptions', String(QUALITY)];
+  if (longest > MAX_DIM) args.push('-Z', String(MAX_DIM));
+  args.push(src, '--out', out);
+
+  execFileSync('sips', args, { stdio: 'ignore' });
+}
+
+console.log(`[generate] optimized ${IMAGE_FILES.length} images -> ${WEB_DIR}`);
+
+const relWeb = (name) => `/assets/images/web/${webName(name)}`;
+
+/* ---------------------------------------------------------------- */
+/* 3. Curated project definitions (verified against disk)            */
+/* ---------------------------------------------------------------- */
+const has = (name) => IMAGE_FILES.includes(name);
+
+const P1 = ['yuvika-1-DSC08153.jpg', 'yuvika-2-DSC08257.jpg', 'yuvika-3-DSC08295.jpg', 'yuvika-4-IMG_8643.jpg', 'yuvika-5-IMG_8644.jpg', 'yuvika-6-IMG_8645.jpg', 'yuvika-7-IMG_8650.jpg', 'yuvika-8-IMG_8651.jpg', 'yuvika-9-IMG_8655.jpg', 'yuvika-10-IMG_8656.jpg', 'yuvika-11-IMG_8662.jpg', 'yuvika-12-IMG_8669.jpg'];
+const P2 = ['fashion-editorial-1.jpg', 'fashion-monochrome.jpg', '03084d87-f055-4544-8548-e1e54195a2f6.jpeg', 'd12c2336-0641-452a-95fc-04d965ec3a26.jpeg', 'f028f6b7-757c-4033-903c-398aa6741b58.jpeg'];
+const P3 = ['DSC01053.jpg', 'DSC01290 (1).jpg', 'DSC01299.jpg', 'DSC03473.jpg', 'IMG_8689.jpg', '82070814-c940-4208-8fb5-8d85173a176d.jpeg', 'aac1f1f7-80e3-4b48-8010-fd4ab01571c6.jpeg', 'e2b10c66-9f54-4d74-a1fd-b75417d6a9bd.jpeg'];
+const P4 = ['brand-product-shoot.jpg'];
+const P5 = ['cinematic-amber-fort.jpg', 'street-atmosphere.jpg', 'd4ec5007-db05-4660-a299-569cebdd3590.jpeg', 'DSC08191.jpg'];
+const P6 = ['desktop-1-124695.jpg.jpeg', 'desktop-2-72128.jpg.jpeg', 'desktop-5-DSC05420.jpg', 'desktop-6-DSC05421.jpg', 'desktop-7-DSC05426.jpg', 'desktop-13-WhatsApp_Image_2026-05-28_at_11.38.27_PM.jpeg', 'desktop-14-WhatsApp_Image_2026-05-28_at_11.38.27_PMM.jpeg', 'desktop-16-WhatsApp_Image_2026-05-31_at_8.32.24_AM.jpeg', 'desktop-17-WhatsApp_Image_2026-07-16_at_1.52.11_PM.jpeg', 'desktop-18-WhatsApp_Image_2026-07-16_at_1.53.54_PM.jpeg', 'desktop-19-WhatsApp_Image_2026-07-16_at_1.53.55_PM__1_.jpeg', 'desktop-20-WhatsApp_Image_2026-07-16_at_1.53.55_PM.jpeg'];
+const P7 = ['DSC00286.JPG', 'DSC00299.JPG', 'DSC03780.JPG', 'DSC03791.JPG', 'DSC04910.JPG', 'DSC04959.JPG', 'DSC05141.JPG', 'DSC05141_1.JPG', 'DSC05143.JPG', 'DSC07538.JPG', 'DSC07550.JPG', 'DSC07553.JPG', 'DSC08953.JPG'];
+const P8 = ['17364.jpg', '17366.jpg', '17395.jpg', '17401.jpg', '80608.jpg', '50667.jpg', '4e04c333-5883-40d6-9968-fca593bd38b3-1059748e-9bc2-46e7-b30c-3892a7f05340~2.jpg', 'ada2aa4e-3204-4203-bfe5-3ebd1f50f417-dc14210e-a1cb-4738-853c-3decd9b46661~2.jpg', 'IMG_20250325_115208.jpg', 'image.jpg', 'image (1).jpg', '20251212_120918.jpg', '20251231_083620.jpg', 'IMG-20260226-WA0007.jpg', 'IMG-20260316-WA0001.jpg', '21860.jpg', '25462.jpg', '27120.jpg', '28583.jpg', '37688.jpg', '37690.jpg', '38282.jpg', '85497.jpg', '20260624_154333.jpg', '20260624_154349.jpeg', 'file_0000000019287208b9282e06a107cfcf (1).png', 'file_000000003c5071faadb9094a063a5947.png', 'file_0000000069647206b878158399b9a358(1).png', 'file_0000000073bc72089ee266ab68078b47.png', 'file_00000000a2c4720b854d0b854ac470a2.png', 'file_00000000c7a87230b8143a811807a75b.png'];
+
+const all = [P1, P2, P3, P4, P5, P6, P7, P8].flat();
+const missing = all.filter((n) => !has(n));
+if (missing.length) {
+  console.error('[generate] FATAL — referenced images missing from disk:', missing);
+  process.exit(1);
+}
+
+const g = (names) => names.map(relWeb);
+
+/* ---------------------------------------------------------------- */
+/* 4. Emit data                                                      */
+/* ---------------------------------------------------------------- */
+const projects = [
+  {
+    id: 'yuvika-editorial-master',
+    number: '01',
+    title: 'YUVIKA EDITORIAL — MONOCHROME SYMPHONY',
+    category: 'FASHION',
+    subCategories: ['FASHION', 'PORTRAITS', 'EDITORIAL'],
+    year: '2026',
+    location: 'Jaipur Studio',
+    client: 'Editorial Session',
+    role: 'Lead Photographer & Art Director',
+    heroImage: relWeb('yuvika-hero.jpg'),
+    aspectRatio: 'large',
+    gallery: g(P1),
+    tagline: 'Comprehensive editorial fashion study featuring model Yuvika exploring silhouette, key light contours, and dramatic gaze.',
+    description: 'Shot during an exclusive editorial session in Jaipur. Single-source directional key light highlights cheekbone contours, delicate garment textures and a piercing emotional gaze. Every frame balances high fashion minimalism with intimate portraiture.',
+    quote: 'Editorial portraiture should feel like a dialog between shadow and gaze.',
+  },
+  {
+    id: 'heritage-couture-frames',
+    number: '02',
+    title: 'HERITAGE COUTURE — STONE & SILK',
+    category: 'FASHION',
+    subCategories: ['FASHION', 'EDITORIAL'],
+    year: '2026',
+    location: 'Jaipur, Rajasthan',
+    client: 'Fashion Editorial',
+    role: 'Campaign Photographer',
+    heroImage: relWeb('fashion-editorial-1.jpg'),
+    aspectRatio: 'wide',
+    gallery: g(P2),
+    tagline: 'High fashion colliding with historic Rajasthani stone arches and silk draping.',
+    description: 'A commercial fashion editorial shot at golden hour. Flowing royal garments juxtaposed against rugged stone walls, emphasizing form, texture and movement.',
+    quote: 'We wanted garment movement that felt like poetry suspended in motion.',
+  },
+  {
+    id: 'intimate-portrait-studies',
+    number: '03',
+    title: 'INTIMATE PORTRAIT STUDIES',
+    category: 'PORTRAITS',
+    subCategories: ['PORTRAITS', 'EDITORIAL'],
+    year: '2026',
+    location: 'Jaipur, India',
+    client: 'Personal Series',
+    role: 'Lead Photographer',
+    heroImage: relWeb('DSC01053.jpg'),
+    aspectRatio: 'tall',
+    gallery: g(P3),
+    tagline: 'A study of presence, mood and the split second where light meets emotion.',
+    description: 'A portrait series exploring contrast between sculpted light and human presence. Every frame tells a silent story of timeless grace.',
+    quote: "Atmosphere isn't created in post-production. It's caught in the split second when light meets emotion.",
+  },
+  {
+    id: 'product-and-macro',
+    number: '04',
+    title: 'PRODUCT & MACRO — STUDIO DETAIL',
+    category: 'PRODUCTS',
+    subCategories: ['PRODUCTS', 'BRANDS'],
+    year: '2026',
+    location: 'Jaipur Studio',
+    client: 'Studio Session',
+    role: 'Product & Studio Photographer',
+    heroImage: relWeb('brand-product-shoot.jpg'),
+    aspectRatio: 'wide',
+    gallery: g(P4),
+    tagline: 'Precision product and macro lighting built for commercial catalogs.',
+    description: 'Commercial studio product work with controlled speculars, deep shadows and micro-detail emphasis. Designed for e-commerce, catalogs and campaign assets.',
+    quote: 'Luxury product photography requires extreme discipline — every reflection must be intentional.',
+  },
+  {
+    id: 'amber-fort-cinematic',
+    number: '05',
+    title: 'THE SILENT FORT — AMBER TWILIGHT',
+    category: 'CINEMATIC',
+    subCategories: ['CINEMATIC', 'STREET / LIFESTYLE'],
+    year: '2025',
+    location: 'Amer, Rajasthan',
+    client: 'Personal Visual Series',
+    role: 'Visual Storyteller',
+    heroImage: relWeb('cinematic-amber-fort.jpg'),
+    aspectRatio: 'wide',
+    gallery: g(P5),
+    tagline: 'Cinematic widescreen frames capturing twilight shadows over 16th century royal ramparts.',
+    description: 'A cinematic photo essay capturing twilight shadows over royal ramparts. Wide atmospheric frames with filmic depth.',
+    quote: 'Frame it like a still from a movie that was never finished.',
+  },
+  {
+    id: 'pink-city-chronicles',
+    number: '06',
+    title: 'CHRONICLES OF THE PINK CITY',
+    category: 'STREET / LIFESTYLE',
+    subCategories: ['STREET / LIFESTYLE', 'CINEMATIC'],
+    year: '2025',
+    location: 'Jaipur, India',
+    client: 'Personal Series',
+    role: 'Street Photographer',
+    heroImage: relWeb('desktop-5-DSC05420.jpg'),
+    aspectRatio: 'tall',
+    gallery: g(P6),
+    tagline: 'Unfiltered urban life, traditional artisans and morning geometry across historic alleyways.',
+    description: 'Candid street documentation across historic alleyways. High contrast sunlight piercing through narrow old-city corridors.',
+    quote: 'The street rewards those who wait quietly in the shadows.',
+  },
+  {
+    id: 'live-and-documentary',
+    number: '07',
+    title: 'LIVE & DOCUMENTARY FRAMES',
+    category: 'EVENTS',
+    subCategories: ['EVENTS', 'PORTRAITS'],
+    year: '2026',
+    location: 'Jaipur, India',
+    client: 'Live Coverage',
+    role: 'Documentary Photographer',
+    heroImage: relWeb('DSC04910.JPG'),
+    aspectRatio: 'wide',
+    gallery: g(P7),
+    tagline: 'Raw energy, low light and authentic moments in motion.',
+    description: 'Low-light hand-held coverage preserving authentic mood and atmosphere without disruptive flash photography.',
+    quote: "Event photography isn't about snapping crowd shots. It's capturing the soul of the room.",
+  },
+  {
+    id: 'everyday-visual-log',
+    number: '08',
+    title: 'EVERYDAY VISUAL LOG',
+    category: 'STREET / LIFESTYLE',
+    subCategories: ['STREET / LIFESTYLE', 'EVENTS', 'PORTRAITS'],
+    year: '2026',
+    location: 'Jaipur, India',
+    client: 'Personal Archive',
+    role: 'Visual Storyteller',
+    heroImage: relWeb('20251231_083620.jpg'),
+    aspectRatio: 'small',
+    gallery: g(P8),
+    tagline: 'Frames from the road, the set and the city between shoots.',
+    description: 'A personal archive of moments collected between assignments — phone frames, set visits and quiet observations of daily life.',
+    quote: 'The best frames are often the ones you were not paid to take.',
+  },
+];
+
+const services = [
+  { number: '01', title: 'PORTRAIT PHOTOGRAPHY', subtitle: 'Cinematic, character-driven personal & celebrity portraits.', description: 'Creating powerful, intimate portraits that uncover personality, atmosphere and presence. Designed for artists, executives, public figures and personal brand building.', deliverables: ['Creative direction', 'Studio & location shoots', 'High-end retouching', 'Commercial usage rights'], image: relWeb('DSC01053.jpg') },
+  { number: '02', title: 'FASHION & EDITORIAL', subtitle: 'High-fashion lookbooks, magazine spreads & couture imagery.', description: 'Editorial photography that elevates apparel and designer couture into artistic statements. Focus on movement, garment texture, lighting narrative and magazine-ready polish.', deliverables: ['Lookbooks & campaign assets', 'On-location / Set styling', 'Model direction', 'Publication licensing'], image: relWeb('yuvika-hero.jpg') },
+  { number: '03', title: 'BRAND CAMPAIGNS', subtitle: 'Commercial visual storytelling built for market impact.', description: 'Translating brand identity into unforgettable imagery. Full-service visual production from moodboards to final color-graded campaign assets for print, web and billboards.', deliverables: ['Campaign strategy', 'Multi-asset deliverables', 'Social & print formats', 'Commercial licensing'], image: relWeb('d12c2336-0641-452a-95fc-04d965ec3a26.jpeg') },
+  { number: '04', title: 'EVENT COVERAGE', subtitle: 'Documentary-style event & concert coverage.', description: 'Discreet, high-impact photography capturing authentic energy, key moments and ambient lighting during exclusive galas, music performances and fashion shows.', deliverables: ['Same-day highlight selects', 'Complete document gallery', 'High-res print files'], image: relWeb('DSC04910.JPG') },
+  { number: '05', title: 'PRODUCT PHOTOGRAPHY', subtitle: 'Luxury jewellery, pendants, rings & lifestyle goods.', description: 'Precision macro photography highlighting craftsmanship, precious stones and fine textures. Specialized in high-end jewellery, timepieces and luxury product catalogs.', deliverables: ['Macro closeups', 'Refinement & specular control', 'E-commerce & editorial cutouts'], image: relWeb('brand-product-shoot.jpg') },
+  { number: '06', title: 'SOCIAL MEDIA CONTENT', subtitle: 'High-volume cinematic imagery optimized for digital feeds.', description: 'Visual content engineered to stand out in fast-scrolling environments while maintaining a distinctive, premium brand aesthetic.', deliverables: ['Vertical & square formats', 'Batch content packs', 'Reels & photo carousels'], image: relWeb('21860.jpg') },
+  { number: '07', title: 'CREATIVE DIRECTION', subtitle: 'Concept design, moodboard curation & visual strategy.', description: 'Comprehensive creative control over lighting, location, talent sourcing, color palette and narrative arc before a single frame is shot.', deliverables: ['Moodboards & storyboards', 'Set design consultation', 'Talent & styling curation'], image: relWeb('yuvika-1-DSC08153.jpg') },
+  { number: '08', title: 'CINEMATIC VISUALS', subtitle: 'Anamorphic stills & motion frames for film & music.', description: 'Widescreen imagery with filmic color grading, depth of field and dramatic atmospheric lighting suited for film stills, album art and creative media.', deliverables: ['Widescreen 2.39:1 stills', 'Custom filmic color grading', 'Key-art poster compositions'], image: relWeb('cinematic-amber-fort.jpg') },
+];
+
+const whyKhush = [
+  { number: '01', title: 'A DISTINCT VISUAL LANGUAGE', description: "I don't want every shoot to look like everyone else's. I craft custom lighting moods, deep shadows and color palettes tailored strictly to the subject." },
+  { number: '02', title: 'STORY OVER SNAPSHOTS', description: "Every frame should communicate something meaningful. Whether it's a 30-second scroll or a physical gallery wall, the image must stop people in their tracks." },
+  { number: '03', title: 'BUILT FOR PEOPLE & BRANDS', description: 'From personal portraits to multi-channel commercial campaigns, the objective remains singular: create commercial value through timeless artistic visual direction.' },
+  { number: '04', title: 'FROM IDEA TO FINAL FRAME', description: 'Concept, mood boarding, composition, shooting, lighting and color grading all live seamlessly under one cohesive creative vision.' },
+];
+
+const instagramGrid = [
+  { id: 1, image: relWeb('yuvika-hero.jpg'), caption: 'Yuvika editorial session. Key light & shadow.' },
+  { id: 2, image: relWeb('DSC01053.jpg'), caption: 'Midnight in old town. 35mm frame.' },
+  { id: 3, image: relWeb('brand-product-shoot.jpg'), caption: 'Studio detail & specular control.' },
+  { id: 4, image: relWeb('03084d87-f055-4544-8548-e1e54195a2f6.jpeg'), caption: 'Full frame editorial still.' },
+  { id: 5, image: relWeb('cinematic-amber-fort.jpg'), caption: 'Dusk over Jaipur fort walls.' },
+  { id: 6, image: relWeb('DSC04910.JPG'), caption: 'Stage lights & live energy.' },
+];
+
+const data = `// AUTO-GENERATED by generate_data.cjs — do not edit by hand.
+// Regenerate with: npm run generate
+
+export const PORTFOLIO_CATEGORIES = [
   "ALL",
   "PORTRAITS",
   "FASHION",
@@ -29,268 +278,25 @@ const portfolioDataContent = `export const PORTFOLIO_CATEGORIES = [
   "CINEMATIC"
 ];
 
-export const ALL_192_PHOTOGRAPHS = ${JSON.stringify(manifest.map(m => m.relPath), null, 2)};
+export const ARCHIVE_IMAGES = ${JSON.stringify(IMAGE_FILES.map(relWeb), null, 2)};
 
-export const PORTFOLIO_PROJECTS = [
-  {
-    id: "yuvika-editorial-master",
-    number: "01",
-    title: "YUVIKA EDITORIAL — MONOCHROME SYMPHONY",
-    category: "FASHION",
-    subCategories: ["FASHION", "PORTRAITS", "EDITORIAL"],
-    year: "2026",
-    location: "Jaipur Studio",
-    client: "Avant-Garde Fashion Zine",
-    role: "Lead Photographer & Art Director",
-    heroImage: "${yuvikaImages[0]}",
-    aspectRatio: "large",
-    gallery: ${JSON.stringify(yuvikaImages, null, 2)},
-    tagline: "Comprehensive editorial fashion study featuring model Yuvika exploring silhouette, key light contours, and dramatic gaze.",
-    description: "Shot during an exclusive editorial session in Jaipur. Utilizing single-source directional key light to highlight cheekbone contours, delicate garment textures and piercing emotional gaze. Every frame balances high fashion minimalism with intimate portraiture.",
-    quote: "Editorial portraiture should feel like a dialog between shadow and gaze."
-  },
-  {
-    id: "rings-luxury-collection",
-    number: "02",
-    title: "THE RINGS COLLECTION — 74 FRAMES",
-    category: "PRODUCTS",
-    subCategories: ["PRODUCTS", "BRANDS"],
-    year: "2026",
-    location: "Jaipur Studio",
-    client: "Aura Fine Jewellery",
-    role: "Product & Studio Photographer",
-    heroImage: "${ringsImages[10] || ringsImages[0]}",
-    aspectRatio: "tall",
-    gallery: ${JSON.stringify(ringsImages, null, 2)},
-    tagline: "Complete 74-frame high-end jewellery catalog highlighting diamond brilliance, silver engravings and gold bands.",
-    description: "Commercial catalog and campaign assets produced for a luxury ring release. Specular control techniques emphasize gemstone clarity, metal facets and micro-etchings across 74 macro frames.",
-    quote: "The macro lens reveals a microscopic world of craftsmanship that deserves full attention."
-  },
-  {
-    id: "pendant-craftsmanship",
-    number: "03",
-    title: "GOLD & SOLITUDE — PENDANTS",
-    category: "PRODUCTS",
-    subCategories: ["PRODUCTS", "BRANDS"],
-    year: "2026",
-    location: "Jaipur Studio",
-    client: "Aura Fine Jewellery",
-    role: "Product & Macro Photographer",
-    heroImage: "${pendantImages[0]}",
-    aspectRatio: "large",
-    gallery: ${JSON.stringify(pendantImages, null, 2)},
-    tagline: "Complete 28-frame macro study celebrating hand-carved gemstones and micro-reflections in luxury pendants.",
-    description: "An intimate commercial product collection for a luxury heritage jewellery brand. Utilizing directional dark-field lighting to make precious metals pop against deep obsidian surfaces.",
-    quote: "Luxury product photography requires extreme discipline — every reflection must be intentional."
-  },
-  {
-    id: "night-in-jaipur-archive",
-    number: "04",
-    title: "NOCTURNE PORTRAITS — JAIPUR",
-    category: "PORTRAITS",
-    subCategories: ["PORTRAITS", "EDITORIAL"],
-    year: "2026",
-    location: "Jaipur, India",
-    client: "Editorial Study",
-    role: "Lead Photographer",
-    heroImage: "${khushPortraits[0]}",
-    aspectRatio: "tall",
-    gallery: ${JSON.stringify(khushPortraits, null, 2)},
-    tagline: "A visual study of nocturnal shadows, traditional architecture and human emotion in the Pink City.",
-    description: "Captured during midnight hours in old Jaipur, this series explores contrast between ancient sandstone facades and low ambient tungsten lights. Every frame tells a silent story of timeless grace.",
-    quote: "Atmosphere isn't created in post-production. It's caught in the split second when light meets emotion."
-  },
-  {
-    id: "amber-fort-cinematic-master",
-    number: "05",
-    title: "THE SILENT FORT — AMBER TWILIGHT",
-    category: "CINEMATIC",
-    subCategories: ["CINEMATIC", "STREET / LIFESTYLE"],
-    year: "2025",
-    location: "Amer, Rajasthan",
-    client: "Personal Visual Series",
-    role: "Visual Storyteller",
-    heroImage: "${khushCinematic[0]}",
-    aspectRatio: "wide",
-    gallery: ${JSON.stringify(khushCinematic, null, 2)},
-    tagline: "Cinematic widescreen frames capturing twilight shadows over 16th century royal ramparts.",
-    description: "A cinematic photo essay capturing twilight shadows over royal ramparts. Shot with anamorphic depth to replicate 35mm film stills.",
-    quote: "Frame it like a still from a movie that was never finished."
-  },
-  {
-    id: "sufi-nocturne-master",
-    number: "06",
-    title: "SUFI NIGHT — NOCTURNE & SOUL",
-    category: "EVENTS",
-    subCategories: ["EVENTS", "PORTRAITS"],
-    year: "2026",
-    location: "Jaipur, India",
-    client: "Jaipur Cultural Festival",
-    role: "Documentary Photographer",
-    heroImage: "${khushStreetEvents[0]}",
-    aspectRatio: "tall",
-    gallery: ${JSON.stringify(khushStreetEvents, null, 2)},
-    tagline: "Raw musical energy, candlelight reflections and ecstasy in motion.",
-    description: "Documenting an exclusive musical gathering in Jaipur. Low-light hand-held camera work preserving authentic mood, smoke and passion without disruptive flash photography.",
-    quote: "Event photography isn't about snapping crowd shots. It's capturing the soul of the room."
-  },
-  {
-    id: "fashion-couture-master",
-    number: "07",
-    title: "HERITAGE COUTURE LOOKBOOK",
-    category: "FASHION",
-    subCategories: ["FASHION", "EDITORIAL"],
-    year: "2026",
-    location: "Jaipur, Rajasthan",
-    client: "Avant-Garde Fashion Label",
-    role: "Campaign Photographer",
-    heroImage: "${khushFashion[0]}",
-    aspectRatio: "wide",
-    gallery: ${JSON.stringify(khushFashion, null, 2)},
-    tagline: "High fashion colliding with historic Rajasthani stone arches and silk draping.",
-    description: "A commercial fashion editorial shot at golden hour. Flowing royal garments juxtaposed against rugged brutalist stone walls, emphasizing form, texture and movement.",
-    quote: "We wanted garment movement that felt like poetry suspended in motion."
-  },
-  {
-    id: "pink-city-chronicles",
-    number: "08",
-    title: "CHRONICLES OF THE PINK CITY",
-    category: "STREET / LIFESTYLE",
-    subCategories: ["STREET / LIFESTYLE", "CINEMATIC"],
-    year: "2025",
-    location: "Johri Bazaar & Hawa Mahal, Jaipur",
-    client: "Travel & Culture Zine",
-    role: "Street Photographer",
-    heroImage: "${desktopImages[4] || desktopImages[0]}",
-    aspectRatio: "small",
-    gallery: ${JSON.stringify(desktopImages, null, 2)},
-    tagline: "Unfiltered urban life, traditional artisans and morning geometry across historic alleyways.",
-    description: "Candid street documentation across historic alleyways. High contrast sunlight piercing through narrow old-city corridors.",
-    quote: "The street rewards those who wait quietly in the shadows."
-  }
-];
+export const PORTFOLIO_PROJECTS = ${JSON.stringify(projects, null, 2)};
 
-export const SERVICES_DATA = [
-  {
-    number: "01",
-    title: "PORTRAIT PHOTOGRAPHY",
-    subtitle: "Cinematic, character-driven personal & celebrity portraits.",
-    description: "Creating powerful, intimate portraits that uncover personality, atmosphere and presence. Designed for artists, executives, public figures and personal brand building.",
-    deliverables: ["Creative direction", "Studio & location shoots", "High-end retouching", "Commercial usage rights"],
-    image: "${khushPortraits[0]}"
-  },
-  {
-    number: "02",
-    title: "FASHION & EDITORIAL",
-    subtitle: "High-fashion lookbooks, magazine spreads & couture imagery.",
-    description: "Editorial photography that elevates apparel and designer couture into artistic statements. Focus on movement, garment texture, lighting narrative and magazine-ready polish.",
-    deliverables: ["Lookbooks & campaign assets", "On-location / Set styling", "Model direction", "Publication licensing"],
-    image: "${yuvikaImages[0]}"
-  },
-  {
-    number: "03",
-    title: "BRAND CAMPAIGNS",
-    subtitle: "Commercial visual storytelling built for market impact.",
-    description: "Translating brand identity into unforgettable imagery. Full-service visual production from moodboards to final color-graded campaign assets for print, web and billboards.",
-    deliverables: ["Campaign strategy", "Multi-asset deliverables", "Social & print formats", "Commercial licensing"],
-    image: "${khushFashion[1]}"
-  },
-  {
-    number: "04",
-    title: "EVENT COVERAGE",
-    subtitle: "Documentary-style event & concert coverage.",
-    description: "Discreet, high-impact photography capturing authentic energy, key moments and ambient lighting during exclusive galas, music performances and fashion shows.",
-    deliverables: ["Same-day highlight selects", "Complete document gallery", "High-res print files"],
-    image: "${khushStreetEvents[0]}"
-  },
-  {
-    number: "05",
-    title: "PRODUCT PHOTOGRAPHY",
-    subtitle: "Luxury jewellery, pendants, rings & lifestyle goods.",
-    description: "Precision macro photography highlighting craftsmanship, precious stones and fine textures. Specialized in high-end jewellery, timepieces and luxury product catalogs.",
-    deliverables: ["Macro closeups", "Refinement & specular control", "E-commerce & editorial cutouts"],
-    image: "${pendantImages[0]}"
-  },
-  {
-    number: "06",
-    title: "SOCIAL MEDIA CONTENT",
-    subtitle: "High-volume cinematic imagery optimized for digital feeds.",
-    description: "Visual content engineered to stand out in fast-scrolling environments while maintaining a distinctive, premium brand aesthetic.",
-    deliverables: ["Vertical & square formats", "Batch content packs", "Reels & photo carousels"],
-    image: "${khushCinematic[1]}"
-  },
-  {
-    number: "07",
-    title: "CREATIVE DIRECTION",
-    subtitle: "Concept design, moodboard curation & visual strategy.",
-    description: "Comprehensive creative control over lighting, location, talent sourcing, color palette and narrative arc before a single frame is shot.",
-    deliverables: ["Moodboards & storyboards", "Set design consultation", "Talent & styling curation"],
-    image: "${yuvikaImages[2]}"
-  },
-  {
-    number: "08",
-    title: "CINEMATIC VISUALS",
-    subtitle: "Anamorphic stills & motion frames for film & music.",
-    description: "Widescreen imagery with filmic color grading, depth of field and dramatic atmospheric lighting suited for film stills, album art and creative media.",
-    deliverables: ["Widescreen 2.39:1 stills", "Custom filmic color grading", "Key-art poster compositions"],
-    image: "${khushCinematic[0]}"
-  }
-];
+export const SERVICES_DATA = ${JSON.stringify(services, null, 2)};
 
-export const WHY_KHUSH_PILLARS = [
-  {
-    number: "01",
-    title: "A DISTINCT VISUAL LANGUAGE",
-    description: "I don't want every shoot to look like everyone else's. I craft custom lighting moods, deep shadows and color palettes tailored strictly to the subject."
-  },
-  {
-    number: "02",
-    title: "STORY OVER SNAPSHOTS",
-    description: "Every frame should communicate something meaningful. Whether it's a 30-second scroll or a physical gallery wall, the image must stop people in their tracks."
-  },
-  {
-    number: "03",
-    title: "BUILT FOR PEOPLE & BRANDS",
-    description: "From personal portraits to multi-channel commercial campaigns, the objective remains singular: create commercial value through timeless artistic visual direction."
-  },
-  {
-    number: "04",
-    title: "FROM IDEA TO FINAL FRAME",
-    description: "Concept, mood boarding, composition, shooting, lighting and color grading all live seamlessly under one cohesive creative vision."
-  }
-];
+export const WHY_KHUSH_PILLARS = ${JSON.stringify(whyKhush, null, 2)};
 
-export const CLIENT_COLLABORATIONS = [
-  "AURA FINE JEWELLERY",
-  "THE PINK CITY GAZETTE",
-  "HERITAGE COUTURE JAIPUR",
-  "SUFI NIGHT FESTIVAL",
-  "AVANT-GARDE ZINE",
-  "ROYAL PALACE HOTELS"
-];
-
-export const TESTIMONIALS = [
-  {
-    quote: "Working with Khush felt less like hiring a photographer and more like having a true creative partner. He turned our fashion concept into editorial artwork.",
-    author: "Creative Director",
-    brand: "Heritage Couture"
-  },
-  {
-    quote: "The jewelry macro shots Khush delivered brought out every intricate gem reflection. Our sales conversion skyrocketed immediately.",
-    author: "Founder",
-    brand: "Aura Fine Jewellery"
-  }
-];
-
-export const INSTAGRAM_GRID = [
-  { id: 1, image: "${yuvikaImages[0]}", caption: "Yuvika editorial session. Key light & shadow." },
-  { id: 2, image: "${khushPortraits[0]}", caption: "Midnight in old town. 35mm frame." },
-  { id: 3, image: "${pendantImages[0]}", caption: "Gemstone reflections in gold." },
-  { id: 4, image: "${ringsImages[0]}", caption: "Silver & diamond macro closeups." },
-  { id: 5, image: "${khushCinematic[0]}", caption: "Dusk over Jaipur fort walls." },
-  { id: 6, image: "${khushStreetEvents[0]}", caption: "Stage lights & Sufi echoes." }
-];
+export const INSTAGRAM_GRID = ${JSON.stringify(instagramGrid, null, 2)};
 `;
 
-fs.writeFileSync(path.join(process.cwd(), 'src', 'data', 'portfolioData.js'), portfolioDataContent);
-console.log('SUCCESSFULLY GENERATED portfolioData.js WITH ALL 192 PHOTOS!');
+fs.writeFileSync(DATA_PATH, data);
+
+const manifest = IMAGE_FILES.map((f) => ({
+  relPath: relWeb(f),
+  originalFile: f,
+  webFile: webName(f),
+}));
+fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2));
+
+console.log(`[generate] SUCCESS — ${IMAGE_FILES.length} photos written to portfolioData.js`);
+console.log(`[generate] excluded (non-photographs): ${EXCLUDED.join(', ')}`);

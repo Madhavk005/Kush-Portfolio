@@ -11,9 +11,9 @@ export default function WhyKhush() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex items-center space-x-3 text-xs font-mono tracking-widest text-[#00E5FF] uppercase mb-8"
+          className="flex items-center space-x-3 text-xs font-mono tracking-widest text-[#258DFF] uppercase mb-8"
         >
-          <span className="w-8 h-[1px] bg-[#00E5FF]" />
+          <span className="w-8 h-[1px] bg-[#258DFF]" />
           <span>— THE CREATIVE EDGE</span>
         </motion.div>
 
@@ -25,7 +25,7 @@ export default function WhyKhush() {
         >
           PEOPLE DON'T <br />
           <span className="text-[#666666]">REMEMBER CONTENT.</span> <br />
-          <span className="text-[#00E5FF]">THEY REMEMBER HOW IT MADE THEM FEEL.</span>
+          <span className="text-[#258DFF]">THEY REMEMBER HOW IT MADE THEM FEEL.</span>
         </motion.h2>
 
         {/* 4 Value Pillars Grid */}
@@ -37,16 +37,16 @@ export default function WhyKhush() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="p-8 md:p-10 border border-white/10 bg-[#0B0B0B] hover:border-[#00E5FF]/50 transition-all duration-300 relative group"
+              className="p-8 md:p-10 border border-white/10 bg-[#0B0B0B] hover:border-[#258DFF]/50 transition-all duration-300 relative group"
             >
               <div className="flex justify-between items-start mb-6">
-                <span className="text-xs font-mono text-[#00E5FF] font-bold">
+                <span className="text-xs font-mono text-[#258DFF] font-bold">
                   {pillar.number} / PHILOSOPHY
                 </span>
-                <div className="w-2 h-2 rounded-full bg-[#00E5FF] opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="w-2 h-2 rounded-full bg-[#258DFF] opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
 
-              <h3 className="text-2xl md:text-3xl font-extrabold font-display uppercase text-[#F1F0EC] group-hover:text-[#00E5FF] transition-colors mb-4">
+              <h3 className="text-2xl md:text-3xl font-extrabold font-display uppercase text-[#F1F0EC] group-hover:text-[#258DFF] transition-colors mb-4">
                 {pillar.title}
               </h3>
 

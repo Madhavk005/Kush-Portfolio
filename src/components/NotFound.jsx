@@ -5,7 +5,7 @@ import { ArrowLeft, Camera } from 'lucide-react';
 export default function NotFound({ onReturnHome }) {
   return (
     <div className="fixed inset-0 z-50 bg-[#050505] text-[#F1F0EC] flex flex-col justify-between p-8 md:p-16 select-none bg-noise">
-      <div className="flex justify-between items-center text-xs font-mono tracking-widest text-[#00E5FF] uppercase">
+      <div className="flex justify-between items-center text-xs font-mono tracking-widest text-[#258DFF] uppercase">
         <span>KHUSH KAPOOR</span>
         <span>ERROR 404</span>
       </div>
@@ -15,7 +15,7 @@ export default function NotFound({ onReturnHome }) {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="w-20 h-20 rounded-full border border-[#00E5FF]/40 bg-[#00E5FF]/5 flex items-center justify-center mx-auto text-[#00E5FF]"
+          className="w-20 h-20 rounded-full border border-[#258DFF]/40 bg-[#258DFF]/5 flex items-center justify-center mx-auto text-[#258DFF]"
         >
           <Camera className="w-10 h-10" />
         </motion.div>
@@ -46,7 +46,7 @@ export default function NotFound({ onReturnHome }) {
         >
           <button
             onClick={onReturnHome}
-            className="px-8 py-4 border border-[#00E5FF] bg-[#00E5FF] text-black font-mono font-bold text-xs tracking-widest uppercase hover:bg-transparent hover:text-[#00E5FF] transition-all flex items-center gap-3 mx-auto"
+            className="px-8 py-4 border border-[#258DFF] bg-[#258DFF] text-black font-mono font-bold text-xs tracking-widest uppercase hover:bg-transparent hover:text-[#258DFF] transition-all flex items-center gap-3 mx-auto"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>RETURN HOME →</span>

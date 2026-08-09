@@ -12,7 +12,7 @@ export default function Footer({ onCursorEnter, onCursorLeave, onOpenContactModa
         <div className="space-y-4">
           <button
             onClick={scrollToTop}
-            className="text-[#F1F0EC] font-display font-extrabold text-2xl tracking-tight uppercase hover:text-[#00E5FF] transition-colors text-left block"
+            className="text-[#F1F0EC] font-display font-extrabold text-2xl tracking-tight uppercase hover:text-[#258DFF] transition-colors text-left block"
           >
             KHUSH KAPOOR
           </button>
@@ -22,16 +22,16 @@ export default function Footer({ onCursorEnter, onCursorLeave, onOpenContactModa
         </div>
 
         <div className="flex flex-wrap gap-8 text-[#F1F0EC]/80">
-          <button onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#00E5FF] transition-colors">
+          <button onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#258DFF] transition-colors">
             WORK
           </button>
-          <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#00E5FF] transition-colors">
+          <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#258DFF] transition-colors">
             ABOUT
           </button>
-          <button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#00E5FF] transition-colors">
+          <button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#258DFF] transition-colors">
             SERVICES
           </button>
-          <button onClick={onOpenContactModal} className="hover:text-[#00E5FF] transition-colors">
+          <button onClick={onOpenContactModal} className="hover:text-[#258DFF] transition-colors">
             INQUIRE
           </button>
         </div>
@@ -41,7 +41,7 @@ export default function Footer({ onCursorEnter, onCursorLeave, onOpenContactModa
             onClick={scrollToTop}
             onMouseEnter={() => onCursorEnter("TOP")}
             onMouseLeave={onCursorLeave}
-            className="p-3 border border-white/10 hover:border-[#00E5FF] hover:text-[#00E5FF] text-[#F1F0EC] transition-colors flex items-center gap-2 group"
+            className="p-3 border border-white/10 hover:border-[#258DFF] hover:text-[#258DFF] text-[#F1F0EC] transition-colors flex items-center gap-2 group"
           >
             <span>BACK TO TOP</span>
             <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
@@ -49,7 +49,7 @@ export default function Footer({ onCursorEnter, onCursorLeave, onOpenContactModa
 
           <div className="text-[10px] text-right space-y-1">
             <p>© {new Date().getFullYear()} KHUSH KAPOOR. ALL RIGHTS RESERVED.</p>
-            <p className="text-[#00E5FF]">JAIPUR, INDIA · 26°55'N 75°47'E</p>
+            <p className="text-[#258DFF]">JAIPUR, INDIA · 26°55'N 75°47'E</p>
           </div>
         </div>
       </div>

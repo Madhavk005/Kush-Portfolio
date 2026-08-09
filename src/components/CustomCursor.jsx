@@ -43,7 +43,7 @@ export default function CustomCursor({ cursorState }) {
     <>
       {/* Inner Dot */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-50 rounded-full bg-[#00E5FF] mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none z-50 rounded-full bg-[#258DFF] mix-blend-difference"
         animate={{
           x: position.x - (active ? 0 : 4),
           y: position.y - (active ? 0 : 4),
@@ -56,14 +56,14 @@ export default function CustomCursor({ cursorState }) {
 
       {/* Outer Magnetic Interactive Circle */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-50 rounded-full flex items-center justify-center border border-[#00E5FF] bg-[#00E5FF]/10 backdrop-blur-xs text-[10px] font-mono tracking-widest text-[#F1F0EC] uppercase font-bold"
+        className="fixed top-0 left-0 pointer-events-none z-50 rounded-full flex items-center justify-center border border-[#258DFF] bg-[#258DFF]/10 backdrop-blur-[2px] text-[10px] font-mono tracking-widest text-[#F1F0EC] uppercase font-bold"
         animate={{
           x: position.x - (active ? 40 : 18),
           y: position.y - (active ? 40 : 18),
           width: active ? 80 : 36,
           height: active ? 80 : 36,
           scale: active ? 1 : 0.6,
-          borderColor: active ? '#00E5FF' : 'rgba(0, 229, 255, 0.4)',
+          borderColor: active ? '#258DFF' : 'rgba(37, 141, 255, 0.4)',
         }}
         transition={{ type: 'spring', damping: 25, stiffness: 250, mass: 0.2 }}
       >

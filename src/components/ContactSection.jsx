@@ -11,9 +11,9 @@ export default function ContactSection({ onOpenContactModal, onCursorEnter, onCu
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex items-center space-x-3 text-xs font-mono tracking-widest text-[#00E5FF] uppercase mb-8"
+          className="flex items-center space-x-3 text-xs font-mono tracking-widest text-[#258DFF] uppercase mb-8"
         >
-          <span className="w-8 h-[1px] bg-[#00E5FF]" />
+          <span className="w-8 h-[1px] bg-[#258DFF]" />
           <span>— LET'S MAKE SOMETHING</span>
         </motion.div>
 
@@ -28,7 +28,7 @@ export default function ContactSection({ onOpenContactModal, onCursorEnter, onCu
             >
               HAVE A PROJECT <br />
               IN MIND? <br />
-              <span className="text-[#00E5FF]">LET'S TALK.</span>
+              <span className="text-[#258DFF]">LET'S TALK.</span>
             </motion.h2>
 
             <p className="text-lg md:text-xl text-[#F1F0EC]/80 font-light max-w-xl leading-relaxed">
@@ -40,7 +40,7 @@ export default function ContactSection({ onOpenContactModal, onCursorEnter, onCu
                 onClick={onOpenContactModal}
                 onMouseEnter={() => onCursorEnter("LET'S GO")}
                 onMouseLeave={onCursorLeave}
-                className="px-8 py-5 border-2 border-[#00E5FF] bg-[#00E5FF] text-black font-mono font-bold text-xs md:text-sm tracking-widest uppercase hover:bg-transparent hover:text-[#00E5FF] transition-all duration-300 flex items-center gap-4 group"
+                className="px-8 py-5 border-2 border-[#258DFF] bg-[#258DFF] text-black font-mono font-bold text-xs md:text-sm tracking-widest uppercase hover:bg-transparent hover:text-[#258DFF] transition-all duration-300 flex items-center gap-4 group"
               >
                 <span>START A PROJECT →</span>
                 <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -50,7 +50,7 @@ export default function ContactSection({ onOpenContactModal, onCursorEnter, onCu
 
           {/* Direct Details Box */}
           <div className="lg:col-span-4 space-y-8 p-8 border border-white/10 bg-[#0B0B0B]">
-            <span className="text-xs font-mono text-[#00E5FF] uppercase tracking-widest block border-b border-white/10 pb-4">
+            <span className="text-xs font-mono text-[#258DFF] uppercase tracking-widest block border-b border-white/10 pb-4">
               DIRECT INQUIRIES
             </span>
 
@@ -59,9 +59,9 @@ export default function ContactSection({ onOpenContactModal, onCursorEnter, onCu
                 <span className="text-[#666666] block">EMAIL</span>
                 <a
                   href="mailto:khush@khushkapoor.com"
-                  className="text-[#F1F0EC] text-sm font-semibold hover:text-[#00E5FF] transition-colors flex items-center gap-2"
+                  className="text-[#F1F0EC] text-sm font-semibold hover:text-[#258DFF] transition-colors flex items-center gap-2"
                 >
-                  <Mail className="w-4 h-4 text-[#00E5FF]" />
+                  <Mail className="w-4 h-4 text-[#258DFF]" />
                   <span>khush@khushkapoor.com</span>
                 </a>
               </div>
@@ -69,7 +69,7 @@ export default function ContactSection({ onOpenContactModal, onCursorEnter, onCu
               <div className="space-y-1">
                 <span className="text-[#666666] block">LOCATION</span>
                 <div className="text-[#F1F0EC] text-sm font-semibold flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-[#00E5FF]" />
+                  <MapPin className="w-4 h-4 text-[#258DFF]" />
                   <span>Jaipur, Rajasthan, India</span>
                 </div>
               </div>
@@ -77,26 +77,26 @@ export default function ContactSection({ onOpenContactModal, onCursorEnter, onCu
               <div className="space-y-1">
                 <span className="text-[#666666] block">INSTAGRAM</span>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/keto.k0"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#F1F0EC] text-sm font-semibold hover:text-[#00E5FF] transition-colors flex items-center gap-2"
+                  className="text-[#F1F0EC] text-sm font-semibold hover:text-[#258DFF] transition-colors flex items-center gap-2"
                 >
-                  <Instagram className="w-4 h-4 text-[#00E5FF]" />
-                  <span>@khush.kapoor</span>
+                  <Instagram className="w-4 h-4 text-[#258DFF]" />
+                  <span>@keto.k0</span>
                 </a>
               </div>
 
               <div className="space-y-1">
                 <span className="text-[#666666] block">WHATSAPP / PHONE</span>
                 <a
-                  href="https://wa.me/919000000000"
+                  href="https://wa.me/918000704738"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#F1F0EC] text-sm font-semibold hover:text-[#00E5FF] transition-colors flex items-center gap-2"
+                  className="text-[#F1F0EC] text-sm font-semibold hover:text-[#258DFF] transition-colors flex items-center gap-2"
                 >
-                  <PhoneCall className="w-4 h-4 text-[#00E5FF]" />
-                  <span>+91 98290 XXXXX</span>
+                  <PhoneCall className="w-4 h-4 text-[#258DFF]" />
+                  <span>+91 80007 04738</span>
                 </a>
               </div>
             </div>

@@ -16,9 +16,9 @@ export default function Services({ onOpenContactModal, onCursorEnter, onCursorLe
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex items-center space-x-3 text-xs font-mono tracking-widest text-[#00E5FF] uppercase mb-4"
+              className="flex items-center space-x-3 text-xs font-mono tracking-widest text-[#258DFF] uppercase mb-4"
             >
-              <span className="w-8 h-[1px] bg-[#00E5FF]" />
+              <span className="w-8 h-[1px] bg-[#258DFF]" />
               <span>— 03 / WHAT I DO</span>
             </motion.div>
 
@@ -29,7 +29,7 @@ export default function Services({ onOpenContactModal, onCursorEnter, onCursorLe
               className="text-4xl sm:text-6xl md:text-7xl font-extrabold font-display tracking-tight text-[#F1F0EC] uppercase leading-[0.95]"
             >
               YOUR IDEA. <br />
-              <span className="text-[#00E5FF]">MY CAMERA.</span>
+              <span className="text-[#258DFF]">MY CAMERA.</span>
             </motion.h2>
           </div>
 
@@ -37,7 +37,7 @@ export default function Services({ onOpenContactModal, onCursorEnter, onCursorLe
             onClick={onOpenContactModal}
             onMouseEnter={() => onCursorEnter("LET'S GO")}
             onMouseLeave={onCursorLeave}
-            className="px-6 py-3 border border-[#00E5FF]/40 bg-[#00E5FF]/5 hover:bg-[#00E5FF] hover:text-black text-xs font-mono tracking-widest text-[#00E5FF] transition-all duration-300 self-start md:self-auto flex items-center gap-2 group"
+            className="px-6 py-3 border border-[#258DFF]/40 bg-[#258DFF]/5 hover:bg-[#258DFF] hover:text-black text-xs font-mono tracking-widest text-[#258DFF] transition-all duration-300 self-start md:self-auto flex items-center gap-2 group"
           >
             <span>BOOK A SERVICES SHOOT</span>
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -65,16 +65,16 @@ export default function Services({ onOpenContactModal, onCursorEnter, onCursorLe
                   {/* Row Top Bar */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-6">
-                      <span className="text-xs font-mono text-[#00E5FF] font-semibold">{service.number}</span>
+                      <span className="text-xs font-mono text-[#258DFF] font-semibold">{service.number}</span>
                       <h3 className={`text-xl md:text-3xl font-extrabold font-display uppercase transition-colors ${
-                        isOpen ? 'text-[#00E5FF]' : 'text-[#F1F0EC] group-hover:text-[#00E5FF]'
+                        isOpen ? 'text-[#258DFF]' : 'text-[#F1F0EC] group-hover:text-[#258DFF]'
                       }`}>
                         {service.title}
                       </h3>
                     </div>
 
                     <div className={`p-2 rounded-full border transition-all ${
-                      isOpen ? 'border-[#00E5FF] bg-[#00E5FF] text-black' : 'border-white/10 text-white/60 group-hover:border-[#00E5FF]'
+                      isOpen ? 'border-[#258DFF] bg-[#258DFF] text-black' : 'border-white/10 text-white/60 group-hover:border-[#258DFF]'
                     }`}>
                       {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                     </div>
@@ -95,13 +95,13 @@ export default function Services({ onOpenContactModal, onCursorEnter, onCursorLe
                         </p>
 
                         <div className="pt-2">
-                          <span className="text-[10px] font-mono tracking-widest text-[#00E5FF] uppercase block mb-3">
+                          <span className="text-[10px] font-mono tracking-widest text-[#258DFF] uppercase block mb-3">
                             DELIVERABLES & SCOPE:
                           </span>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             {service.deliverables.map((item, i) => (
                               <div key={i} className="flex items-center space-x-2 text-xs font-mono text-[#666666]">
-                                <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5FF]" />
+                                <CheckCircle2 className="w-3.5 h-3.5 text-[#258DFF]" />
                                 <span className="text-[#F1F0EC]">{item}</span>
                               </div>
                             ))}
@@ -135,7 +135,7 @@ export default function Services({ onOpenContactModal, onCursorEnter, onCursorLe
               
               <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end text-xs font-mono">
                 <div>
-                  <span className="text-[#00E5FF]">SERVICE PREVIEW</span>
+                  <span className="text-[#258DFF]">SERVICE PREVIEW</span>
                   <p className="text-[#F1F0EC] font-bold text-sm">
                     {SERVICES_DATA[activeService !== null ? activeService : 0].title}
                   </p>

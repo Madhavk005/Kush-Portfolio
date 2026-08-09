@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, Camera, MapPin, Grid } from 'lucide-react';
 import ProgressiveImage from './ProgressiveImage';
+import useFocusTrap from '../hooks/useFocusTrap';
 
 export default function ImageLightbox({ images, currentIndex, onClose, onNavigate }) {
   const [isZoomed, setIsZoomed] = useState(false);
   const [showThumbnails, setShowThumbnails] = useState(true);
+  const modalRef = useRef(null);
+  useFocusTrap(currentIndex !== null, modalRef);
 
   // Reset zoom when navigating to another image
   useEffect(() => {
@@ -42,9 +45,11 @@ export default function ImageLightbox({ images, currentIndex, onClose, onNavigat
   return (
     <AnimatePresence>
       <motion.div
+        ref={modalRef}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        tabIndex={-1}
         className="fixed inset-0 z-50 bg-[#050505]/98 backdrop-blur-2xl flex flex-col justify-between p-3 sm:p-6 select-none"
         role="dialog"
         aria-label="Image Fullscreen Lightbox"

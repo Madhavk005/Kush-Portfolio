@@ -50,7 +50,7 @@ export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave,
             onMouseEnter={() => onCursorEnter('HOME')}
             onMouseLeave={onCursorLeave}
           >
-            <span className="text-lg md:text-xl font-bold font-display tracking-tight text-[#F1F0EC] group-hover:text-[#00E5FF] transition-colors">
+            <span className="text-lg md:text-xl font-bold font-display tracking-tight text-[#F1F0EC] group-hover:text-[#258DFF] transition-colors">
               KHUSH KAPOOR
             </span>
             <span className="text-[10px] font-mono tracking-widest text-[#666666] group-hover:text-[#F1F0EC] transition-colors">
@@ -68,13 +68,13 @@ export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave,
                   onClick={() => scrollToSection(item.id)}
                   onMouseEnter={() => onCursorEnter(item.id === 'contact' ? "LET'S GO" : 'OPEN')}
                   onMouseLeave={onCursorLeave}
-                  className="relative py-1 text-xs font-mono tracking-widest uppercase transition-colors text-[#F1F0EC]/80 hover:text-[#00E5FF]"
+                  className="relative py-1 text-xs font-mono tracking-widest uppercase transition-colors text-[#F1F0EC]/80 hover:text-[#258DFF]"
                 >
                   {item.label}
                   {isActive && (
                     <motion.div
                       layoutId="activeNavLine"
-                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#00E5FF]"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#258DFF]"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -87,7 +87,7 @@ export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave,
               onClick={onOpenContactModal}
               onMouseEnter={() => onCursorEnter("LET'S GO")}
               onMouseLeave={onCursorLeave}
-              className="ml-4 px-5 py-2.5 rounded-none border border-[#00E5FF]/40 bg-[#00E5FF]/5 hover:bg-[#00E5FF] hover:text-black text-xs font-mono tracking-widest text-[#00E5FF] transition-all duration-300 flex items-center gap-2 group"
+              className="ml-4 px-5 py-2.5 rounded-none border border-[#258DFF]/40 bg-[#258DFF]/5 hover:bg-[#258DFF] hover:text-black text-xs font-mono tracking-widest text-[#258DFF] transition-all duration-300 flex items-center gap-2 group"
             >
               <span>START A PROJECT</span>
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -97,7 +97,7 @@ export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave,
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#F1F0EC] hover:text-[#00E5FF] focus:outline-none"
+            className="md:hidden p-2 text-[#F1F0EC] hover:text-[#258DFF] focus:outline-none"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -115,12 +115,12 @@ export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave,
             className="fixed inset-0 z-30 bg-[#050505]/95 backdrop-blur-2xl flex flex-col justify-between p-8 pt-28 md:hidden"
           >
             <div className="flex flex-col space-y-6">
-              <span className="text-xs font-mono tracking-widest text-[#00E5FF]">NAVIGATION</span>
+              <span className="text-xs font-mono tracking-widest text-[#258DFF]">NAVIGATION</span>
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-left text-3xl font-display font-extrabold text-[#F1F0EC] hover:text-[#00E5FF] transition-colors py-2 flex items-center justify-between border-b border-white/5"
+                  className="text-left text-3xl font-display font-extrabold text-[#F1F0EC] hover:text-[#258DFF] transition-colors py-2 flex items-center justify-between border-b border-white/5"
                 >
                   <span>{item.label}</span>
                   <ArrowUpRight className="w-6 h-6 text-[#666666]" />
@@ -134,7 +134,7 @@ export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave,
                   setMobileMenuOpen(false);
                   onOpenContactModal();
                 }}
-                className="w-full py-4 bg-[#00E5FF] text-black font-mono font-bold text-xs tracking-widest text-center"
+                className="w-full py-4 bg-[#258DFF] text-black font-mono font-bold text-xs tracking-widest text-center"
               >
                 START A PROJECT →
               </button>

@@ -114,6 +114,28 @@
   scrollbar-width: none;
 }
 
+/* Accessible focus states (keyboard users) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #258DFF;
+  outline-offset: 2px;
+}
+
+/* Anchor targets clear the fixed header */
+section[id] {
+  scroll-margin-top: 90px;
+}
+
+/* Archive tiles: skip rendering cost below the fold */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 256px;
+}
+
 /* Custom Responsive Media Queries for Ultra-Wide / Tablets / Mobile */
 @media (max-width: 640px) {
   .hero-padding {

@@ -16,7 +16,7 @@ export default function Hero({ onCursorEnter, onCursorLeave }) {
         className="absolute inset-0 z-0 opacity-40 filter contrast-[1.1] brightness-75 gpu-accel"
       >
         <ProgressiveImage
-          src="/assets/images/all/khush-1-DSC03753.jpg"
+          src="/assets/images/web/hero-bg.jpg"
           alt="Khush Kapoor Photography Hero"
           priority={true}
           className="scale-105"

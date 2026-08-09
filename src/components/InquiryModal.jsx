@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CheckCircle2, Send, AlertCircle, Loader2 } from 'lucide-react';
+import { X, CheckCircle2, Send, AlertCircle } from 'lucide-react';
+import useFocusTrap from '../hooks/useFocusTrap';
 
 export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorLeave }) {
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [formData, setFormData] = useState({
     name: '',
@@ -14,6 +14,8 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
     description: '',
     budget: '$1,000 - $3,000'
   });
+  const modalRef = useRef(null);
+  useFocusTrap(isOpen, modalRef);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -46,13 +48,26 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
       return;
     }
 
-    setLoading(true);
+    // Compose the inquiry and deliver it via WhatsApp (opens WhatsApp with the prefilled message)
+    const message = [
+      `NEW PROJECT INQUIRY — khushkapoor.com`,
+      ``,
+      `NAME: ${formData.name}`,
+      `EMAIL: ${formData.email}`,
+      formData.brand ? `BRAND: ${formData.brand}` : null,
+      `PROJECT TYPE: ${formData.serviceType}`,
+      `BUDGET: ${formData.budget}`,
+      ``,
+      `PROJECT DETAILS:`,
+      formData.description,
+    ]
+      .filter(Boolean)
+      .join('\n');
 
-    // Simulate reliable async delivery submit
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 800);
+    const whatsappUrl = `https://wa.me/918000704738?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+    setSubmitted(true);
   };
 
   const projectTypes = [
@@ -84,11 +99,11 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
         aria-labelledby="modal-title"
         aria-modal="true"
       >
-        <div className="relative w-full max-w-3xl bg-[#0B0B0B] border border-white/10 p-6 md:p-12 my-auto">
+        <div ref={modalRef} className="relative w-full max-w-3xl bg-[#0B0B0B] border border-white/10 p-6 md:p-12 my-auto" tabIndex={-1}>
           {/* Header */}
           <div className="flex justify-between items-center pb-6 border-b border-white/10">
             <div>
-              <span className="text-xs font-mono text-[#00E5FF] uppercase tracking-widest block">
+              <span className="text-xs font-mono text-[#258DFF] uppercase tracking-widest block">
                 — PROJECT INQUIRY FORM
               </span>
               <h3 id="modal-title" className="text-2xl md:text-4xl font-extrabold font-display uppercase text-[#F1F0EC]">
@@ -101,7 +116,7 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
               onMouseEnter={() => onCursorEnter("CLOSE")}
               onMouseLeave={onCursorLeave}
               aria-label="Close inquiry form"
-              className="p-2 border border-white/10 hover:border-[#00E5FF] text-white/60 hover:text-[#00E5FF] transition-colors"
+              className="p-2 border border-white/10 hover:border-[#258DFF] text-white/60 hover:text-[#258DFF] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -129,7 +144,7 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                     placeholder="e.g. Maya Lin"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#00E5FF] focus:outline-none transition-colors"
+                    className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#258DFF] focus:outline-none transition-colors"
                   />
                 </div>
 
@@ -145,7 +160,7 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                     placeholder="maya@brand.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#00E5FF] focus:outline-none transition-colors"
+                    className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#258DFF] focus:outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -161,7 +176,7 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                   placeholder="e.g. Aura Couture / Independent"
                   value={formData.brand}
                   onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
-                  className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#00E5FF] focus:outline-none transition-colors"
+                  className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#258DFF] focus:outline-none transition-colors"
                 />
               </div>
 
@@ -174,7 +189,7 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                   id="inquiry-service"
                   value={formData.serviceType}
                   onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
-                  className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#00E5FF] focus:outline-none transition-colors"
+                  className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#258DFF] focus:outline-none transition-colors"
                 >
                   {projectTypes.map((t) => (
                     <option key={t} value={t} className="bg-[#050505] text-[#F1F0EC]">
@@ -196,7 +211,7 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                   placeholder="Describe your vision, shoot dates, location, deliverables or story concept..."
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#00E5FF] focus:outline-none transition-colors"
+                  className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#258DFF] focus:outline-none transition-colors"
                 />
               </div>
 
@@ -211,8 +226,8 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                       onClick={() => setFormData({ ...formData, budget: b })}
                       className={`py-2.5 px-3 text-center border text-[11px] transition-colors ${
                         formData.budget === b
-                          ? 'border-[#00E5FF] bg-[#00E5FF] text-black font-bold'
-                          : 'border-white/10 bg-[#121212] text-[#F1F0EC]/70 hover:border-[#00E5FF]/50'
+                          ? 'border-[#258DFF] bg-[#258DFF] text-black font-bold'
+                          : 'border-white/10 bg-[#121212] text-[#F1F0EC]/70 hover:border-[#258DFF]/50'
                       }`}
                     >
                       {b}
@@ -225,22 +240,12 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
               <div className="pt-4">
                 <button
                   type="submit"
-                  disabled={loading}
                   onMouseEnter={() => onCursorEnter("SEND")}
                   onMouseLeave={onCursorLeave}
-                  className="w-full py-4 bg-[#00E5FF] text-black font-bold text-xs tracking-widest uppercase hover:bg-white transition-colors flex items-center justify-center gap-3 disabled:opacity-50"
+                  className="w-full py-4 bg-[#258DFF] text-black font-bold text-xs tracking-widest uppercase hover:bg-white transition-colors flex items-center justify-center gap-3"
                 >
-                  {loading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>SENDING INQUIRY...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" />
-                      <span>SEND THE IDEA →</span>
-                    </>
-                  )}
+                  <Send className="w-4 h-4" />
+                  <span>SEND VIA WHATSAPP →</span>
                 </button>
               </div>
             </form>
@@ -250,7 +255,7 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
               animate={{ opacity: 1, scale: 1 }}
               className="py-16 text-center space-y-6"
             >
-              <div className="w-16 h-16 rounded-full bg-[#00E5FF]/20 text-[#00E5FF] flex items-center justify-center mx-auto border border-[#00E5FF]">
+              <div className="w-16 h-16 rounded-full bg-[#258DFF]/20 text-[#258DFF] flex items-center justify-center mx-auto border border-[#258DFF]">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
 
@@ -258,12 +263,14 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                 MESSAGE RECEIVED.
               </h4>
 
-              <p className="text-sm text-[#00E5FF] font-mono tracking-widest uppercase max-w-md mx-auto">
+              <p className="text-sm text-[#258DFF] font-mono tracking-widest uppercase max-w-md mx-auto">
                 LET'S CREATE SOMETHING WORTH REMEMBERING.
               </p>
 
               <p className="text-xs text-[#666666] font-mono max-w-sm mx-auto leading-relaxed">
-                Khush will review your project details and get back to you at <span className="text-[#F1F0EC]">{formData.email}</span> within 24 hours.
+                Your inquiry just opened in WhatsApp with all the details prefilled. Didn't open? Email it directly to{' '}
+                <a href="mailto:khush@khushkapoor.com" className="text-[#F1F0EC] underline hover:text-[#258DFF] transition-colors">khush@khushkapoor.com</a>
+                {' '}and Khush will get back within 24 hours.
               </p>
 
               <button
@@ -271,7 +278,7 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                   setSubmitted(false);
                   onClose();
                 }}
-                className="mt-6 px-6 py-3 border border-white/10 text-xs font-mono text-[#F1F0EC] hover:border-[#00E5FF] hover:text-[#00E5FF] transition-colors"
+                className="mt-6 px-6 py-3 border border-white/10 text-xs font-mono text-[#F1F0EC] hover:border-[#258DFF] hover:text-[#258DFF] transition-colors"
               >
                 RETURN TO WEBSITE
               </button>
