@@ -7,7 +7,7 @@ export default function Services({ onOpenContactModal, onCursorEnter, onCursorLe
   const [activeService, setActiveService] = useState(0);
 
   return (
-    <section id="services" className="py-24 md:py-36 bg-[#050505] border-t border-white/5 relative">
+    <section id="services" className="py-24 md:py-36 bg-[#000] border-t border-white/5 relative">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-20 gap-6">
@@ -16,17 +16,16 @@ export default function Services({ onOpenContactModal, onCursorEnter, onCursorLe
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex items-center space-x-3 text-xs font-mono tracking-widest text-[#258DFF] uppercase mb-4"
+              className="kicker mb-4"
             >
-              <span className="w-8 h-[1px] bg-[#258DFF]" />
-              <span>— 03 / WHAT I DO</span>
+              What I do
             </motion.div>
 
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl sm:text-6xl md:text-7xl font-extrabold font-display tracking-tight text-[#F1F0EC] uppercase leading-[0.95]"
+              className="text-4xl sm:text-6xl md:text-7xl font-extrabold font-display tracking-tight text-[#F5F5F7] uppercase leading-[0.95]"
             >
               YOUR IDEA. <br />
               <span className="text-[#258DFF]">MY CAMERA.</span>
@@ -37,17 +36,17 @@ export default function Services({ onOpenContactModal, onCursorEnter, onCursorLe
             onClick={onOpenContactModal}
             onMouseEnter={() => onCursorEnter("LET'S GO")}
             onMouseLeave={onCursorLeave}
-            className="px-6 py-3 border border-[#258DFF]/40 bg-[#258DFF]/5 hover:bg-[#258DFF] hover:text-black text-xs font-mono tracking-widest text-[#258DFF] transition-all duration-300 self-start md:self-auto flex items-center gap-2 group"
+            className="group/btn text-sm font-medium tracking-widest uppercase text-[#F5F5F7] border-b border-white/30 pb-1.5 self-start md:self-auto w-fit hover:text-[#258DFF] hover:border-[#258DFF] transition-colors duration-300 flex items-center gap-2"
           >
-            <span>BOOK A SERVICES SHOOT</span>
-            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <span>Book a shoot</span>
+            <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
           </button>
         </div>
 
         {/* Interactive Services List + Live Image Preview Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Services Rows */}
-          <div className="lg:col-span-7 divide-y divide-white/10 border-y border-white/10">
+          <div className="lg:col-span-7 divide-y divide-white/5">
             {SERVICES_DATA.map((service, idx) => {
               const isOpen = activeService === idx;
 
@@ -64,19 +63,19 @@ export default function Services({ onOpenContactModal, onCursorEnter, onCursorLe
                 >
                   {/* Row Top Bar */}
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-6">
-                      <span className="text-xs font-mono text-[#258DFF] font-semibold">{service.number}</span>
+                    <div className="flex items-center gap-6">
+                      <span className="text-sm text-[#86868B]">{service.number}</span>
                       <h3 className={`text-xl md:text-3xl font-extrabold font-display uppercase transition-colors ${
-                        isOpen ? 'text-[#258DFF]' : 'text-[#F1F0EC] group-hover:text-[#258DFF]'
+                        isOpen ? 'text-[#258DFF]' : 'text-[#F5F5F7] group-hover:text-[#258DFF]'
                       }`}>
                         {service.title}
                       </h3>
                     </div>
 
-                    <div className={`p-2 rounded-full border transition-all ${
-                      isOpen ? 'border-[#258DFF] bg-[#258DFF] text-black' : 'border-white/10 text-white/60 group-hover:border-[#258DFF]'
+                    <div className={`transition-all duration-300 ${
+                      isOpen ? 'text-[#258DFF]' : 'text-white/40 group-hover:text-white/80'
                     }`}>
-                      {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                      {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
                     </div>
                   </div>
 
@@ -90,19 +89,19 @@ export default function Services({ onOpenContactModal, onCursorEnter, onCursorLe
                         transition={{ duration: 0.4 }}
                         className="overflow-hidden pt-6 space-y-4"
                       >
-                        <p className="text-sm md:text-base text-[#F1F0EC]/80 font-light leading-relaxed">
+                        <p className="text-sm md:text-base text-[#F5F5F7]/80 font-light leading-relaxed">
                           {service.description}
                         </p>
 
                         <div className="pt-2">
-                          <span className="text-[10px] font-mono tracking-widest text-[#258DFF] uppercase block mb-3">
-                            DELIVERABLES & SCOPE:
+                          <span className="block text-sm text-[#86868B] mb-3">
+                            Deliverables
                           </span>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             {service.deliverables.map((item, i) => (
-                              <div key={i} className="flex items-center space-x-2 text-xs font-mono text-[#666666]">
+                              <div key={i} className="flex items-center space-x-2 text-sm text-[#86868B]">
                                 <CheckCircle2 className="w-3.5 h-3.5 text-[#258DFF]" />
-                                <span className="text-[#F1F0EC]">{item}</span>
+                                <span className="text-[#F5F5F7]">{item}</span>
                               </div>
                             ))}
                           </div>
@@ -117,7 +116,7 @@ export default function Services({ onOpenContactModal, onCursorEnter, onCursorLe
 
           {/* Sticky Right Preview Photograph */}
           <div className="lg:col-span-5 hidden lg:block sticky top-32">
-            <div className="relative h-[550px] w-full border border-white/10 overflow-hidden bg-[#0B0B0B]">
+            <div className="relative h-[550px] w-full rounded-2xl overflow-hidden bg-[#1D1D1F]">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={activeService}
@@ -133,14 +132,14 @@ export default function Services({ onOpenContactModal, onCursorEnter, onCursorLe
               
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70" />
               
-              <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end text-xs font-mono">
+              <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
                 <div>
-                  <span className="text-[#258DFF]">SERVICE PREVIEW</span>
-                  <p className="text-[#F1F0EC] font-bold text-sm">
+                  <span className="text-[#86868B] text-sm">Service preview</span>
+                  <p className="text-[#F5F5F7] font-bold text-lg">
                     {SERVICES_DATA[activeService !== null ? activeService : 0].title}
                   </p>
                 </div>
-                <span className="text-white/60">KHUSH KAPOOR STUDIO</span>
+                <span className="text-white/60 text-sm">Khush Kapoor Studio</span>
               </div>
             </div>
           </div>

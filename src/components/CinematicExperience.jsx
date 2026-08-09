@@ -17,10 +17,10 @@ export default function CinematicExperience({ onCursorEnter, onCursorLeave }) {
   ];
 
   return (
-    <section className="py-24 md:py-36 bg-[#050505] border-t border-white/5 relative overflow-hidden">
+    <section className="py-24 md:py-36 bg-[#000] border-t border-white/5 relative overflow-hidden">
       {/* Moving Kinetic Text Header */}
       <div className="space-y-4 mb-16 overflow-hidden select-none pointer-events-none">
-        <motion.div style={{ x: textXLeft }} className="whitespace-nowrap flex space-x-8 text-6xl md:text-9xl font-extrabold font-display uppercase tracking-tight text-stroke opacity-30">
+        <motion.div style={{ x: textXLeft }} className="whitespace-nowrap flex space-x-8 text-6xl md:text-9xl font-extrabold font-display uppercase tracking-tight text-[#1D1D1F]">
           <span>CINEMATIC VISUAL STORYTELLING</span>
           <span>·</span>
           <span>ATMOSPHERE & SHADOWS</span>
@@ -41,7 +41,7 @@ export default function CinematicExperience({ onCursorEnter, onCursorLeave }) {
             <motion.div
               key={i}
               whileHover={{ scale: 1.03 }}
-              className="flex-none w-[300px] sm:w-[400px] md:w-[500px] h-[350px] md:h-[450px] snap-center relative border border-white/10 overflow-hidden group cursor-pointer"
+              className="flex-none w-[300px] sm:w-[400px] md:w-[500px] h-[350px] md:h-[450px] snap-center relative overflow-hidden rounded-xl bg-[#0C0C0D] group cursor-pointer"
               onMouseEnter={() => onCursorEnter("EXPLORE")}
               onMouseLeave={onCursorLeave}
             >
@@ -53,12 +53,12 @@ export default function CinematicExperience({ onCursorEnter, onCursorLeave }) {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 pointer-events-none" />
               
-              <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end text-xs font-mono pointer-events-none">
+              <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end pointer-events-none">
                 <div>
-                  <span className="text-[#258DFF] block mb-1">0{i + 1} / CINEMATIC FRAME</span>
-                  <h4 className="text-lg font-bold font-display text-[#F1F0EC] uppercase">{img.title}</h4>
+                  <span className="text-[#86868B] block text-xs mb-1">0{i + 1} — cinematic frame</span>
+                  <h4 className="text-lg font-bold font-display text-[#F5F5F7] uppercase">{img.title}</h4>
                 </div>
-                <span className="text-white/60">35MM ASPECT</span>
+                <span className="text-white/50 text-xs">35mm</span>
               </div>
             </motion.div>
           ))}

@@ -94,19 +94,19 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 bg-[#050505]/95 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-6 md:p-12 overflow-y-auto"
+        className="fixed inset-0 z-50 bg-[#000]/95 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-6 md:p-12 overflow-y-auto"
         role="dialog"
         aria-labelledby="modal-title"
         aria-modal="true"
       >
-        <div ref={modalRef} className="relative w-full max-w-3xl bg-[#0B0B0B] border border-white/10 p-6 md:p-12 my-auto" tabIndex={-1}>
+        <div ref={modalRef} className="relative w-full max-w-3xl bg-[#1D1D1F] border border-white/10 p-6 md:p-12 my-auto" tabIndex={-1}>
           {/* Header */}
           <div className="flex justify-between items-center pb-6 border-b border-white/10">
             <div>
-              <span className="text-xs font-mono text-[#258DFF] uppercase tracking-widest block">
-                — PROJECT INQUIRY FORM
+              <span className="block text-sm text-[#86868B]">
+                Project inquiry
               </span>
-              <h3 id="modal-title" className="text-2xl md:text-4xl font-extrabold font-display uppercase text-[#F1F0EC]">
+              <h3 id="modal-title" className="text-2xl md:text-4xl font-extrabold font-display uppercase text-[#F5F5F7]">
                 LET'S CREATE
               </h3>
             </div>
@@ -123,7 +123,7 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
           </div>
 
           {!submitted ? (
-            <form onSubmit={handleSubmit} className="py-6 space-y-6 text-xs font-mono">
+            <form onSubmit={handleSubmit} className="py-6 space-y-6 text-sm">
               {errorMsg && (
                 <div className="p-4 border border-red-500/50 bg-red-500/10 text-red-400 flex items-center gap-3">
                   <AlertCircle className="w-4 h-4 flex-shrink-0" />
@@ -134,8 +134,8 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Name */}
                 <div className="space-y-2">
-                  <label htmlFor="inquiry-name" className="text-[#666666] uppercase block">
-                    YOUR NAME *
+                  <label htmlFor="inquiry-name" className="text-[#86868B] block text-xs">
+                    Your name *
                   </label>
                   <input
                     id="inquiry-name"
@@ -144,14 +144,14 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                     placeholder="e.g. Maya Lin"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#258DFF] focus:outline-none transition-colors"
+                    className="w-full bg-[#1D1D1F] border border-white/10 rounded-xl px-4 py-3 text-[#F5F5F7] focus:border-[#258DFF] focus:outline-none transition-colors"
                   />
                 </div>
 
                 {/* Email */}
                 <div className="space-y-2">
-                  <label htmlFor="inquiry-email" className="text-[#666666] uppercase block">
-                    EMAIL ADDRESS *
+                  <label htmlFor="inquiry-email" className="text-[#86868B] block text-xs">
+                    Email address *
                   </label>
                   <input
                     id="inquiry-email"
@@ -160,15 +160,15 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                     placeholder="maya@brand.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#258DFF] focus:outline-none transition-colors"
+                    className="w-full bg-[#1D1D1F] border border-white/10 rounded-xl px-4 py-3 text-[#F5F5F7] focus:border-[#258DFF] focus:outline-none transition-colors"
                   />
                 </div>
               </div>
 
               {/* Brand/Company */}
               <div className="space-y-2">
-                <label htmlFor="inquiry-brand" className="text-[#666666] uppercase block">
-                  BRAND / COMPANY (OPTIONAL)
+                <label htmlFor="inquiry-brand" className="text-[#86868B] block text-xs">
+                    Brand / company (optional)
                 </label>
                 <input
                   id="inquiry-brand"
@@ -176,23 +176,23 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                   placeholder="e.g. Aura Couture / Independent"
                   value={formData.brand}
                   onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
-                  className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#258DFF] focus:outline-none transition-colors"
+                  className="w-full bg-[#1D1D1F] border border-white/10 rounded-xl px-4 py-3 text-[#F5F5F7] focus:border-[#258DFF] focus:outline-none transition-colors"
                 />
               </div>
 
               {/* Project Type */}
               <div className="space-y-2">
-                <label htmlFor="inquiry-service" className="text-[#666666] uppercase block">
-                  WHAT ARE YOU LOOKING FOR? *
+                <label htmlFor="inquiry-service" className="text-[#86868B] block text-xs">
+                    What are you looking for? *
                 </label>
                 <select
                   id="inquiry-service"
                   value={formData.serviceType}
                   onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
-                  className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#258DFF] focus:outline-none transition-colors"
+                  className="w-full bg-[#1D1D1F] border border-white/10 rounded-xl px-4 py-3 text-[#F5F5F7] focus:border-[#258DFF] focus:outline-none transition-colors"
                 >
                   {projectTypes.map((t) => (
-                    <option key={t} value={t} className="bg-[#050505] text-[#F1F0EC]">
+                    <option key={t} value={t} className="bg-[#000] text-[#F5F5F7]">
                       {t}
                     </option>
                   ))}
@@ -201,8 +201,8 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
 
               {/* Description */}
               <div className="space-y-2">
-                <label htmlFor="inquiry-desc" className="text-[#666666] uppercase block">
-                  TELL ME ABOUT THE PROJECT *
+                <label htmlFor="inquiry-desc" className="text-[#86868B] block text-xs">
+                    Tell me about the project *
                 </label>
                 <textarea
                   id="inquiry-desc"
@@ -211,13 +211,13 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                   placeholder="Describe your vision, shoot dates, location, deliverables or story concept..."
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full bg-[#121212] border border-white/10 px-4 py-3 text-[#F1F0EC] focus:border-[#258DFF] focus:outline-none transition-colors"
+                  className="w-full bg-[#1D1D1F] border border-white/10 rounded-xl px-4 py-3 text-[#F5F5F7] focus:border-[#258DFF] focus:outline-none transition-colors"
                 />
               </div>
 
               {/* Budget Range */}
               <div className="space-y-2">
-                <span className="text-[#666666] uppercase block">ESTIMATED BUDGET RANGE</span>
+                <span className="text-[#86868B] block text-xs">Estimated budget range</span>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
                   {budgetRanges.map((b) => (
                     <button
@@ -227,7 +227,7 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                       className={`py-2.5 px-3 text-center border text-[11px] transition-colors ${
                         formData.budget === b
                           ? 'border-[#258DFF] bg-[#258DFF] text-black font-bold'
-                          : 'border-white/10 bg-[#121212] text-[#F1F0EC]/70 hover:border-[#258DFF]/50'
+                          : 'border-white/10 bg-[#1D1D1F] text-[#F5F5F7]/70 hover:border-[#258DFF]/50'
                       }`}
                     >
                       {b}
@@ -242,7 +242,7 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                   type="submit"
                   onMouseEnter={() => onCursorEnter("SEND")}
                   onMouseLeave={onCursorLeave}
-                  className="w-full py-4 bg-[#258DFF] text-black font-bold text-xs tracking-widest uppercase hover:bg-white transition-colors flex items-center justify-center gap-3"
+                  className="w-full py-4 rounded-full bg-[#258DFF] text-[#000] font-semibold text-xs tracking-widest uppercase hover:bg-[#F5F5F7] transition-colors flex items-center justify-center gap-3"
                 >
                   <Send className="w-4 h-4" />
                   <span>SEND VIA WHATSAPP →</span>
@@ -259,17 +259,17 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                 <CheckCircle2 className="w-8 h-8" />
               </div>
 
-              <h4 className="text-3xl md:text-4xl font-extrabold font-display uppercase text-[#F1F0EC]">
+              <h4 className="text-3xl md:text-4xl font-extrabold font-display uppercase text-[#F5F5F7]">
                 MESSAGE RECEIVED.
               </h4>
 
-              <p className="text-sm text-[#258DFF] font-mono tracking-widest uppercase max-w-md mx-auto">
-                LET'S CREATE SOMETHING WORTH REMEMBERING.
+              <p className="text-sm text-[#258DFF] max-w-md mx-auto">
+                Let's create something worth remembering.
               </p>
 
-              <p className="text-xs text-[#666666] font-mono max-w-sm mx-auto leading-relaxed">
+              <p className="text-sm text-[#86868B] max-w-sm mx-auto leading-relaxed">
                 Your inquiry just opened in WhatsApp with all the details prefilled. Didn't open? Email it directly to{' '}
-                <a href="mailto:khush@khushkapoor.com" className="text-[#F1F0EC] underline hover:text-[#258DFF] transition-colors">khush@khushkapoor.com</a>
+                <a href="mailto:khush@khushkapoor.com" className="text-[#F5F5F7] underline hover:text-[#258DFF] transition-colors">khush@khushkapoor.com</a>
                 {' '}and Khush will get back within 24 hours.
               </p>
 
@@ -278,9 +278,9 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                   setSubmitted(false);
                   onClose();
                 }}
-                className="mt-6 px-6 py-3 border border-white/10 text-xs font-mono text-[#F1F0EC] hover:border-[#258DFF] hover:text-[#258DFF] transition-colors"
+                className="mt-6 text-sm font-medium tracking-widest uppercase text-[#F5F5F7] border-b border-white/30 pb-1 hover:text-[#258DFF] hover:border-[#258DFF] transition-colors duration-300"
               >
-                RETURN TO WEBSITE
+                Return to website
               </button>
             </motion.div>
           )}

@@ -30,7 +30,6 @@ export const ARCHIVE_IMAGES = [
   "/assets/images/web/37688.jpg",
   "/assets/images/web/37690.jpg",
   "/assets/images/web/38282.jpg",
-  "/assets/images/web/4e04c333-5883-40d6-9968-fca593bd38b3-1059748e-9bc2-46e7-b30c-3892a7f05340.jpg",
   "/assets/images/web/50667.jpg",
   "/assets/images/web/80608.jpg",
   "/assets/images/web/82070814-c940-4208-8fb5-8d85173a176d.jpg",
@@ -79,12 +78,6 @@ export const ARCHIVE_IMAGES = [
   "/assets/images/web/f028f6b7-757c-4033-903c-398aa6741b58.jpg",
   "/assets/images/web/fashion-editorial-1.jpg",
   "/assets/images/web/fashion-monochrome.jpg",
-  "/assets/images/web/file_0000000019287208b9282e06a107cfcf-1.jpg",
-  "/assets/images/web/file_000000003c5071faadb9094a063a5947.jpg",
-  "/assets/images/web/file_0000000069647206b878158399b9a3581.jpg",
-  "/assets/images/web/file_0000000073bc72089ee266ab68078b47.jpg",
-  "/assets/images/web/file_00000000a2c4720b854d0b854ac470a2.jpg",
-  "/assets/images/web/file_00000000c7a87230b8143a811807a75b.jpg",
   "/assets/images/web/hero-bg.jpg",
   "/assets/images/web/image-1.jpg",
   "/assets/images/web/image.jpg",
@@ -116,7 +109,6 @@ export const ARCHIVE_IMAGES = [
 export const PORTFOLIO_PROJECTS = [
   {
     "id": "yuvika-editorial-master",
-    "number": "01",
     "title": "YUVIKA EDITORIAL — MONOCHROME SYMPHONY",
     "category": "FASHION",
     "subCategories": [
@@ -146,11 +138,12 @@ export const PORTFOLIO_PROJECTS = [
     ],
     "tagline": "Comprehensive editorial fashion study featuring model Yuvika exploring silhouette, key light contours, and dramatic gaze.",
     "description": "Shot during an exclusive editorial session in Jaipur. Single-source directional key light highlights cheekbone contours, delicate garment textures and a piercing emotional gaze. Every frame balances high fashion minimalism with intimate portraiture.",
-    "quote": "Editorial portraiture should feel like a dialog between shadow and gaze."
+    "quote": "Editorial portraiture should feel like a dialog between shadow and gaze.",
+    "visible": true,
+    "number": "01"
   },
   {
     "id": "heritage-couture-frames",
-    "number": "02",
     "title": "HERITAGE COUTURE — STONE & SILK",
     "category": "FASHION",
     "subCategories": [
@@ -172,11 +165,12 @@ export const PORTFOLIO_PROJECTS = [
     ],
     "tagline": "High fashion colliding with historic Rajasthani stone arches and silk draping.",
     "description": "A commercial fashion editorial shot at golden hour. Flowing royal garments juxtaposed against rugged stone walls, emphasizing form, texture and movement.",
-    "quote": "We wanted garment movement that felt like poetry suspended in motion."
+    "quote": "We wanted garment movement that felt like poetry suspended in motion.",
+    "visible": true,
+    "number": "02"
   },
   {
     "id": "intimate-portrait-studies",
-    "number": "03",
     "title": "INTIMATE PORTRAIT STUDIES",
     "category": "PORTRAITS",
     "subCategories": [
@@ -200,34 +194,13 @@ export const PORTFOLIO_PROJECTS = [
       "/assets/images/web/e2b10c66-9f54-4d74-a1fd-b75417d6a9bd.jpg"
     ],
     "tagline": "A study of presence, mood and the split second where light meets emotion.",
-    "description": "A portrait series exploring contrast between sculpted light and human presence. Every frame tells a silent story of timeless grace.",
-    "quote": "Atmosphere isn't created in post-production. It's caught in the split second when light meets emotion."
-  },
-  {
-    "id": "product-and-macro",
-    "number": "04",
-    "title": "PRODUCT & MACRO — STUDIO DETAIL",
-    "category": "PRODUCTS",
-    "subCategories": [
-      "PRODUCTS",
-      "BRANDS"
-    ],
-    "year": "2026",
-    "location": "Jaipur Studio",
-    "client": "Studio Session",
-    "role": "Product & Studio Photographer",
-    "heroImage": "/assets/images/web/brand-product-shoot.jpg",
-    "aspectRatio": "wide",
-    "gallery": [
-      "/assets/images/web/brand-product-shoot.jpg"
-    ],
-    "tagline": "Precision product and macro lighting built for commercial catalogs.",
-    "description": "Commercial studio product work with controlled speculars, deep shadows and micro-detail emphasis. Designed for e-commerce, catalogs and campaign assets.",
-    "quote": "Luxury product photography requires extreme discipline — every reflection must be intentional."
+    "description": "A portrait series exploring contrast between sculpted light and human presence. Every frame tells a story of timeless grace.",
+    "quote": "Atmosphere isn't created in post-production. It's caught in the split second when light meets emotion.",
+    "visible": true,
+    "number": "03"
   },
   {
     "id": "amber-fort-cinematic",
-    "number": "05",
     "title": "THE SILENT FORT — AMBER TWILIGHT",
     "category": "CINEMATIC",
     "subCategories": [
@@ -248,11 +221,12 @@ export const PORTFOLIO_PROJECTS = [
     ],
     "tagline": "Cinematic widescreen frames capturing twilight shadows over 16th century royal ramparts.",
     "description": "A cinematic photo essay capturing twilight shadows over royal ramparts. Wide atmospheric frames with filmic depth.",
-    "quote": "Frame it like a still from a movie that was never finished."
+    "quote": "Frame it like a still from a movie that was never finished.",
+    "visible": true,
+    "number": "04"
   },
   {
     "id": "pink-city-chronicles",
-    "number": "06",
     "title": "CHRONICLES OF THE PINK CITY",
     "category": "STREET / LIFESTYLE",
     "subCategories": [
@@ -281,11 +255,12 @@ export const PORTFOLIO_PROJECTS = [
     ],
     "tagline": "Unfiltered urban life, traditional artisans and morning geometry across historic alleyways.",
     "description": "Candid street documentation across historic alleyways. High contrast sunlight piercing through narrow old-city corridors.",
-    "quote": "The street rewards those who wait quietly in the shadows."
+    "quote": "The street rewards those who wait quietly in the shadows.",
+    "visible": true,
+    "number": "05"
   },
   {
     "id": "live-and-documentary",
-    "number": "07",
     "title": "LIVE & DOCUMENTARY FRAMES",
     "category": "EVENTS",
     "subCategories": [
@@ -315,11 +290,12 @@ export const PORTFOLIO_PROJECTS = [
     ],
     "tagline": "Raw energy, low light and authentic moments in motion.",
     "description": "Low-light hand-held coverage preserving authentic mood and atmosphere without disruptive flash photography.",
-    "quote": "Event photography isn't about snapping crowd shots. It's capturing the soul of the room."
+    "quote": "Event photography isn't about snapping crowd shots. It's capturing the soul of the room.",
+    "visible": true,
+    "number": "06"
   },
   {
     "id": "everyday-visual-log",
-    "number": "08",
     "title": "EVERYDAY VISUAL LOG",
     "category": "STREET / LIFESTYLE",
     "subCategories": [
@@ -338,17 +314,10 @@ export const PORTFOLIO_PROJECTS = [
       "/assets/images/web/17366.jpg",
       "/assets/images/web/17395.jpg",
       "/assets/images/web/17401.jpg",
-      "/assets/images/web/80608.jpg",
-      "/assets/images/web/50667.jpg",
-      "/assets/images/web/4e04c333-5883-40d6-9968-fca593bd38b3-1059748e-9bc2-46e7-b30c-3892a7f05340.jpg",
-      "/assets/images/web/ada2aa4e-3204-4203-bfe5-3ebd1f50f417-dc14210e-a1cb-4738-853c-3decd9b46661.jpg",
-      "/assets/images/web/IMG_20250325_115208.jpg",
-      "/assets/images/web/image.jpg",
-      "/assets/images/web/image-1.jpg",
       "/assets/images/web/20251212_120918.jpg",
       "/assets/images/web/20251231_083620.jpg",
-      "/assets/images/web/IMG-20260226-WA0007.jpg",
-      "/assets/images/web/IMG-20260316-WA0001.jpg",
+      "/assets/images/web/20260624_154333.jpg",
+      "/assets/images/web/20260624_154349.jpg",
       "/assets/images/web/21860.jpg",
       "/assets/images/web/25462.jpg",
       "/assets/images/web/27120.jpg",
@@ -356,19 +325,32 @@ export const PORTFOLIO_PROJECTS = [
       "/assets/images/web/37688.jpg",
       "/assets/images/web/37690.jpg",
       "/assets/images/web/38282.jpg",
+      "/assets/images/web/50667.jpg",
+      "/assets/images/web/80608.jpg",
       "/assets/images/web/85497.jpg",
-      "/assets/images/web/20260624_154333.jpg",
-      "/assets/images/web/20260624_154349.jpg",
-      "/assets/images/web/file_0000000019287208b9282e06a107cfcf-1.jpg",
-      "/assets/images/web/file_000000003c5071faadb9094a063a5947.jpg",
-      "/assets/images/web/file_0000000069647206b878158399b9a3581.jpg",
-      "/assets/images/web/file_0000000073bc72089ee266ab68078b47.jpg",
-      "/assets/images/web/file_00000000a2c4720b854d0b854ac470a2.jpg",
-      "/assets/images/web/file_00000000c7a87230b8143a811807a75b.jpg"
+      "/assets/images/web/IMG-20260226-WA0007.jpg",
+      "/assets/images/web/IMG-20260316-WA0001.jpg",
+      "/assets/images/web/IMG_20250325_115208.jpg",
+      "/assets/images/web/ada2aa4e-3204-4203-bfe5-3ebd1f50f417-dc14210e-a1cb-4738-853c-3decd9b46661.jpg",
+      "/assets/images/web/hero-bg.jpg",
+      "/assets/images/web/image-1.jpg",
+      "/assets/images/web/image.jpg",
+      "/assets/images/web/khush-behind-lens.jpg",
+      "/assets/images/web/khush-portrait.jpg",
+      "/assets/images/web/yuvika-frame-1.jpg",
+      "/assets/images/web/yuvika-frame-2.jpg",
+      "/assets/images/web/yuvika-frame-3.jpg",
+      "/assets/images/web/yuvika-frame-4.jpg",
+      "/assets/images/web/yuvika-frame-5.jpg",
+      "/assets/images/web/yuvika-frame-6.jpg",
+      "/assets/images/web/yuvika-frame-7.jpg",
+      "/assets/images/web/yuvika-hero.jpg"
     ],
     "tagline": "Frames from the road, the set and the city between shoots.",
     "description": "A personal archive of moments collected between assignments — phone frames, set visits and quiet observations of daily life.",
-    "quote": "The best frames are often the ones you were not paid to take."
+    "quote": "The best frames are often the ones you were not paid to take.",
+    "visible": true,
+    "number": "07"
   }
 ];
 
@@ -430,7 +412,7 @@ export const SERVICES_DATA = [
     "subtitle": "Luxury jewellery, pendants, rings & lifestyle goods.",
     "description": "Precision macro photography highlighting craftsmanship, precious stones and fine textures. Specialized in high-end jewellery, timepieces and luxury product catalogs.",
     "deliverables": [
-      "Macro closeups",
+      "Macro close-Ups",
       "Refinement & specular control",
       "E-commerce & editorial cutouts"
     ],
@@ -466,7 +448,7 @@ export const SERVICES_DATA = [
     "subtitle": "Anamorphic stills & motion frames for film & music.",
     "description": "Widescreen imagery with filmic color grading, depth of field and dramatic atmospheric lighting suited for film stills, album art and creative media.",
     "deliverables": [
-      "Widescreen 2.39:1 stills",
+      "Widescreen ratio stills",
       "Custom filmic color grading",
       "Key-art poster compositions"
     ],
@@ -483,7 +465,7 @@ export const WHY_KHUSH_PILLARS = [
   {
     "number": "02",
     "title": "STORY OVER SNAPSHOTS",
-    "description": "Every frame should communicate something meaningful. Whether it's a 30-second scroll or a physical gallery wall, the image must stop people in their tracks."
+    "description": "Every frame should communicate something meaningful. Whether visible for a 30-second scroll or a physical gallery wall, the image must stop people in their tracks."
   },
   {
     "number": "03",
@@ -493,7 +475,7 @@ export const WHY_KHUSH_PILLARS = [
   {
     "number": "04",
     "title": "FROM IDEA TO FINAL FRAME",
-    "description": "Concept, mood boarding, composition, shooting, lighting and color grading all live seamlessly under one cohesive creative vision."
+    "description": "Concept, mood boarding, shooting, lighting and color grading all live seamlessly under one cohesive creative vision."
   }
 ];
 
@@ -506,7 +488,7 @@ export const INSTAGRAM_GRID = [
   {
     "id": 2,
     "image": "/assets/images/web/DSC01053.jpg",
-    "caption": "Midnight in old town. 35mm frame."
+    "caption": "Conversations in light."
   },
   {
     "id": 3,

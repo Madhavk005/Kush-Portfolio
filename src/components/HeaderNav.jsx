@@ -38,8 +38,8 @@ export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave,
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-          scrolled ? 'py-4 bg-[#050505]/85 backdrop-blur-md border-b border-white/5' : 'py-6 md:py-8 bg-transparent'
+className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+          scrolled ? 'py-3 bg-[#000]/80 backdrop-blur-2xl border-b border-white/5' : 'py-6 md:py-8 bg-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
@@ -50,11 +50,11 @@ export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave,
             onMouseEnter={() => onCursorEnter('HOME')}
             onMouseLeave={onCursorLeave}
           >
-            <span className="text-lg md:text-xl font-bold font-display tracking-tight text-[#F1F0EC] group-hover:text-[#258DFF] transition-colors">
+            <span className="text-lg md:text-xl font-bold font-display tracking-tight text-[#F5F5F7] group-hover:text-[#258DFF] transition-colors">
               KHUSH KAPOOR
             </span>
-            <span className="text-[10px] font-mono tracking-widest text-[#666666] group-hover:text-[#F1F0EC] transition-colors">
-              JAIPUR · INDIA
+            <span className="text-[10px] text-[#86868B] group-hover:text-[#F5F5F7] transition-colors">
+              Jaipur · India
             </span>
           </button>
 
@@ -68,13 +68,13 @@ export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave,
                   onClick={() => scrollToSection(item.id)}
                   onMouseEnter={() => onCursorEnter(item.id === 'contact' ? "LET'S GO" : 'OPEN')}
                   onMouseLeave={onCursorLeave}
-                  className="relative py-1 text-xs font-mono tracking-widest uppercase transition-colors text-[#F1F0EC]/80 hover:text-[#258DFF]"
+                  className="relative py-1 text-[13px] font-medium tracking-wide uppercase transition-colors text-[#86868B] hover:text-[#F5F5F7]"
                 >
                   {item.label}
                   {isActive && (
                     <motion.div
                       layoutId="activeNavLine"
-                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#258DFF]"
+                      className="absolute bottom-0 left-0 right-0 h-px bg-[#F5F5F7]"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -87,9 +87,9 @@ export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave,
               onClick={onOpenContactModal}
               onMouseEnter={() => onCursorEnter("LET'S GO")}
               onMouseLeave={onCursorLeave}
-              className="ml-4 px-5 py-2.5 rounded-none border border-[#258DFF]/40 bg-[#258DFF]/5 hover:bg-[#258DFF] hover:text-black text-xs font-mono tracking-widest text-[#258DFF] transition-all duration-300 flex items-center gap-2 group"
+              className="ml-5 text-sm font-medium tracking-widest uppercase text-[#F5F5F7] border-b border-[#258DFF]/60 pb-1 hover:text-[#258DFF] hover:border-[#258DFF] transition-colors duration-300 flex items-center gap-2 group"
             >
-              <span>START A PROJECT</span>
+              <span>Start a Project</span>
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </button>
           </nav>
@@ -97,7 +97,7 @@ export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave,
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#F1F0EC] hover:text-[#258DFF] focus:outline-none"
+            className="md:hidden p-2 text-[#F5F5F7] hover:text-[#258DFF] focus:outline-none"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -112,18 +112,18 @@ export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave,
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-30 bg-[#050505]/95 backdrop-blur-2xl flex flex-col justify-between p-8 pt-28 md:hidden"
+            className="fixed inset-0 z-30 bg-[#000]/95 backdrop-blur-2xl flex flex-col justify-between p-8 pt-28 md:hidden"
           >
             <div className="flex flex-col space-y-6">
-              <span className="text-xs font-mono tracking-widest text-[#258DFF]">NAVIGATION</span>
+              <span className="text-sm text-[#86868B]">Navigation</span>
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-left text-3xl font-display font-extrabold text-[#F1F0EC] hover:text-[#258DFF] transition-colors py-2 flex items-center justify-between border-b border-white/5"
+                  className="text-left text-3xl font-display font-extrabold text-[#F5F5F7] hover:text-[#258DFF] transition-colors py-2 flex items-center justify-between border-b border-white/5"
                 >
                   <span>{item.label}</span>
-                  <ArrowUpRight className="w-6 h-6 text-[#666666]" />
+                  <ArrowUpRight className="w-6 h-6 text-[#86868B]" />
                 </button>
               ))}
             </div>
@@ -134,12 +134,12 @@ export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave,
                   setMobileMenuOpen(false);
                   onOpenContactModal();
                 }}
-                className="w-full py-4 bg-[#258DFF] text-black font-mono font-bold text-xs tracking-widest text-center"
+                className="w-full py-4 rounded-full bg-[#258DFF] text-[#000] font-mono font-semibold text-xs tracking-widest text-center"
               >
                 START A PROJECT →
               </button>
 
-              <div className="flex justify-between items-center text-[10px] font-mono text-[#666666]">
+              <div className="flex justify-between items-center text-[10px] font-mono text-[#86868B]">
                 <span>PHOTOGRAPHER · JAIPUR</span>
                 <span>© 2026 KHUSH KAPOOR</span>
               </div>

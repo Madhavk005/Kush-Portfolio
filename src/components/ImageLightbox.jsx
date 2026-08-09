@@ -50,16 +50,16 @@ export default function ImageLightbox({ images, currentIndex, onClose, onNavigat
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         tabIndex={-1}
-        className="fixed inset-0 z-50 bg-[#050505]/98 backdrop-blur-2xl flex flex-col justify-between p-3 sm:p-6 select-none"
+        className="fixed inset-0 z-50 bg-[#000]/98 backdrop-blur-2xl flex flex-col justify-between p-3 sm:p-6 select-none"
         role="dialog"
         aria-label="Image Fullscreen Lightbox"
       >
         {/* Top Header */}
-        <div className="flex justify-between items-center z-20 font-mono text-xs text-[#666666] border-b border-white/10 pb-3">
-          <div className="flex items-center space-x-3 text-[#258DFF]">
-            <Camera className="w-4 h-4" />
-            <span className="tracking-widest uppercase font-semibold">
-              KHUSH KAPOOR ARCHIVE · FRAME {String(currentIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+        <div className="flex justify-between items-center z-20 text-sm text-[#86868B] border-b border-white/10 pb-3">
+          <div className="flex items-center space-x-3">
+            <Camera className="w-4 h-4 text-[#258DFF]" />
+            <span className="font-semibold">
+              Frame {String(currentIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
             </span>
           </div>
 
@@ -70,8 +70,8 @@ export default function ImageLightbox({ images, currentIndex, onClose, onNavigat
               title="Toggle Detail Zoom [Space]"
             >
               {isZoomed ? <ZoomOut className="w-4 h-4" /> : <ZoomIn className="w-4 h-4" />}
-              <span className="text-[10px] tracking-widest uppercase hidden md:inline">
-                {isZoomed ? 'RESET' : 'ZOOM'}
+              <span className="text-xs hidden md:inline">
+                {isZoomed ? 'Reset' : 'Zoom'}
               </span>
             </button>
 
@@ -85,14 +85,14 @@ export default function ImageLightbox({ images, currentIndex, onClose, onNavigat
               title="Toggle Thumbnails Track"
             >
               <Grid className="w-4 h-4" />
-              <span className="text-[10px] tracking-widest uppercase hidden md:inline">STRIP</span>
+              <span className="text-xs hidden md:inline">Strip</span>
             </button>
 
             <button
               onClick={onClose}
               className="p-2 border border-white/10 hover:border-[#258DFF] text-white/70 hover:text-[#258DFF] transition-colors flex items-center gap-2"
             >
-              <span className="text-[10px] tracking-widest uppercase hidden sm:inline">CLOSE [ESC]</span>
+              <span className="text-xs hidden sm:inline">Close</span>
               <X className="w-4 h-4" />
             </button>
           </div>
@@ -175,8 +175,8 @@ export default function ImageLightbox({ images, currentIndex, onClose, onNavigat
         )}
 
         {/* Footer Metadata Info */}
-        <div className="flex justify-between items-center font-mono text-[10px] sm:text-xs text-[#666666] pt-2 border-t border-white/10 z-20">
-          <div className="flex items-center space-x-2 text-[#F1F0EC]/80">
+        <div className="flex justify-between items-center font-mono text-[10px] sm:text-xs text-[#86868B] pt-2 border-t border-white/10 z-20">
+          <div className="flex items-center space-x-2 text-[#F5F5F7]/80">
             <MapPin className="w-3.5 h-3.5 text-[#258DFF]" />
             <span>JAIPUR, INDIA · 35MM EDITORIAL STILL</span>
           </div>

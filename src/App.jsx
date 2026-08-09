@@ -103,7 +103,7 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-    <div className="bg-[#050505] text-[#F1F0EC] min-h-screen relative font-sans selection:bg-[#258DFF] selection:text-black overflow-x-hidden gpu-accel">
+    <div className="bg-[#000] text-[#F5F5F7] min-h-screen relative font-sans selection:bg-[#258DFF] selection:text-black overflow-x-hidden gpu-accel">
       {/* Cinematic Loading Screen */}
       {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
 

@@ -4,11 +4,17 @@
  * Rebuilds src/data/portfolioData.js from the ACTUAL files on disk.
  *
  * Steps:
- *   1. Scans public/assets/images/all for every image file.
- *   2. Generates web-optimized JPEG copies into public/assets/images/web
+ *   1. Scans assets-original-images for every image file.
+ *   2. Excludes non-photography: app screenshots, AI-generated PNGs (file_*),
+ *      and any file whose longest side is < 900px (thumbnails/logos).
+ *   3. Generates web-optimized JPEG copies into public/assets/images/web
  *      via macOS `sips` (max 2000px, q80) — raw originals stay untouched.
- *   3. Maps verified project/service/instagram data to existing files only.
- *   4. Writes src/data/portfolioData.js and src/data/all_images_manifest.json.
+ *   4. Stale web copies (no longer in the source set) are deleted.
+ *   5. Maps curated project/service/instagram data to verified files only.
+ *   6. Writes src/data/portfolioData.js and src/data/all_images_manifest.json.
+ *
+ * Projects with fewer than 3 gallery frames are auto-hidden (`visible: false`)
+ * so the showcase never presents an empty-looking card.
  *
  * Usage: node generate_data.cjs
  */
@@ -24,6 +30,7 @@ const DATA_PATH = path.join(__dirname, 'src', 'data', 'portfolioData.js');
 
 const MAX_DIM = 2000;
 const QUALITY = 80;
+const MIN_SIDE = 900;
 
 /* ---------------------------------------------------------------- */
 /* 1. Scan disk                                                     */
@@ -31,11 +38,8 @@ const QUALITY = 80;
 const files = fs.readdirSync(ALL_DIR).filter((f) => /\.(jpe?g|png|webp)$/i.test(f));
 files.sort();
 
-/* Non-photograph files (screenshots of apps, UI, etc.) — excluded
-   from the public archive. They stay on disk but are not referenced. */
-const EXCLUDED = files.filter((f) => /^Screenshot_/i.test(f));
-
-const IMAGE_FILES = files.filter((f) => !/^Screenshot_/i.test(f));
+/* Non-photograph files — stay on disk, never published. */
+const EXCLUDED_BY_NAME = files.filter((f) => /^(Screenshot_|file_)/i.test(f));
 
 function sanitize(name) {
   return name
@@ -44,16 +48,36 @@ function sanitize(name) {
     .replace(/~2/g, '');
 }
 
+const webName = (name) => sanitize(path.parse(name).name) + '.jpg';
+const relWeb = (name) => `/assets/images/web/${webName(name)}`;
+
+/* Photographs: every file that is not name-excluded AND not a thumbnail.
+ * Smallest genuine frames on disk are 1024px+; AI thumbnails/logos are 605px. */
+const IMAGE_FILES = files.filter((f) => {
+  if (EXCLUDED_BY_NAME.includes(f)) return false;
+  const src = path.join(ALL_DIR, f);
+  try {
+    const meta = execFileSync('sips', ['-g', 'pixelWidth', '-g', 'pixelHeight', src], { encoding: 'utf8' });
+    const w = parseInt(/pixelWidth: (\d+)/.exec(meta)[1], 10);
+    const h = parseInt(/pixelHeight: (\d+)/.exec(meta)[1], 10);
+    return Math.max(w, h) >= MIN_SIDE;
+  } catch {
+    return false;
+  }
+});
+
+console.log(`[generate] ${files.length} files on disk → ${IMAGE_FILES.length} published, ${files.length - IMAGE_FILES.length} excluded (screenshots / AI / too small)`);
+
 /* ---------------------------------------------------------------- */
-/* 2. Web-optimized copies via sips                                  */
+/* 2. Web-optimized copies via sips + prune stale outputs            */
 /* ---------------------------------------------------------------- */
 fs.mkdirSync(WEB_DIR, { recursive: true });
-
-const webName = (name) => sanitize(path.parse(name).name) + '.jpg';
 
 for (const file of IMAGE_FILES) {
   const src = path.join(ALL_DIR, file);
   const out = path.join(WEB_DIR, webName(file));
+
+  if (fs.existsSync(out)) continue;
 
   const meta = execFileSync('sips', ['-g', 'pixelWidth', '-g', 'pixelHeight', src], { encoding: 'utf8' });
   const width = parseInt(/pixelWidth: (\d+)/.exec(meta)[1], 10);
@@ -67,9 +91,17 @@ for (const file of IMAGE_FILES) {
   execFileSync('sips', args, { stdio: 'ignore' });
 }
 
-console.log(`[generate] optimized ${IMAGE_FILES.length} images -> ${WEB_DIR}`);
+/* Delete previously-generated images that are no longer in the source set
+   (e.g. AI PNGs from an earlier pipeline re-run) — keeps web/ in sync. */
+const expected = new Set(IMAGE_FILES.map(webName));
+for (const stale of fs.readdirSync(WEB_DIR)) {
+  if (!expected.has(stale)) {
+    fs.unlinkSync(path.join(WEB_DIR, stale));
+    console.log(`[generate] pruned stale web asset: ${stale}`);
+  }
+}
 
-const relWeb = (name) => `/assets/images/web/${webName(name)}`;
+console.log(`[generate] optimized ${IMAGE_FILES.length} images -> ${WEB_DIR}`);
 
 /* ---------------------------------------------------------------- */
 /* 3. Curated project definitions (verified against disk)            */
@@ -79,11 +111,16 @@ const has = (name) => IMAGE_FILES.includes(name);
 const P1 = ['yuvika-1-DSC08153.jpg', 'yuvika-2-DSC08257.jpg', 'yuvika-3-DSC08295.jpg', 'yuvika-4-IMG_8643.jpg', 'yuvika-5-IMG_8644.jpg', 'yuvika-6-IMG_8645.jpg', 'yuvika-7-IMG_8650.jpg', 'yuvika-8-IMG_8651.jpg', 'yuvika-9-IMG_8655.jpg', 'yuvika-10-IMG_8656.jpg', 'yuvika-11-IMG_8662.jpg', 'yuvika-12-IMG_8669.jpg'];
 const P2 = ['fashion-editorial-1.jpg', 'fashion-monochrome.jpg', '03084d87-f055-4544-8548-e1e54195a2f6.jpeg', 'd12c2336-0641-452a-95fc-04d965ec3a26.jpeg', 'f028f6b7-757c-4033-903c-398aa6741b58.jpeg'];
 const P3 = ['DSC01053.jpg', 'DSC01290 (1).jpg', 'DSC01299.jpg', 'DSC03473.jpg', 'IMG_8689.jpg', '82070814-c940-4208-8fb5-8d85173a176d.jpeg', 'aac1f1f7-80e3-4b48-8010-fd4ab01571c6.jpeg', 'e2b10c66-9f54-4d74-a1fd-b75417d6a9bd.jpeg'];
-const P4 = ['brand-product-shoot.jpg'];
+/* Product set: the single verified frame today; rings/pendant originals
+   (MISSING-PHOTOS.md) auto-join this project the moment they land on disk. */
+const P4 = ['brand-product-shoot.jpg', ...IMAGE_FILES.filter((n) => /^(rings|pendant)-/i.test(n))];
 const P5 = ['cinematic-amber-fort.jpg', 'street-atmosphere.jpg', 'd4ec5007-db05-4660-a299-569cebdd3590.jpeg', 'DSC08191.jpg'];
 const P6 = ['desktop-1-124695.jpg.jpeg', 'desktop-2-72128.jpg.jpeg', 'desktop-5-DSC05420.jpg', 'desktop-6-DSC05421.jpg', 'desktop-7-DSC05426.jpg', 'desktop-13-WhatsApp_Image_2026-05-28_at_11.38.27_PM.jpeg', 'desktop-14-WhatsApp_Image_2026-05-28_at_11.38.27_PMM.jpeg', 'desktop-16-WhatsApp_Image_2026-05-31_at_8.32.24_AM.jpeg', 'desktop-17-WhatsApp_Image_2026-07-16_at_1.52.11_PM.jpeg', 'desktop-18-WhatsApp_Image_2026-07-16_at_1.53.54_PM.jpeg', 'desktop-19-WhatsApp_Image_2026-07-16_at_1.53.55_PM__1_.jpeg', 'desktop-20-WhatsApp_Image_2026-07-16_at_1.53.55_PM.jpeg'];
 const P7 = ['DSC00286.JPG', 'DSC00299.JPG', 'DSC03780.JPG', 'DSC03791.JPG', 'DSC04910.JPG', 'DSC04959.JPG', 'DSC05141.JPG', 'DSC05141_1.JPG', 'DSC05143.JPG', 'DSC07538.JPG', 'DSC07550.JPG', 'DSC07553.JPG', 'DSC08953.JPG'];
-const P8 = ['17364.jpg', '17366.jpg', '17395.jpg', '17401.jpg', '80608.jpg', '50667.jpg', '4e04c333-5883-40d6-9968-fca593bd38b3-1059748e-9bc2-46e7-b30c-3892a7f05340~2.jpg', 'ada2aa4e-3204-4203-bfe5-3ebd1f50f417-dc14210e-a1cb-4738-853c-3decd9b46661~2.jpg', 'IMG_20250325_115208.jpg', 'image.jpg', 'image (1).jpg', '20251212_120918.jpg', '20251231_083620.jpg', 'IMG-20260226-WA0007.jpg', 'IMG-20260316-WA0001.jpg', '21860.jpg', '25462.jpg', '27120.jpg', '28583.jpg', '37688.jpg', '37690.jpg', '38282.jpg', '85497.jpg', '20260624_154333.jpg', '20260624_154349.jpeg', 'file_0000000019287208b9282e06a107cfcf (1).png', 'file_000000003c5071faadb9094a063a5947.png', 'file_0000000069647206b878158399b9a358(1).png', 'file_0000000073bc72089ee266ab68078b47.png', 'file_00000000a2c4720b854d0b854ac470a2.png', 'file_00000000c7a87230b8143a811807a75b.png'];
+
+/* P8 = everything remaining, so no verified frame is ever orphaned. */
+const curated = [P1, P2, P3, P4, P5, P6, P7].flat();
+const P8 = IMAGE_FILES.filter((n) => !curated.includes(n));
 
 const all = [P1, P2, P3, P4, P5, P6, P7, P8].flat();
 const missing = all.filter((n) => !has(n));
@@ -100,7 +137,6 @@ const g = (names) => names.map(relWeb);
 const projects = [
   {
     id: 'yuvika-editorial-master',
-    number: '01',
     title: 'YUVIKA EDITORIAL — MONOCHROME SYMPHONY',
     category: 'FASHION',
     subCategories: ['FASHION', 'PORTRAITS', 'EDITORIAL'],
@@ -117,7 +153,6 @@ const projects = [
   },
   {
     id: 'heritage-couture-frames',
-    number: '02',
     title: 'HERITAGE COUTURE — STONE & SILK',
     category: 'FASHION',
     subCategories: ['FASHION', 'EDITORIAL'],
@@ -134,7 +169,6 @@ const projects = [
   },
   {
     id: 'intimate-portrait-studies',
-    number: '03',
     title: 'INTIMATE PORTRAIT STUDIES',
     category: 'PORTRAITS',
     subCategories: ['PORTRAITS', 'EDITORIAL'],
@@ -146,12 +180,11 @@ const projects = [
     aspectRatio: 'tall',
     gallery: g(P3),
     tagline: 'A study of presence, mood and the split second where light meets emotion.',
-    description: 'A portrait series exploring contrast between sculpted light and human presence. Every frame tells a silent story of timeless grace.',
+    description: 'A portrait series exploring contrast between sculpted light and human presence. Every frame tells a story of timeless grace.',
     quote: "Atmosphere isn't created in post-production. It's caught in the split second when light meets emotion.",
   },
   {
     id: 'product-and-macro',
-    number: '04',
     title: 'PRODUCT & MACRO — STUDIO DETAIL',
     category: 'PRODUCTS',
     subCategories: ['PRODUCTS', 'BRANDS'],
@@ -168,7 +201,6 @@ const projects = [
   },
   {
     id: 'amber-fort-cinematic',
-    number: '05',
     title: 'THE SILENT FORT — AMBER TWILIGHT',
     category: 'CINEMATIC',
     subCategories: ['CINEMATIC', 'STREET / LIFESTYLE'],
@@ -185,7 +217,6 @@ const projects = [
   },
   {
     id: 'pink-city-chronicles',
-    number: '06',
     title: 'CHRONICLES OF THE PINK CITY',
     category: 'STREET / LIFESTYLE',
     subCategories: ['STREET / LIFESTYLE', 'CINEMATIC'],
@@ -202,7 +233,6 @@ const projects = [
   },
   {
     id: 'live-and-documentary',
-    number: '07',
     title: 'LIVE & DOCUMENTARY FRAMES',
     category: 'EVENTS',
     subCategories: ['EVENTS', 'PORTRAITS'],
@@ -219,7 +249,6 @@ const projects = [
   },
   {
     id: 'everyday-visual-log',
-    number: '08',
     title: 'EVERYDAY VISUAL LOG',
     category: 'STREET / LIFESTYLE',
     subCategories: ['STREET / LIFESTYLE', 'EVENTS', 'PORTRAITS'],
@@ -234,29 +263,36 @@ const projects = [
     description: 'A personal archive of moments collected between assignments — phone frames, set visits and quiet observations of daily life.',
     quote: 'The best frames are often the ones you were not paid to take.',
   },
-];
+].map((p) => ({
+  ...p,
+  /* A project needs at least 3 frames to be showcased as a portfolio card. */
+  visible: p.gallery.length >= 3,
+}));
+
+const visibleProjects = projects.filter((p) => p.visible).map((p, i) => ({ ...p, number: String(i + 1).padStart(2, '0') }));
+console.log(`[generate] projects: ${visibleProjects.length} visible` + (visibleProjects.length < projects.length ? `, ${projects.length - visibleProjects.length} hidden (too few frames)` : ''));
 
 const services = [
   { number: '01', title: 'PORTRAIT PHOTOGRAPHY', subtitle: 'Cinematic, character-driven personal & celebrity portraits.', description: 'Creating powerful, intimate portraits that uncover personality, atmosphere and presence. Designed for artists, executives, public figures and personal brand building.', deliverables: ['Creative direction', 'Studio & location shoots', 'High-end retouching', 'Commercial usage rights'], image: relWeb('DSC01053.jpg') },
   { number: '02', title: 'FASHION & EDITORIAL', subtitle: 'High-fashion lookbooks, magazine spreads & couture imagery.', description: 'Editorial photography that elevates apparel and designer couture into artistic statements. Focus on movement, garment texture, lighting narrative and magazine-ready polish.', deliverables: ['Lookbooks & campaign assets', 'On-location / Set styling', 'Model direction', 'Publication licensing'], image: relWeb('yuvika-hero.jpg') },
   { number: '03', title: 'BRAND CAMPAIGNS', subtitle: 'Commercial visual storytelling built for market impact.', description: 'Translating brand identity into unforgettable imagery. Full-service visual production from moodboards to final color-graded campaign assets for print, web and billboards.', deliverables: ['Campaign strategy', 'Multi-asset deliverables', 'Social & print formats', 'Commercial licensing'], image: relWeb('d12c2336-0641-452a-95fc-04d965ec3a26.jpeg') },
   { number: '04', title: 'EVENT COVERAGE', subtitle: 'Documentary-style event & concert coverage.', description: 'Discreet, high-impact photography capturing authentic energy, key moments and ambient lighting during exclusive galas, music performances and fashion shows.', deliverables: ['Same-day highlight selects', 'Complete document gallery', 'High-res print files'], image: relWeb('DSC04910.JPG') },
-  { number: '05', title: 'PRODUCT PHOTOGRAPHY', subtitle: 'Luxury jewellery, pendants, rings & lifestyle goods.', description: 'Precision macro photography highlighting craftsmanship, precious stones and fine textures. Specialized in high-end jewellery, timepieces and luxury product catalogs.', deliverables: ['Macro closeups', 'Refinement & specular control', 'E-commerce & editorial cutouts'], image: relWeb('brand-product-shoot.jpg') },
+  { number: '05', title: 'PRODUCT PHOTOGRAPHY', subtitle: 'Luxury jewellery, pendants, rings & lifestyle goods.', description: 'Precision macro photography highlighting craftsmanship, precious stones and fine textures. Specialized in high-end jewellery, timepieces and luxury product catalogs.', deliverables: ['Macro close-Ups', 'Refinement & specular control', 'E-commerce & editorial cutouts'], image: relWeb('brand-product-shoot.jpg') },
   { number: '06', title: 'SOCIAL MEDIA CONTENT', subtitle: 'High-volume cinematic imagery optimized for digital feeds.', description: 'Visual content engineered to stand out in fast-scrolling environments while maintaining a distinctive, premium brand aesthetic.', deliverables: ['Vertical & square formats', 'Batch content packs', 'Reels & photo carousels'], image: relWeb('21860.jpg') },
   { number: '07', title: 'CREATIVE DIRECTION', subtitle: 'Concept design, moodboard curation & visual strategy.', description: 'Comprehensive creative control over lighting, location, talent sourcing, color palette and narrative arc before a single frame is shot.', deliverables: ['Moodboards & storyboards', 'Set design consultation', 'Talent & styling curation'], image: relWeb('yuvika-1-DSC08153.jpg') },
-  { number: '08', title: 'CINEMATIC VISUALS', subtitle: 'Anamorphic stills & motion frames for film & music.', description: 'Widescreen imagery with filmic color grading, depth of field and dramatic atmospheric lighting suited for film stills, album art and creative media.', deliverables: ['Widescreen 2.39:1 stills', 'Custom filmic color grading', 'Key-art poster compositions'], image: relWeb('cinematic-amber-fort.jpg') },
+  { number: '08', title: 'CINEMATIC VISUALS', subtitle: 'Anamorphic stills & motion frames for film & music.', description: 'Widescreen imagery with filmic color grading, depth of field and dramatic atmospheric lighting suited for film stills, album art and creative media.', deliverables: ['Widescreen ratio stills', 'Custom filmic color grading', 'Key-art poster compositions'], image: relWeb('cinematic-amber-fort.jpg') },
 ];
 
 const whyKhush = [
   { number: '01', title: 'A DISTINCT VISUAL LANGUAGE', description: "I don't want every shoot to look like everyone else's. I craft custom lighting moods, deep shadows and color palettes tailored strictly to the subject." },
-  { number: '02', title: 'STORY OVER SNAPSHOTS', description: "Every frame should communicate something meaningful. Whether it's a 30-second scroll or a physical gallery wall, the image must stop people in their tracks." },
+  { number: '02', title: 'STORY OVER SNAPSHOTS', description: 'Every frame should communicate something meaningful. Whether visible for a 30-second scroll or a physical gallery wall, the image must stop people in their tracks.' },
   { number: '03', title: 'BUILT FOR PEOPLE & BRANDS', description: 'From personal portraits to multi-channel commercial campaigns, the objective remains singular: create commercial value through timeless artistic visual direction.' },
-  { number: '04', title: 'FROM IDEA TO FINAL FRAME', description: 'Concept, mood boarding, composition, shooting, lighting and color grading all live seamlessly under one cohesive creative vision.' },
+  { number: '04', title: 'FROM IDEA TO FINAL FRAME', description: 'Concept, mood boarding, shooting, lighting and color grading all live seamlessly under one cohesive creative vision.' },
 ];
 
 const instagramGrid = [
   { id: 1, image: relWeb('yuvika-hero.jpg'), caption: 'Yuvika editorial session. Key light & shadow.' },
-  { id: 2, image: relWeb('DSC01053.jpg'), caption: 'Midnight in old town. 35mm frame.' },
+  { id: 2, image: relWeb('DSC01053.jpg'), caption: 'Conversations in light.' },
   { id: 3, image: relWeb('brand-product-shoot.jpg'), caption: 'Studio detail & specular control.' },
   { id: 4, image: relWeb('03084d87-f055-4544-8548-e1e54195a2f6.jpeg'), caption: 'Full frame editorial still.' },
   { id: 5, image: relWeb('cinematic-amber-fort.jpg'), caption: 'Dusk over Jaipur fort walls.' },
@@ -280,7 +316,7 @@ export const PORTFOLIO_CATEGORIES = [
 
 export const ARCHIVE_IMAGES = ${JSON.stringify(IMAGE_FILES.map(relWeb), null, 2)};
 
-export const PORTFOLIO_PROJECTS = ${JSON.stringify(projects, null, 2)};
+export const PORTFOLIO_PROJECTS = ${JSON.stringify(visibleProjects, null, 2)};
 
 export const SERVICES_DATA = ${JSON.stringify(services, null, 2)};
 
@@ -299,4 +335,4 @@ const manifest = IMAGE_FILES.map((f) => ({
 fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2));
 
 console.log(`[generate] SUCCESS — ${IMAGE_FILES.length} photos written to portfolioData.js`);
-console.log(`[generate] excluded (non-photographs): ${EXCLUDED.join(', ')}`);
+console.log(`[generate] excluded (non-photographs): ${EXCLUDED_BY_NAME.join(', ')}`);

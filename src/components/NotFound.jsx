@@ -4,10 +4,10 @@ import { ArrowLeft, Camera } from 'lucide-react';
 
 export default function NotFound({ onReturnHome }) {
   return (
-    <div className="fixed inset-0 z-50 bg-[#050505] text-[#F1F0EC] flex flex-col justify-between p-8 md:p-16 select-none bg-noise">
-      <div className="flex justify-between items-center text-xs font-mono tracking-widest text-[#258DFF] uppercase">
-        <span>KHUSH KAPOOR</span>
-        <span>ERROR 404</span>
+    <div className="fixed inset-0 z-50 bg-[#000] text-[#F5F5F7] flex flex-col justify-between p-8 md:p-16 select-none bg-noise">
+      <div className="flex justify-between items-center text-sm text-[#86868B]">
+        <span>Khush Kapoor</span>
+        <span>Error 404</span>
       </div>
 
       <div className="max-w-4xl mx-auto text-center space-y-8 my-auto">
@@ -15,16 +15,16 @@ export default function NotFound({ onReturnHome }) {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="w-20 h-20 rounded-full border border-[#258DFF]/40 bg-[#258DFF]/5 flex items-center justify-center mx-auto text-[#258DFF]"
+          className="w-20 h-20 rounded-full bg-[#258DFF]/15 text-[#258DFF] flex items-center justify-center mx-auto"
         >
-          <Camera className="w-10 h-10" />
+          <Camera className="w-9 h-9" />
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-5xl sm:text-7xl md:text-9xl font-extrabold font-display uppercase tracking-tight text-[#F1F0EC]"
+          className="text-5xl sm:text-7xl md:text-9xl font-extrabold font-display uppercase tracking-tight text-[#F5F5F7]"
         >
           WRONG FRAME.
         </motion.h1>
@@ -33,9 +33,9 @@ export default function NotFound({ onReturnHome }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-sm md:text-xl font-mono text-[#666666] tracking-widest uppercase"
+          className="text-base md:text-xl text-[#86868B]"
         >
-          THE PAGE YOU'RE LOOKING FOR DOESN'T EXIST.
+          The page you're looking for doesn't exist.
         </motion.p>
 
         <motion.div
@@ -46,17 +46,17 @@ export default function NotFound({ onReturnHome }) {
         >
           <button
             onClick={onReturnHome}
-            className="px-8 py-4 border border-[#258DFF] bg-[#258DFF] text-black font-mono font-bold text-xs tracking-widest uppercase hover:bg-transparent hover:text-[#258DFF] transition-all flex items-center gap-3 mx-auto"
+            className="inline-flex items-center gap-3 text-sm font-medium tracking-widest uppercase text-[#F5F5F7] border-b border-white/30 pb-1.5 mx-auto hover:text-[#258DFF] hover:border-[#258DFF] transition-colors duration-300"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>RETURN HOME →</span>
+            <span>Return home</span>
           </button>
         </motion.div>
       </div>
 
-      <div className="flex justify-between items-end font-mono text-[10px] text-[#666666]">
-        <span>JAIPUR, INDIA</span>
-        <span>© {new Date().getFullYear()} KHUSH KAPOOR</span>
+      <div className="flex justify-between items-end text-xs text-[#86868B]">
+        <span>Jaipur, India</span>
+        <span>© {new Date().getFullYear()} Khush Kapoor</span>
       </div>
     </div>
   );

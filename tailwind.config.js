@@ -7,19 +7,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#050505",
+        background: "#000000",
         surface: "#0A0A0A",
         "surface-card": "#111111",
         "surface-border": "#202020",
         "accent-blue": "#258DFF", // Electric cool blue used sparingly
         "accent-blue-glow": "rgba(37, 141, 255, 0.25)",
-        textPrimary: "#F1F0EC",
-        textMuted: "#6B6B6B",
+        textPrimary: "#F5F5F7",
+        textMuted: "#86868B",
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Syne', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'Inter', 'sans-serif'],
+        display: ['-apple-system', 'BlinkMacSystemFont', 'Inter', 'sans-serif'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'JetBrains Mono', 'monospace'],
       },
       letterSpacing: {
         widest: '0.25em',

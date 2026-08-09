@@ -18,21 +18,21 @@ export default function ProgressiveImage({
 
   return (
     <div
-      className={`relative overflow-hidden bg-[#0A0A0A] ${containerClassName}`}
+      className={`relative overflow-hidden bg-[#101012] ${containerClassName}`}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       {/* Skeleton Loading State */}
       {!isLoaded && !hasError && (
-        <div className="absolute inset-0 bg-[#0B0B0B] z-10 flex items-center justify-center">
+        <div className="absolute inset-0 bg-[#1D1D1F] z-10 flex items-center justify-center">
           <div className="w-full h-full bg-gradient-to-r from-transparent via-white/[0.04] to-transparent animate-pulse" />
         </div>
       )}
 
       {/* Error Fallback State */}
       {hasError ? (
-        <div className="w-full h-full min-h-[160px] bg-[#0E0E0E] border border-white/5 flex flex-col items-center justify-center p-6 text-center text-[#666666]">
+        <div className="w-full h-full min-h-[160px] bg-[#0E0E0E] border border-white/5 flex flex-col items-center justify-center p-6 text-center text-[#86868B]">
           <Camera className="w-6 h-6 mb-2 opacity-40 text-[#258DFF]" />
           <span className="font-mono text-[10px] tracking-widest uppercase opacity-60">
             KHUSH KAPOOR ARCHIVE

@@ -5,17 +5,16 @@ import { ARCHIVE_IMAGES } from '../data/portfolioData';
 
 export default function AboutKhush({ onCursorEnter, onCursorLeave }) {
   return (
-    <section id="about" className="py-24 md:py-36 bg-[#050505] border-t border-white/5 relative">
+    <section id="about" className="py-24 md:py-36 bg-[#000] border-t border-white/5 relative">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Section Label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex items-center space-x-3 text-xs font-mono tracking-widest text-[#258DFF] uppercase mb-8"
+          className="kicker mb-8"
         >
-          <span className="w-8 h-[1px] bg-[#258DFF]" />
-          <span>— ABOUT THE ARTIST</span>
+          About the artist
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -26,7 +25,7 @@ export default function AboutKhush({ onCursorEnter, onCursorLeave }) {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative z-10 border border-white/10 overflow-hidden group"
+              className="relative z-10 overflow-hidden rounded-2xl group"
               onMouseEnter={() => onCursorEnter("KHUSH")}
               onMouseLeave={onCursorLeave}
             >
@@ -37,9 +36,9 @@ export default function AboutKhush({ onCursorEnter, onCursorLeave }) {
                 containerClassName="w-full h-[480px] md:h-[580px]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 pointer-events-none" />
-              <div className="absolute bottom-6 left-6 text-xs font-mono text-[#F1F0EC] pointer-events-none">
-                <p className="font-bold text-[#258DFF]">ON SET · JAIPUR</p>
-                <p className="text-white/60">VISUAL DIRECTION & CAMERA</p>
+              <div className="absolute bottom-6 left-6 text-[#F5F5F7] pointer-events-none">
+                <p className="text-lg font-bold">On set · Jaipur</p>
+                <p className="text-white/60 text-sm">Visual direction & camera</p>
               </div>
             </motion.div>
 
@@ -49,7 +48,7 @@ export default function AboutKhush({ onCursorEnter, onCursorLeave }) {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="hidden md:block absolute -bottom-8 -right-8 w-60 h-72 border-2 border-[#258DFF] overflow-hidden shadow-2xl z-20"
+              className="hidden md:block absolute -bottom-8 -right-8 w-60 h-72 rounded-2xl overflow-hidden shadow-2xl z-20"
             >
               <ProgressiveImage
                 src="/assets/images/web/khush-portrait.jpg"
@@ -66,7 +65,7 @@ export default function AboutKhush({ onCursorEnter, onCursorLeave }) {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl sm:text-6xl md:text-7xl font-extrabold font-display tracking-tight text-[#F1F0EC] uppercase leading-[0.95]"
+              className="text-4xl sm:text-6xl md:text-7xl font-extrabold font-display tracking-tight text-[#F5F5F7] uppercase leading-[0.95]"
             >
               BEHIND <br />
               <span className="text-[#258DFF]">THE LENS.</span>
@@ -77,7 +76,7 @@ export default function AboutKhush({ onCursorEnter, onCursorLeave }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="space-y-6 text-base md:text-lg text-[#F1F0EC]/80 font-light leading-relaxed"
+              className="space-y-6 text-base md:text-lg text-[#F5F5F7]/80 font-light leading-relaxed"
             >
               <p>
                 I'm Khush Kapoor, a photographer and visual storyteller based in Jaipur.
@@ -98,19 +97,19 @@ export default function AboutKhush({ onCursorEnter, onCursorLeave }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="pt-4 grid grid-cols-3 gap-6 border-t border-white/10 text-xs font-mono"
+              className="pt-4 grid grid-cols-3 gap-6 border-t border-white/10"
             >
               <div>
                 <span className="text-[#258DFF] font-bold block text-xl md:text-2xl font-display">{ARCHIVE_IMAGES.length}+</span>
-                <span className="text-[#666666]">FRAMES ARCHIVED</span>
+                <span className="text-[#86868B] text-sm">frames archived</span>
               </div>
               <div>
                 <span className="text-[#258DFF] font-bold block text-xl md:text-2xl font-display">8</span>
-                <span className="text-[#666666]">SHOOT CATEGORIES</span>
+                <span className="text-[#86868B] text-sm">shoot categories</span>
               </div>
               <div>
                 <span className="text-[#258DFF] font-bold block text-xl md:text-2xl font-display">JAIPUR</span>
-                <span className="text-[#666666]">BASE LOCATION</span>
+                <span className="text-[#86868B] text-sm">base location</span>
               </div>
             </motion.div>
           </div>
