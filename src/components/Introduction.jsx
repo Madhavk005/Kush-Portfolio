@@ -91,7 +91,7 @@ export default function Introduction({ onCursorEnter, onCursorLeave }) {
           >
             <div className="relative img-reveal-wrapper overflow-hidden rounded-2xl shadow-2xl">
               <img
-                src="/assets/images/web/khush-portrait.jpg"
+                src="/assets/images/web/IMG_8689.jpg"
                 alt="Khush Kapoor Photographer"
                 className="w-full h-[520px] md:h-[620px] object-cover object-center filter grayscale contrast-[1.15] group-hover:grayscale-0 transition-all duration-700"
               />

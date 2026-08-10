@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Instagram, ArrowUpRight } from 'lucide-react';
 import { INSTAGRAM_GRID } from '../data/portfolioData';
 import ProgressiveImage from './ProgressiveImage';
+import { scrollToId } from '../lib/scroll';
 
 const SHOOT_TYPES = [
   'PORTRAITS',
@@ -60,7 +61,7 @@ export default function SocialSection({ onCursorEnter, onCursorLeave }) {
               </p>
             </div>
             <button
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => scrollToId('contact')}
               onMouseEnter={() => onCursorEnter("LET'S GO")}
               onMouseLeave={onCursorLeave}
               className="group/btn text-sm font-medium tracking-widest uppercase text-[#F5F5F7] border-b border-white/30 pb-1.5 w-fit hover:text-[#258DFF] hover:border-[#258DFF] transition-colors duration-300 flex items-center gap-2 self-start md:self-auto"

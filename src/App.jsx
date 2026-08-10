@@ -18,6 +18,7 @@ import ContactSection from './components/ContactSection';
 import InquiryModal from './components/InquiryModal';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
+import { registerLenis } from './lib/scroll';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -39,7 +40,9 @@ export default function App() {
       smoothTouch: true,
       touchMultiplier: 1.5,
       wheelMultiplier: 1.0,
+      anchors: true,
     });
+    registerLenis(lenis);
 
     let animationFrameId;
 
@@ -87,7 +90,7 @@ export default function App() {
 
   // Hash-based 404: unknown hash (dead link) -> NotFound screen
   useEffect(() => {
-    const VALID_HASHES = new Set(['', '#hero', '#work', '#about', '#about-intro', '#services', '#contact', '#archive']);
+    const VALID_HASHES = new Set(['', '#hero', '#work', '#about', '#about-intro', '#services', '#contact']);
     const onHashChange = () => {
       const h = window.location.hash;
       setIs404(h !== '' && !VALID_HASHES.has(h));

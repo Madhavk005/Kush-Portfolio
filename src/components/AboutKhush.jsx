@@ -51,7 +51,7 @@ export default function AboutKhush({ onCursorEnter, onCursorLeave }) {
               className="hidden md:block absolute -bottom-8 -right-8 w-60 h-72 rounded-2xl overflow-hidden shadow-2xl z-20"
             >
               <ProgressiveImage
-                src="/assets/images/web/khush-portrait.jpg"
+                src="/assets/images/web/IMG_8689.jpg"
                 alt="Khush Kapoor Portrait"
                 className="w-full h-full"
                 containerClassName="w-full h-full"

@@ -1,10 +1,8 @@
 import React from 'react';
 import { ArrowUp } from 'lucide-react';
+import { scrollToId, scrollToTop } from '../lib/scroll';
 
 export default function Footer({ onCursorEnter, onCursorLeave, onOpenContactModal }) {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   return (
     <footer className="bg-[#000] border-t border-white/5 py-16 px-6 md:px-12 text-sm text-[#86868B]">
@@ -22,13 +20,13 @@ export default function Footer({ onCursorEnter, onCursorLeave, onOpenContactModa
         </div>
 
         <div className="flex flex-wrap gap-8 text-sm text-[#F5F5F7]/80">
-          <button onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#258DFF] transition-colors">
+          <button onClick={() => scrollToId('work')} className="hover:text-[#258DFF] transition-colors">
             Work
           </button>
-          <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#258DFF] transition-colors">
+          <button onClick={() => scrollToId('about')} className="hover:text-[#258DFF] transition-colors">
             About
           </button>
-          <button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#258DFF] transition-colors">
+          <button onClick={() => scrollToId('services')} className="hover:text-[#258DFF] transition-colors">
             Services
           </button>
           <button onClick={onOpenContactModal} className="hover:text-[#258DFF] transition-colors">

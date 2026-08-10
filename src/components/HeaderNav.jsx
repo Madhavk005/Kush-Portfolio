@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { scrollToId, scrollToTop } from '../lib/scroll';
 
 export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave, onOpenContactModal }) {
   const [scrolled, setScrolled] = useState(false);
@@ -27,12 +28,7 @@ export default function HeaderNav({ activeSection, onCursorEnter, onCursorLeave,
       onOpenContactModal();
       return;
     }
-    const element = document.getElementById(id);
-    if (element) {
-      const yOffset = -70;
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
+    scrollToId(id);
   };
 
   return (
@@ -45,7 +41,7 @@ className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
           {/* Logo */}
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={scrollToTop}
             className="group flex flex-col text-left focus:outline-none"
             onMouseEnter={() => onCursorEnter('HOME')}
             onMouseLeave={onCursorLeave}
