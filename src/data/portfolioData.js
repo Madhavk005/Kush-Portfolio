@@ -3,354 +3,355 @@
 
 export const PORTFOLIO_CATEGORIES = [
   "ALL",
-  "PORTRAITS",
-  "FASHION",
-  "BRANDS",
-  "EVENTS",
-  "PRODUCTS",
-  "STREET / LIFESTYLE",
-  "EDITORIAL",
-  "CINEMATIC"
+  "ANIMALS",
+  "CELEBRITY",
+  "CLUBS & NIGHTLIFE",
+  "FOOD & DRINK",
+  "JEWELLERY",
+  "MODELS & FASHION",
+  "REAL ESTATE",
+  "STREET"
 ];
 
 export const ARCHIVE_IMAGES = [
-  "/assets/images/web/03084d87-f055-4544-8548-e1e54195a2f6.jpg",
-  "/assets/images/web/17364.jpg",
-  "/assets/images/web/17366.jpg",
-  "/assets/images/web/17395.jpg",
-  "/assets/images/web/17401.jpg",
-  "/assets/images/web/20251212_120918.jpg",
-  "/assets/images/web/20251231_083620.jpg",
-  "/assets/images/web/20260624_154333.jpg",
-  "/assets/images/web/20260624_154349.jpg",
-  "/assets/images/web/21860.jpg",
-  "/assets/images/web/25462.jpg",
-  "/assets/images/web/27120.jpg",
-  "/assets/images/web/28583.jpg",
-  "/assets/images/web/37688.jpg",
-  "/assets/images/web/37690.jpg",
-  "/assets/images/web/38282.jpg",
-  "/assets/images/web/50667.jpg",
-  "/assets/images/web/80608.jpg",
-  "/assets/images/web/82070814-c940-4208-8fb5-8d85173a176d.jpg",
-  "/assets/images/web/85497.jpg",
-  "/assets/images/web/DSC00286.jpg",
-  "/assets/images/web/DSC00299.jpg",
-  "/assets/images/web/DSC01053.jpg",
-  "/assets/images/web/DSC01290-1.jpg",
-  "/assets/images/web/DSC01299.jpg",
-  "/assets/images/web/DSC03473.jpg",
-  "/assets/images/web/DSC03780.jpg",
-  "/assets/images/web/DSC03791.jpg",
-  "/assets/images/web/DSC04910.jpg",
-  "/assets/images/web/DSC04959.jpg",
-  "/assets/images/web/DSC05141.jpg",
-  "/assets/images/web/DSC05141_1.jpg",
-  "/assets/images/web/DSC05143.jpg",
-  "/assets/images/web/DSC07538.jpg",
-  "/assets/images/web/DSC07550.jpg",
-  "/assets/images/web/DSC07553.jpg",
-  "/assets/images/web/DSC08191.jpg",
-  "/assets/images/web/DSC08953.jpg",
-  "/assets/images/web/IMG-20260226-WA0007.jpg",
-  "/assets/images/web/IMG-20260316-WA0001.jpg",
-  "/assets/images/web/IMG_20250325_115208.jpg",
-  "/assets/images/web/IMG_8689.jpg",
-  "/assets/images/web/aac1f1f7-80e3-4b48-8010-fd4ab01571c6.jpg",
-  "/assets/images/web/ada2aa4e-3204-4203-bfe5-3ebd1f50f417-dc14210e-a1cb-4738-853c-3decd9b46661.jpg",
-  "/assets/images/web/brand-product-shoot.jpg",
-  "/assets/images/web/cinematic-amber-fort.jpg",
-  "/assets/images/web/d12c2336-0641-452a-95fc-04d965ec3a26.jpg",
-  "/assets/images/web/d4ec5007-db05-4660-a299-569cebdd3590.jpg",
-  "/assets/images/web/desktop-1-124695.jpg.jpg",
-  "/assets/images/web/desktop-13-WhatsApp_Image_2026-05-28_at_11.38.27_PM.jpg",
-  "/assets/images/web/desktop-14-WhatsApp_Image_2026-05-28_at_11.38.27_PMM.jpg",
-  "/assets/images/web/desktop-16-WhatsApp_Image_2026-05-31_at_8.32.24_AM.jpg",
-  "/assets/images/web/desktop-17-WhatsApp_Image_2026-07-16_at_1.52.11_PM.jpg",
-  "/assets/images/web/desktop-18-WhatsApp_Image_2026-07-16_at_1.53.54_PM.jpg",
-  "/assets/images/web/desktop-19-WhatsApp_Image_2026-07-16_at_1.53.55_PM__1_.jpg",
-  "/assets/images/web/desktop-2-72128.jpg.jpg",
-  "/assets/images/web/desktop-20-WhatsApp_Image_2026-07-16_at_1.53.55_PM.jpg",
-  "/assets/images/web/desktop-5-DSC05420.jpg",
-  "/assets/images/web/desktop-6-DSC05421.jpg",
-  "/assets/images/web/desktop-7-DSC05426.jpg",
-  "/assets/images/web/e2b10c66-9f54-4d74-a1fd-b75417d6a9bd.jpg",
-  "/assets/images/web/f028f6b7-757c-4033-903c-398aa6741b58.jpg",
-  "/assets/images/web/fashion-editorial-1.jpg",
-  "/assets/images/web/fashion-monochrome.jpg",
-  "/assets/images/web/hero-bg.jpg",
-  "/assets/images/web/image-1.jpg",
-  "/assets/images/web/image.jpg",
-  "/assets/images/web/khush-behind-lens.jpg",
-  "/assets/images/web/khush-portrait.jpg",
-  "/assets/images/web/street-atmosphere.jpg",
-  "/assets/images/web/yuvika-1-DSC08153.jpg",
-  "/assets/images/web/yuvika-10-IMG_8656.jpg",
-  "/assets/images/web/yuvika-11-IMG_8662.jpg",
-  "/assets/images/web/yuvika-12-IMG_8669.jpg",
-  "/assets/images/web/yuvika-2-DSC08257.jpg",
-  "/assets/images/web/yuvika-3-DSC08295.jpg",
-  "/assets/images/web/yuvika-4-IMG_8643.jpg",
-  "/assets/images/web/yuvika-5-IMG_8644.jpg",
-  "/assets/images/web/yuvika-6-IMG_8645.jpg",
-  "/assets/images/web/yuvika-7-IMG_8650.jpg",
-  "/assets/images/web/yuvika-8-IMG_8651.jpg",
-  "/assets/images/web/yuvika-9-IMG_8655.jpg",
-  "/assets/images/web/yuvika-frame-1.jpg",
-  "/assets/images/web/yuvika-frame-2.jpg",
-  "/assets/images/web/yuvika-frame-3.jpg",
-  "/assets/images/web/yuvika-frame-4.jpg",
-  "/assets/images/web/yuvika-frame-5.jpg",
-  "/assets/images/web/yuvika-frame-6.jpg",
-  "/assets/images/web/yuvika-frame-7.jpg",
-  "/assets/images/web/yuvika-hero.jpg"
+  "/assets/images/web/animal-DSC03780.jpg",
+  "/assets/images/web/animal-DSC03791.jpg",
+  "/assets/images/web/animal-DSC04910.jpg",
+  "/assets/images/web/animal-ada2aa4e-3204-4203-bfe5-3ebd1f50f417-dc14210e-a1cb-4738-853c-3decd9b46661.jpg",
+  "/assets/images/web/animal-image-1.jpg",
+  "/assets/images/web/animal-image.jpg",
+  "/assets/images/web/celeb-WhatsApp-Image-2026-05-28-at-11.38.27-PMM.jpg",
+  "/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-12.03.36-PM.jpg",
+  "/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-12.03.48-PM.jpg",
+  "/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-12.05.14-PM-1.jpg",
+  "/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-12.05.14-PM.jpg",
+  "/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-2.52.33-PM-1.jpg",
+  "/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-2.52.33-PM.jpg",
+  "/assets/images/web/clubs-03084d87-f055-4544-8548-e1e54195a2f6.jpg",
+  "/assets/images/web/clubs-DSC01053.jpg",
+  "/assets/images/web/clubs-DSC01162.jpg",
+  "/assets/images/web/clubs-DSC01290-1.jpg",
+  "/assets/images/web/clubs-DSC01299.jpg",
+  "/assets/images/web/clubs-IMG_8608.jpg",
+  "/assets/images/web/clubs-IMG_8645.jpg",
+  "/assets/images/web/clubs-d12c2336-0641-452a-95fc-04d965ec3a26.jpg",
+  "/assets/images/web/clubs-d4ec5007-db05-4660-a299-569cebdd3590.jpg",
+  "/assets/images/web/clubs-f028f6b7-757c-4033-903c-398aa6741b58.jpg",
+  "/assets/images/web/food-WhatsApp-Image-2026-08-11-at-12.05.27-PM-1.jpg",
+  "/assets/images/web/food-WhatsApp-Image-2026-08-11-at-12.05.27-PM.jpg",
+  "/assets/images/web/food-WhatsApp-Image-2026-08-11-at-12.05.28-PM-1.jpg",
+  "/assets/images/web/food-WhatsApp-Image-2026-08-11-at-12.05.28-PM.jpg",
+  "/assets/images/web/food-WhatsApp-Image-2026-08-11-at-5.51.38-PM.jpg",
+  "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.28-PM.jpg",
+  "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.30-PM-1.jpg",
+  "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.30-PM-2.jpg",
+  "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.30-PM-3.jpg",
+  "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.30-PM.jpg",
+  "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.31-PM-1.jpg",
+  "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.31-PM.jpg",
+  "/assets/images/web/model-DSC05141.jpg",
+  "/assets/images/web/model-DSC05141_1.jpg",
+  "/assets/images/web/model-DSC05143.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-1.08.39-PM-1.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-1.08.39-PM.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-1.08.40-PM-1.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-1.08.40-PM.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-1.35.55-PM.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.00.33-PM-1.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.22.00-PM-1.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.22.00-PM-2.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.22.00-PM-3.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.22.00-PM.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.30.43-PM.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.30.44-PM-1.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.30.44-PM-2.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.30.44-PM.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.44.05-PM-1.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.44.05-PM-2.jpg",
+  "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.44.05-PM.jpg",
+  "/assets/images/web/real-estate-19.jpg",
+  "/assets/images/web/real-estate-20.jpg",
+  "/assets/images/web/real-estate-25.jpg",
+  "/assets/images/web/street-20251212_120918.jpg",
+  "/assets/images/web/street-21860.jpg",
+  "/assets/images/web/street-25462.jpg",
+  "/assets/images/web/street-27120.jpg",
+  "/assets/images/web/street-28583.jpg",
+  "/assets/images/web/street-37688.jpg",
+  "/assets/images/web/street-37690.jpg",
+  "/assets/images/web/street-38282.jpg",
+  "/assets/images/web/street-50667.jpg",
+  "/assets/images/web/street-DSC00299.jpg",
+  "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.46.58-PM.jpg",
+  "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.46.59-PM-1.jpg",
+  "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.46.59-PM-2.jpg",
+  "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.46.59-PM.jpg",
+  "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.47.00-PM-1.jpg",
+  "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.47.00-PM-2.jpg",
+  "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.47.00-PM-3.jpg",
+  "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.47.00-PM.jpg",
+  "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.47.01-PM.jpg",
+  "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-12.00.32-PM-1.jpg",
+  "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-12.00.33-PM.jpg"
 ];
 
 export const PORTFOLIO_PROJECTS = [
   {
-    "id": "yuvika-editorial-master",
-    "title": "YUVIKA EDITORIAL — MONOCHROME SYMPHONY",
-    "category": "FASHION",
+    "id": "album-animal",
+    "number": "01",
+    "title": "CREATURES OF THE FRAME",
+    "category": "ANIMALS",
     "subCategories": [
-      "FASHION",
-      "PORTRAITS",
-      "EDITORIAL"
-    ],
-    "year": "2026",
-    "location": "Jaipur Studio",
-    "client": "Editorial Session",
-    "role": "Lead Photographer & Art Director",
-    "heroImage": "/assets/images/web/yuvika-hero.jpg",
-    "aspectRatio": "large",
-    "gallery": [
-      "/assets/images/web/yuvika-1-DSC08153.jpg",
-      "/assets/images/web/yuvika-2-DSC08257.jpg",
-      "/assets/images/web/yuvika-3-DSC08295.jpg",
-      "/assets/images/web/yuvika-4-IMG_8643.jpg",
-      "/assets/images/web/yuvika-5-IMG_8644.jpg",
-      "/assets/images/web/yuvika-6-IMG_8645.jpg",
-      "/assets/images/web/yuvika-7-IMG_8650.jpg",
-      "/assets/images/web/yuvika-8-IMG_8651.jpg",
-      "/assets/images/web/yuvika-9-IMG_8655.jpg",
-      "/assets/images/web/yuvika-10-IMG_8656.jpg",
-      "/assets/images/web/yuvika-11-IMG_8662.jpg",
-      "/assets/images/web/yuvika-12-IMG_8669.jpg"
-    ],
-    "tagline": "Comprehensive editorial fashion study featuring model Yuvika exploring silhouette, key light contours, and dramatic gaze.",
-    "description": "Shot during an exclusive editorial session in Jaipur. Single-source directional key light highlights cheekbone contours, delicate garment textures and a piercing emotional gaze. Every frame balances high fashion minimalism with intimate portraiture.",
-    "quote": "Editorial portraiture should feel like a dialog between shadow and gaze.",
-    "visible": true,
-    "number": "01"
-  },
-  {
-    "id": "heritage-couture-frames",
-    "title": "HERITAGE COUTURE — STONE & SILK",
-    "category": "FASHION",
-    "subCategories": [
-      "FASHION",
-      "EDITORIAL"
-    ],
-    "year": "2026",
-    "location": "Jaipur, Rajasthan",
-    "client": "Fashion Editorial",
-    "role": "Campaign Photographer",
-    "heroImage": "/assets/images/web/fashion-editorial-1.jpg",
-    "aspectRatio": "wide",
-    "gallery": [
-      "/assets/images/web/fashion-editorial-1.jpg",
-      "/assets/images/web/fashion-monochrome.jpg",
-      "/assets/images/web/03084d87-f055-4544-8548-e1e54195a2f6.jpg",
-      "/assets/images/web/d12c2336-0641-452a-95fc-04d965ec3a26.jpg",
-      "/assets/images/web/f028f6b7-757c-4033-903c-398aa6741b58.jpg"
-    ],
-    "tagline": "High fashion colliding with historic Rajasthani stone arches and silk draping.",
-    "description": "A commercial fashion editorial shot at golden hour. Flowing royal garments juxtaposed against rugged stone walls, emphasizing form, texture and movement.",
-    "quote": "We wanted garment movement that felt like poetry suspended in motion.",
-    "visible": true,
-    "number": "02"
-  },
-  {
-    "id": "intimate-portrait-studies",
-    "title": "INTIMATE PORTRAIT STUDIES",
-    "category": "PORTRAITS",
-    "subCategories": [
-      "PORTRAITS",
-      "EDITORIAL"
+      "ANIMALS",
+      "LIFESTYLE"
     ],
     "year": "2026",
     "location": "Jaipur, India",
     "client": "Personal Series",
     "role": "Lead Photographer",
-    "heroImage": "/assets/images/web/DSC01053.jpg",
-    "aspectRatio": "tall",
-    "gallery": [
-      "/assets/images/web/DSC01053.jpg",
-      "/assets/images/web/DSC01290-1.jpg",
-      "/assets/images/web/DSC01299.jpg",
-      "/assets/images/web/DSC03473.jpg",
-      "/assets/images/web/IMG_8689.jpg",
-      "/assets/images/web/82070814-c940-4208-8fb5-8d85173a176d.jpg",
-      "/assets/images/web/aac1f1f7-80e3-4b48-8010-fd4ab01571c6.jpg",
-      "/assets/images/web/e2b10c66-9f54-4d74-a1fd-b75417d6a9bd.jpg"
-    ],
-    "tagline": "A study of presence, mood and the split second where light meets emotion.",
-    "description": "A portrait series exploring contrast between sculpted light and human presence. Every frame tells a story of timeless grace.",
-    "quote": "Atmosphere isn't created in post-production. It's caught in the split second when light meets emotion.",
-    "visible": true,
-    "number": "03"
-  },
-  {
-    "id": "amber-fort-cinematic",
-    "title": "THE SILENT FORT — AMBER TWILIGHT",
-    "category": "CINEMATIC",
-    "subCategories": [
-      "CINEMATIC",
-      "STREET / LIFESTYLE"
-    ],
-    "year": "2025",
-    "location": "Amer, Rajasthan",
-    "client": "Personal Visual Series",
-    "role": "Visual Storyteller",
-    "heroImage": "/assets/images/web/cinematic-amber-fort.jpg",
+    "heroImage": "/assets/images/web/animal-DSC03780.jpg",
     "aspectRatio": "wide",
     "gallery": [
-      "/assets/images/web/cinematic-amber-fort.jpg",
-      "/assets/images/web/street-atmosphere.jpg",
-      "/assets/images/web/d4ec5007-db05-4660-a299-569cebdd3590.jpg",
-      "/assets/images/web/DSC08191.jpg"
+      "/assets/images/web/animal-DSC03780.jpg",
+      "/assets/images/web/animal-DSC03791.jpg",
+      "/assets/images/web/animal-DSC04910.jpg",
+      "/assets/images/web/animal-ada2aa4e-3204-4203-bfe5-3ebd1f50f417-dc14210e-a1cb-4738-853c-3decd9b46661.jpg",
+      "/assets/images/web/animal-image-1.jpg",
+      "/assets/images/web/animal-image.jpg"
     ],
-    "tagline": "Cinematic widescreen frames capturing twilight shadows over 16th century royal ramparts.",
-    "description": "A cinematic photo essay capturing twilight shadows over royal ramparts. Wide atmospheric frames with filmic depth.",
-    "quote": "Frame it like a still from a movie that was never finished.",
-    "visible": true,
-    "number": "04"
+    "tagline": "Straight-shooting animal portraits — wild presence, honest light and quiet patience.",
+    "description": "A collection of animal studies shot with available light and restraint. Every frame leans on stillness, texture and the unguarded moment between animal and lens.",
+    "quote": "An animal gives you one honest glance — that is the frame.",
+    "visible": true
   },
   {
-    "id": "pink-city-chronicles",
-    "title": "CHRONICLES OF THE PINK CITY",
-    "category": "STREET / LIFESTYLE",
+    "id": "album-celeb",
+    "number": "02",
+    "title": "IN THE PRESENCE OF STARS",
+    "category": "CELEBRITY",
     "subCategories": [
-      "STREET / LIFESTYLE",
-      "CINEMATIC"
-    ],
-    "year": "2025",
-    "location": "Jaipur, India",
-    "client": "Personal Series",
-    "role": "Street Photographer",
-    "heroImage": "/assets/images/web/desktop-5-DSC05420.jpg",
-    "aspectRatio": "tall",
-    "gallery": [
-      "/assets/images/web/desktop-1-124695.jpg.jpg",
-      "/assets/images/web/desktop-2-72128.jpg.jpg",
-      "/assets/images/web/desktop-5-DSC05420.jpg",
-      "/assets/images/web/desktop-6-DSC05421.jpg",
-      "/assets/images/web/desktop-7-DSC05426.jpg",
-      "/assets/images/web/desktop-13-WhatsApp_Image_2026-05-28_at_11.38.27_PM.jpg",
-      "/assets/images/web/desktop-14-WhatsApp_Image_2026-05-28_at_11.38.27_PMM.jpg",
-      "/assets/images/web/desktop-16-WhatsApp_Image_2026-05-31_at_8.32.24_AM.jpg",
-      "/assets/images/web/desktop-17-WhatsApp_Image_2026-07-16_at_1.52.11_PM.jpg",
-      "/assets/images/web/desktop-18-WhatsApp_Image_2026-07-16_at_1.53.54_PM.jpg",
-      "/assets/images/web/desktop-19-WhatsApp_Image_2026-07-16_at_1.53.55_PM__1_.jpg",
-      "/assets/images/web/desktop-20-WhatsApp_Image_2026-07-16_at_1.53.55_PM.jpg"
-    ],
-    "tagline": "Unfiltered urban life, traditional artisans and morning geometry across historic alleyways.",
-    "description": "Candid street documentation across historic alleyways. High contrast sunlight piercing through narrow old-city corridors.",
-    "quote": "The street rewards those who wait quietly in the shadows.",
-    "visible": true,
-    "number": "05"
-  },
-  {
-    "id": "live-and-documentary",
-    "title": "LIVE & DOCUMENTARY FRAMES",
-    "category": "EVENTS",
-    "subCategories": [
-      "EVENTS",
+      "CELEBRITY",
       "PORTRAITS"
     ],
     "year": "2026",
     "location": "Jaipur, India",
-    "client": "Live Coverage",
-    "role": "Documentary Photographer",
-    "heroImage": "/assets/images/web/DSC04910.jpg",
-    "aspectRatio": "wide",
+    "client": "Celebrity & Media Coverage",
+    "role": "Lead Photographer",
+    "heroImage": "/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-2.52.33-PM.jpg",
+    "aspectRatio": "tall",
     "gallery": [
-      "/assets/images/web/DSC00286.jpg",
-      "/assets/images/web/DSC00299.jpg",
-      "/assets/images/web/DSC03780.jpg",
-      "/assets/images/web/DSC03791.jpg",
-      "/assets/images/web/DSC04910.jpg",
-      "/assets/images/web/DSC04959.jpg",
-      "/assets/images/web/DSC05141.jpg",
-      "/assets/images/web/DSC05141_1.jpg",
-      "/assets/images/web/DSC05143.jpg",
-      "/assets/images/web/DSC07538.jpg",
-      "/assets/images/web/DSC07550.jpg",
-      "/assets/images/web/DSC07553.jpg",
-      "/assets/images/web/DSC08953.jpg"
+      "/assets/images/web/celeb-WhatsApp-Image-2026-05-28-at-11.38.27-PMM.jpg",
+      "/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-12.03.36-PM.jpg",
+      "/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-12.03.48-PM.jpg",
+      "/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-12.05.14-PM-1.jpg",
+      "/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-12.05.14-PM.jpg",
+      "/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-2.52.33-PM-1.jpg",
+      "/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-2.52.33-PM.jpg"
     ],
-    "tagline": "Raw energy, low light and authentic moments in motion.",
-    "description": "Low-light hand-held coverage preserving authentic mood and atmosphere without disruptive flash photography.",
-    "quote": "Event photography isn't about snapping crowd shots. It's capturing the soul of the room.",
-    "visible": true,
-    "number": "06"
+    "tagline": "Red-carpet and backstage portraits of public figures, made intimate.",
+    "description": "Coverage built on composure — controlled backgrounds, flattering single-source light and enough distance to let public figures feel like people.",
+    "quote": "Celebrity portraiture is trust, shot at one-sixtieth of a second.",
+    "visible": true
   },
   {
-    "id": "everyday-visual-log",
-    "title": "EVERYDAY VISUAL LOG",
-    "category": "STREET / LIFESTYLE",
+    "id": "album-clubs",
+    "number": "03",
+    "title": "CLUBS & NIGHT ENERGY",
+    "category": "CLUBS & NIGHTLIFE",
     "subCategories": [
-      "STREET / LIFESTYLE",
-      "EVENTS",
-      "PORTRAITS"
+      "CLUBS & NIGHTLIFE",
+      "EVENTS"
     ],
     "year": "2026",
     "location": "Jaipur, India",
-    "client": "Personal Archive",
-    "role": "Visual Storyteller",
-    "heroImage": "/assets/images/web/20251231_083620.jpg",
+    "client": "Nightlife & Event Coverage",
+    "role": "Lead Photographer",
+    "heroImage": "/assets/images/web/clubs-03084d87-f055-4544-8548-e1e54195a2f6.jpg",
+    "aspectRatio": "wide",
+    "gallery": [
+      "/assets/images/web/clubs-03084d87-f055-4544-8548-e1e54195a2f6.jpg",
+      "/assets/images/web/clubs-DSC01053.jpg",
+      "/assets/images/web/clubs-DSC01162.jpg",
+      "/assets/images/web/clubs-DSC01290-1.jpg",
+      "/assets/images/web/clubs-DSC01299.jpg",
+      "/assets/images/web/clubs-IMG_8608.jpg",
+      "/assets/images/web/clubs-IMG_8645.jpg",
+      "/assets/images/web/clubs-d12c2336-0641-452a-95fc-04d965ec3a26.jpg",
+      "/assets/images/web/clubs-d4ec5007-db05-4660-a299-569cebdd3590.jpg",
+      "/assets/images/web/clubs-f028f6b7-757c-4033-903c-398aa6741b58.jpg"
+    ],
+    "tagline": "Low light, loud colour and motion blur that still holds a face sharp.",
+    "description": "Nightlife documentation shot handheld under strobes and LED wash — the energy of the floor preserved without killing the mood with flash.",
+    "quote": "A club floor rewards the photographer who becomes part of it.",
+    "visible": true
+  },
+  {
+    "id": "album-food",
+    "number": "04",
+    "title": "FLAVOUR STUDIES",
+    "category": "FOOD & DRINK",
+    "subCategories": [
+      "FOOD & DRINK",
+      "PRODUCTS"
+    ],
+    "year": "2026",
+    "location": "Jaipur, India",
+    "client": "Food & Hospitality",
+    "role": "Lead Photographer",
+    "heroImage": "/assets/images/web/food-WhatsApp-Image-2026-08-11-at-5.51.38-PM.jpg",
+    "aspectRatio": "tall",
+    "gallery": [
+      "/assets/images/web/food-WhatsApp-Image-2026-08-11-at-12.05.27-PM-1.jpg",
+      "/assets/images/web/food-WhatsApp-Image-2026-08-11-at-12.05.27-PM.jpg",
+      "/assets/images/web/food-WhatsApp-Image-2026-08-11-at-12.05.28-PM-1.jpg",
+      "/assets/images/web/food-WhatsApp-Image-2026-08-11-at-12.05.28-PM.jpg",
+      "/assets/images/web/food-WhatsApp-Image-2026-08-11-at-5.51.38-PM.jpg"
+    ],
+    "tagline": "Texture-first food photography built for menus and social feeds.",
+    "description": "Editorial food frames that make steam, crust and garnish the heroes — styled to appetite, lit to sell.",
+    "quote": "Good food photography should make a screen taste like a kitchen.",
+    "visible": true
+  },
+  {
+    "id": "album-jewellery",
+    "number": "05",
+    "title": "JEWELS OF RAJASTHAN",
+    "category": "JEWELLERY",
+    "subCategories": [
+      "JEWELLERY",
+      "PRODUCTS",
+      "BRANDS"
+    ],
+    "year": "2026",
+    "location": "Jaipur, India",
+    "client": "Jewellery Brand",
+    "role": "Lead Photographer",
+    "heroImage": "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.28-PM.jpg",
     "aspectRatio": "small",
     "gallery": [
-      "/assets/images/web/17364.jpg",
-      "/assets/images/web/17366.jpg",
-      "/assets/images/web/17395.jpg",
-      "/assets/images/web/17401.jpg",
-      "/assets/images/web/20251212_120918.jpg",
-      "/assets/images/web/20251231_083620.jpg",
-      "/assets/images/web/20260624_154333.jpg",
-      "/assets/images/web/20260624_154349.jpg",
-      "/assets/images/web/21860.jpg",
-      "/assets/images/web/25462.jpg",
-      "/assets/images/web/27120.jpg",
-      "/assets/images/web/28583.jpg",
-      "/assets/images/web/37688.jpg",
-      "/assets/images/web/37690.jpg",
-      "/assets/images/web/38282.jpg",
-      "/assets/images/web/50667.jpg",
-      "/assets/images/web/80608.jpg",
-      "/assets/images/web/85497.jpg",
-      "/assets/images/web/IMG-20260226-WA0007.jpg",
-      "/assets/images/web/IMG-20260316-WA0001.jpg",
-      "/assets/images/web/IMG_20250325_115208.jpg",
-      "/assets/images/web/ada2aa4e-3204-4203-bfe5-3ebd1f50f417-dc14210e-a1cb-4738-853c-3decd9b46661.jpg",
-      "/assets/images/web/hero-bg.jpg",
-      "/assets/images/web/image-1.jpg",
-      "/assets/images/web/image.jpg",
-      "/assets/images/web/khush-behind-lens.jpg",
-      "/assets/images/web/khush-portrait.jpg",
-      "/assets/images/web/yuvika-frame-1.jpg",
-      "/assets/images/web/yuvika-frame-2.jpg",
-      "/assets/images/web/yuvika-frame-3.jpg",
-      "/assets/images/web/yuvika-frame-4.jpg",
-      "/assets/images/web/yuvika-frame-5.jpg",
-      "/assets/images/web/yuvika-frame-6.jpg",
-      "/assets/images/web/yuvika-frame-7.jpg",
-      "/assets/images/web/yuvika-hero.jpg"
+      "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.28-PM.jpg",
+      "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.30-PM-1.jpg",
+      "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.30-PM-2.jpg",
+      "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.30-PM-3.jpg",
+      "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.30-PM.jpg",
+      "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.31-PM-1.jpg",
+      "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.31-PM.jpg"
     ],
-    "tagline": "Frames from the road, the set and the city between shoots.",
-    "description": "A personal archive of moments collected between assignments — phone frames, set visits and quiet observations of daily life.",
-    "quote": "The best frames are often the ones you were not paid to take.",
-    "visible": true,
-    "number": "07"
+    "tagline": "Macro detail, controlled speculars and stone-first storytelling.",
+    "description": "High-detail jewellery work where every reflection is intentional and every facet gets its own light. Built for catalogs, campaigns and e-commerce.",
+    "quote": "Luxury product photography requires extreme discipline — every reflection must be intentional.",
+    "visible": true
+  },
+  {
+    "id": "album-model",
+    "number": "06",
+    "title": "THE ART OF THE POSE",
+    "category": "MODELS & FASHION",
+    "subCategories": [
+      "MODELS & FASHION",
+      "PORTRAITS",
+      "FASHION"
+    ],
+    "year": "2026",
+    "location": "Jaipur, India",
+    "client": "Editorial Sessions",
+    "role": "Lead Photographer",
+    "heroImage": "/assets/images/web/model-DSC05141.jpg",
+    "aspectRatio": "wide",
+    "gallery": [
+      "/assets/images/web/model-DSC05141.jpg",
+      "/assets/images/web/model-DSC05141_1.jpg",
+      "/assets/images/web/model-DSC05143.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-1.08.39-PM-1.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-1.08.39-PM.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-1.08.40-PM-1.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-1.08.40-PM.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-1.35.55-PM.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.00.33-PM-1.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.22.00-PM-1.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.22.00-PM-2.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.22.00-PM-3.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.22.00-PM.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.30.43-PM.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.30.44-PM-1.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.30.44-PM-2.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.30.44-PM.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.44.05-PM-1.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.44.05-PM-2.jpg",
+      "/assets/images/web/model-WhatsApp-Image-2026-08-11-at-12.44.05-PM.jpg"
+    ],
+    "tagline": "Direction, silhouette and garment movement in one continuous take.",
+    "description": "Fashion session frames balancing model direction, key-light contours and editorial polish — the bridge between portrait intimacy and campaign imagery.",
+    "quote": "Posing is a dialogue — the camera is the third person in the room.",
+    "visible": true
+  },
+  {
+    "id": "album-real-estate",
+    "number": "07",
+    "title": "SPACES & ARCHITECTURE",
+    "category": "REAL ESTATE",
+    "subCategories": [
+      "REAL ESTATE",
+      "BRANDS"
+    ],
+    "year": "2026",
+    "location": "Jaipur, India",
+    "client": "Real Estate & Property",
+    "role": "Lead Photographer",
+    "heroImage": "/assets/images/web/real-estate-19.jpg",
+    "aspectRatio": "wide",
+    "gallery": [
+      "/assets/images/web/real-estate-19.jpg",
+      "/assets/images/web/real-estate-20.jpg",
+      "/assets/images/web/real-estate-25.jpg"
+    ],
+    "tagline": "Wide, luminous interior frames that sell the space, not just the square feet.",
+    "description": "Architectural and interior photography that respects geometry and daylight — clean verticals, generous depth and a sense of open, livable air.",
+    "quote": "A room is a portrait of the people who will live in it.",
+    "visible": true
+  },
+  {
+    "id": "album-street",
+    "number": "08",
+    "title": "STREET CHRONICLES",
+    "category": "STREET",
+    "subCategories": [
+      "STREET",
+      "LIFESTYLE"
+    ],
+    "year": "2026",
+    "location": "Jaipur, India",
+    "client": "Personal Series",
+    "role": "Lead Photographer",
+    "heroImage": "/assets/images/web/street-21860.jpg",
+    "aspectRatio": "tall",
+    "gallery": [
+      "/assets/images/web/street-20251212_120918.jpg",
+      "/assets/images/web/street-21860.jpg",
+      "/assets/images/web/street-25462.jpg",
+      "/assets/images/web/street-27120.jpg",
+      "/assets/images/web/street-28583.jpg",
+      "/assets/images/web/street-37688.jpg",
+      "/assets/images/web/street-37690.jpg",
+      "/assets/images/web/street-38282.jpg",
+      "/assets/images/web/street-50667.jpg",
+      "/assets/images/web/street-DSC00299.jpg",
+      "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.46.58-PM.jpg",
+      "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.46.59-PM-1.jpg",
+      "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.46.59-PM-2.jpg",
+      "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.46.59-PM.jpg",
+      "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.47.00-PM-1.jpg",
+      "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.47.00-PM-2.jpg",
+      "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.47.00-PM-3.jpg",
+      "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.47.00-PM.jpg",
+      "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-1.47.01-PM.jpg",
+      "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-12.00.32-PM-1.jpg",
+      "/assets/images/web/street-WhatsApp-Image-2026-08-11-at-12.00.33-PM.jpg"
+    ],
+    "tagline": "Unfiltered city life, caught in open shade and honest light.",
+    "description": "Candid street documentation across old-city corridors and market squares — high contrast sunlight, passing strangers and the geometry of everyday Jaipur.",
+    "quote": "The street rewards those who wait quietly in the shadows.",
+    "visible": true
   }
 ];
 
@@ -366,7 +367,7 @@ export const SERVICES_DATA = [
       "High-end retouching",
       "Commercial usage rights"
     ],
-    "image": "/assets/images/web/DSC01053.jpg"
+    "image": "/assets/images/web/celeb-WhatsApp-Image-2026-05-28-at-11.38.27-PMM.jpg"
   },
   {
     "number": "02",
@@ -379,7 +380,7 @@ export const SERVICES_DATA = [
       "Model direction",
       "Publication licensing"
     ],
-    "image": "/assets/images/web/yuvika-hero.jpg"
+    "image": "/assets/images/web/model-DSC05141.jpg"
   },
   {
     "number": "03",
@@ -392,19 +393,19 @@ export const SERVICES_DATA = [
       "Social & print formats",
       "Commercial licensing"
     ],
-    "image": "/assets/images/web/d12c2336-0641-452a-95fc-04d965ec3a26.jpg"
+    "image": "/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-2.52.33-PM-1.jpg"
   },
   {
     "number": "04",
     "title": "EVENT COVERAGE",
-    "subtitle": "Documentary-style event & concert coverage.",
-    "description": "Discreet, high-impact photography capturing authentic energy, key moments and ambient lighting during exclusive galas, music performances and fashion shows.",
+    "subtitle": "Documentary-style event & nightlife coverage.",
+    "description": "Discreet, high-impact photography capturing authentic energy, key moments and ambient lighting during exclusive galas, club nights and fashion shows.",
     "deliverables": [
       "Same-day highlight selects",
       "Complete document gallery",
       "High-res print files"
     ],
-    "image": "/assets/images/web/DSC04910.jpg"
+    "image": "/assets/images/web/clubs-03084d87-f055-4544-8548-e1e54195a2f6.jpg"
   },
   {
     "number": "05",
@@ -416,7 +417,7 @@ export const SERVICES_DATA = [
       "Refinement & specular control",
       "E-commerce & editorial cutouts"
     ],
-    "image": "/assets/images/web/brand-product-shoot.jpg"
+    "image": "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.28-PM.jpg"
   },
   {
     "number": "06",
@@ -428,7 +429,7 @@ export const SERVICES_DATA = [
       "Batch content packs",
       "Reels & photo carousels"
     ],
-    "image": "/assets/images/web/21860.jpg"
+    "image": "/assets/images/web/street-20251212_120918.jpg"
   },
   {
     "number": "07",
@@ -440,7 +441,7 @@ export const SERVICES_DATA = [
       "Set design consultation",
       "Talent & styling curation"
     ],
-    "image": "/assets/images/web/yuvika-1-DSC08153.jpg"
+    "image": "/assets/images/web/model-DSC05141.jpg"
   },
   {
     "number": "08",
@@ -452,7 +453,7 @@ export const SERVICES_DATA = [
       "Custom filmic color grading",
       "Key-art poster compositions"
     ],
-    "image": "/assets/images/web/cinematic-amber-fort.jpg"
+    "image": "/assets/images/web/street-25462.jpg"
   }
 ];
 
@@ -470,7 +471,7 @@ export const WHY_KHUSH_PILLARS = [
   {
     "number": "03",
     "title": "BUILT FOR PEOPLE & BRANDS",
-    "description": "From personal portraits to multi-channel commercial campaigns, the objective remains singular: create commercial value through timeless artistic visual direction."
+    "description": "From animal portraits to celebrity coverage and nightlife energy, the objective remains singular: create commercial value through timeless artistic visual direction."
   },
   {
     "number": "04",
@@ -482,32 +483,32 @@ export const WHY_KHUSH_PILLARS = [
 export const INSTAGRAM_GRID = [
   {
     "id": 1,
-    "image": "/assets/images/web/yuvika-hero.jpg",
-    "caption": "Yuvika editorial session. Key light & shadow."
+    "image": "/assets/images/web/celeb-WhatsApp-Image-2026-05-28-at-11.38.27-PMM.jpg",
+    "caption": "In the presence of stars — celebrity portraiture."
   },
   {
     "id": 2,
-    "image": "/assets/images/web/DSC01053.jpg",
-    "caption": "Conversations in light."
+    "image": "/assets/images/web/model-DSC05141.jpg",
+    "caption": "The art of the pose — editorial session."
   },
   {
     "id": 3,
-    "image": "/assets/images/web/brand-product-shoot.jpg",
-    "caption": "Studio detail & specular control."
+    "image": "/assets/images/web/clubs-03084d87-f055-4544-8548-e1e54195a2f6.jpg",
+    "caption": "Night energy — clubs & after-dark coverage."
   },
   {
     "id": 4,
-    "image": "/assets/images/web/03084d87-f055-4544-8548-e1e54195a2f6.jpg",
-    "caption": "Full frame editorial still."
+    "image": "/assets/images/web/street-20251212_120918.jpg",
+    "caption": "Street chronicles — honest light, candid city."
   },
   {
     "id": 5,
-    "image": "/assets/images/web/cinematic-amber-fort.jpg",
-    "caption": "Dusk over Jaipur fort walls."
+    "image": "/assets/images/web/jewellery-WhatsApp-Image-2026-08-11-at-5.44.28-PM.jpg",
+    "caption": "Jewels of Rajasthan — macro & specular control."
   },
   {
     "id": 6,
-    "image": "/assets/images/web/DSC04910.jpg",
-    "caption": "Stage lights & live energy."
+    "image": "/assets/images/web/food-WhatsApp-Image-2026-08-11-at-12.05.27-PM-1.jpg",
+    "caption": "Flavour studies — food shot for appetite."
   }
 ];

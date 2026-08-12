@@ -178,7 +178,7 @@ export default function ImageLightbox({ images, currentIndex, onClose, onNavigat
         <div className="flex justify-between items-center font-mono text-[10px] sm:text-xs text-[#86868B] pt-2 border-t border-white/10 z-20">
           <div className="flex items-center space-x-2 text-[#F5F5F7]/80">
             <MapPin className="w-3.5 h-3.5 text-[#258DFF]" />
-            <span>JAIPUR, INDIA · 35MM EDITORIAL STILL</span>
+            <span>JAIPUR, INDIA · KHUSH KAPOOR ARCHIVE</span>
           </div>
 
           <div className="flex items-center space-x-4">

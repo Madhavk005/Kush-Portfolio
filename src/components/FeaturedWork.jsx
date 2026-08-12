@@ -135,7 +135,7 @@ export default function FeaturedWork({ onSelectProject, onCursorEnter, onCursorL
                       : 'text-[#86868B] hover:text-[#F5F5F7]'
                   }`}
                 >
-                  {category === "STREET / LIFESTYLE" ? "street / lifestyle" : category.toLowerCase()}
+                  {category.toLowerCase()}
                 </button>
               );
             })}

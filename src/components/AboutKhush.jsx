@@ -30,7 +30,7 @@ export default function AboutKhush({ onCursorEnter, onCursorLeave }) {
               onMouseLeave={onCursorLeave}
             >
               <ProgressiveImage
-                src="/assets/images/web/khush-behind-lens.jpg"
+                src="/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-2.52.33-PM.jpg"
                 alt="Khush Kapoor Behind The Lens"
                 className="filter contrast-[1.1] grayscale group-hover:grayscale-0 transition-all duration-700"
                 containerClassName="w-full h-[480px] md:h-[580px]"
@@ -51,7 +51,7 @@ export default function AboutKhush({ onCursorEnter, onCursorLeave }) {
               className="hidden md:block absolute -bottom-8 -right-8 w-60 h-72 rounded-2xl overflow-hidden shadow-2xl z-20"
             >
               <ProgressiveImage
-                src="/assets/images/web/IMG_8689.jpg"
+                src="/assets/images/web/celeb-WhatsApp-Image-2026-08-11-at-2.52.33-PM-1.jpg"
                 alt="Khush Kapoor Portrait"
                 className="w-full h-full"
                 containerClassName="w-full h-full"

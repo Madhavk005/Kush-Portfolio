@@ -7,13 +7,13 @@ import { scrollToId } from '../lib/scroll';
 
 const SHOOT_TYPES = [
   'PORTRAITS',
-  'FASHION',
-  'BRANDS',
-  'EVENTS',
-  'PRODUCTS',
-  'EDITORIAL',
-  'CINEMATIC',
-  'STREET / LIFESTYLE',
+  'CELEBRITY',
+  'CLUBS & NIGHTLIFE',
+  'FOOD & DRINK',
+  'JEWELLERY',
+  'MODELS & FASHION',
+  'REAL ESTATE',
+  'STREET',
 ];
 
 export default function SocialSection({ onCursorEnter, onCursorLeave }) {

@@ -31,7 +31,7 @@ const addRef = (file, p) => {
 for (const file of filesToScan) {
   if (!fs.existsSync(file)) continue;
   const content = fs.readFileSync(file, 'utf8');
-  for (const match of content.matchAll(/"(\/assets\/[^" ]+)"/g)) addRef(file, match[1]);
+  for (const match of content.matchAll(/["'](\/assets\/[^"']+)["']/g)) addRef(file, match[1]);
 }
 
 const broken = [...refs.entries()].filter(([p]) => !fs.existsSync(path.join(PUBLIC, p)));

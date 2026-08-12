@@ -29,7 +29,7 @@ export default function LoadingScreen({ onComplete }) {
       </div>
 
       <div className="flex justify-between items-end text-sm text-[#86868B]">
-        <span>Portraits · Fashion · Brands · Events</span>
+        <span>Portraits · Celebrity · Clubs · Street</span>
         <span className="text-[#258DFF]">Est. Jaipur</span>
       </div>
     </motion.div>

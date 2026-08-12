@@ -141,7 +141,7 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                     id="inquiry-name"
                     type="text"
                     required
-                    placeholder="e.g. Maya Lin"
+                    placeholder="Your full name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full bg-[#1D1D1F] border border-white/10 rounded-xl px-4 py-3 text-[#F5F5F7] focus:border-[#258DFF] focus:outline-none transition-colors"
@@ -157,7 +157,7 @@ export default function InquiryModal({ isOpen, onClose, onCursorEnter, onCursorL
                     id="inquiry-email"
                     type="email"
                     required
-                    placeholder="maya@brand.com"
+                    placeholder="you@company.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full bg-[#1D1D1F] border border-white/10 rounded-xl px-4 py-3 text-[#F5F5F7] focus:border-[#258DFF] focus:outline-none transition-colors"
